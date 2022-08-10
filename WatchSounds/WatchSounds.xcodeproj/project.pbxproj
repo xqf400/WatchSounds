@@ -20,7 +20,6 @@
 		05BC48D528A3DA3A00402347 /* SoundsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC48D428A3DA3A00402347 /* SoundsInterfaceController.swift */; };
 		05BC48D728A3DA3A00402347 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC48D628A3DA3A00402347 /* ExtensionDelegate.swift */; };
 		05BC48D928A3DA3A00402347 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC48D828A3DA3A00402347 /* NotificationController.swift */; };
-		05BC48DB28A3DA3A00402347 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC48DA28A3DA3A00402347 /* ComplicationController.swift */; };
 		05BC48DD28A3DA3B00402347 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05BC48DC28A3DA3B00402347 /* Assets.xcassets */; };
 		05BC48EC28A3DB8900402347 /* SoundRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC48EB28A3DB8900402347 /* SoundRow.swift */; };
 		05BC48EE28A3DCD900402347 /* SoundModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC48ED28A3DCD800402347 /* SoundModel.swift */; };
@@ -89,7 +88,6 @@
 		05BC48D428A3DA3A00402347 /* SoundsInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsInterfaceController.swift; sourceTree = "<group>"; };
 		05BC48D628A3DA3A00402347 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		05BC48D828A3DA3A00402347 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
-		05BC48DA28A3DA3A00402347 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		05BC48DC28A3DA3B00402347 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		05BC48DE28A3DA3B00402347 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05BC48DF28A3DA3B00402347 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
@@ -202,7 +200,6 @@
 			children = (
 				05BC48D628A3DA3A00402347 /* ExtensionDelegate.swift */,
 				05BC48D828A3DA3A00402347 /* NotificationController.swift */,
-				05BC48DA28A3DA3A00402347 /* ComplicationController.swift */,
 			);
 			path = "Not needed";
 			sourceTree = "<group>";
@@ -381,7 +378,6 @@
 				05BC48F728A3DFFC00402347 /* VolumeViewController.swift in Sources */,
 				05BC48D928A3DA3A00402347 /* NotificationController.swift in Sources */,
 				05BC48EC28A3DB8900402347 /* SoundRow.swift in Sources */,
-				05BC48DB28A3DA3A00402347 /* ComplicationController.swift in Sources */,
 				05BC48EF28A3DCD900402347 /* SoundModel.swift in Sources */,
 				05BC48D728A3DA3A00402347 /* ExtensionDelegate.swift in Sources */,
 				05BC48D528A3DA3A00402347 /* SoundsInterfaceController.swift in Sources */,
@@ -571,7 +567,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -601,14 +597,14 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
 		05BC48E128A3DA3B00402347 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = "";
 				CODE_SIGN_ENTITLEMENTS = "WatchSoundsWatch WatchKit Extension/WatchSoundsWatch WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -616,7 +612,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WatchSoundsWatch WatchKit Extension/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "WatchSoundsWatch WatchKit Extension";
-				INFOPLIST_KEY_CLKComplicationPrincipalClass = "$(PRODUCT_MODULE_NAME).ComplicationController";
+				INFOPLIST_KEY_CLKComplicationPrincipalClass = "";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_WKExtensionDelegateClassName = "$(PRODUCT_MODULE_NAME).ExtensionDelegate";
 				INFOPLIST_KEY_WKWatchOnly = YES;
@@ -640,7 +636,7 @@
 		05BC48E228A3DA3B00402347 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = "";
 				CODE_SIGN_ENTITLEMENTS = "WatchSoundsWatch WatchKit Extension/WatchSoundsWatch WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -648,7 +644,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WatchSoundsWatch WatchKit Extension/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "WatchSoundsWatch WatchKit Extension";
-				INFOPLIST_KEY_CLKComplicationPrincipalClass = "$(PRODUCT_MODULE_NAME).ComplicationController";
+				INFOPLIST_KEY_CLKComplicationPrincipalClass = "";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_WKExtensionDelegateClassName = "$(PRODUCT_MODULE_NAME).ExtensionDelegate";
 				INFOPLIST_KEY_WKWatchOnly = YES;

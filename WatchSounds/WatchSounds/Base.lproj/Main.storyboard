@@ -34,17 +34,34 @@
                                     <action selector="addFile:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lzj-Ll-5bv"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pZH-1L-cHi">
+                                <rect key="frame" x="20" y="483.5" width="374" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Ce7-Nv-7v4"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="upload"/>
+                                <connections>
+                                    <action selector="uploadFile:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TJx-kl-iPP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="YJh-w6-fX0" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Nb8-Wx-cIJ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="XPF-2v-5Bv" secondAttribute="bottom" constant="8" id="STf-bX-iG4"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pZH-1L-cHi" secondAttribute="trailing" constant="20" id="T2Z-ey-HVd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XPF-2v-5Bv" secondAttribute="trailing" constant="8" id="b4C-ZR-D2b"/>
+                            <constraint firstItem="pZH-1L-cHi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="dr9-AH-akz"/>
+                            <constraint firstItem="pZH-1L-cHi" firstAttribute="top" secondItem="YJh-w6-fX0" secondAttribute="bottom" constant="20" id="ohd-wR-jPi"/>
                             <constraint firstItem="XPF-2v-5Bv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="sT2-zx-T6L"/>
                             <constraint firstItem="YJh-w6-fX0" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="yvE-NT-OnA"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="countLabel" destination="YJh-w6-fX0" id="q41-kx-zAE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

@@ -11,41 +11,48 @@ import UniformTypeIdentifiers
 
 class ViewController: UIViewController {
     
-    let url =
-    FileManager.default.containerURL(
-        forSecurityApplicationGroupIdentifier: "group.fku.watchSounds.SharingData")
+    @IBOutlet weak var countLabel: UILabel!
+    //let url =FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.fku.watchSounds.SharingData")
     var mp3URL : URL?
-    var userDefaults = UserDefaults.init(suiteName: "group.fku.watchSounds.SharingData")
+    var names : [String] = []
+    //var userDefaults = UserDefaults.init(suiteName: "group.fku.watchSounds.SharingData")
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        userDefaults!.set("Test", forKey: "test")
-        userDefaults!.synchronize()
-        print(userDefaults!.string(forKey: "test"))
-//        do {
-//            let directoryContents = try FileManager.default.contentsOfDirectory(at: url!, includingPropertiesForKeys: nil)
-//            //print("directoryContents:", directoryContents.map { $0.localizedName ?? $0.lastPathComponent })
+        let tempURL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first!
+        //print(tempURL)
+        do {
+            let directoryContents = try FileManager.default.contentsOfDirectory(at: tempURL, includingPropertiesForKeys: nil)
+            //print("directoryContents:", directoryContents.map { $0.localizedName ?? $0.lastPathComponent })
 //            for url1 in directoryContents {
+//
 //                print(url1.localizedName ?? url1.lastPathComponent)
 //            }
-//
-//            // if you would like to hide the file extension
-//            for var url in directoryContents {
-//                url.hasHiddenExtension = true
-//            }
-//            for url in directoryContents {
-//                print(url.localizedName ?? url.lastPathComponent)
-//            }
-//            // if you want to get all mp3 files located at the documents directory:
-//            let mp3s = directoryContents.filter(\.isMP3).map { $0.localizedName ?? $0.lastPathComponent }
-//            print("mp3s:", mp3s)
-//
-//        } catch {
-//            print(error)
-//        }
-    }
+            
+            // if you would like to hide the file extension
+            //                    for var url in directoryContents {
+            //                        url.hasHiddenExtension = true
+            //                    }
+            //                    for url in directoryContents {
+            //                        print(url.localizedName ?? url.lastPathComponent)
+            //                    }
+            // if you want to get all mp3 files located at the documents directory:
+            let mp3s = directoryContents.filter(\.isMP3).map { $0.localizedName ?? $0.lastPathComponent }
+            print("mp3s:", mp3s)
+            for mp3File in mp3s {
+                names.append(mp3File)
+            }
+            countLabel.text = "Count: \(names.count)"
+            
+        } catch {
+            print(error)
+        }
 
+    }
+    @IBAction func uploadFile(_ sender: Any) {
+    }
+    
     @IBAction func addFile(_ sender: Any) {
         
         var documentPicker: UIDocumentPickerViewController!
@@ -54,7 +61,6 @@ class ViewController: UIViewController {
         documentPicker.delegate = self
         documentPicker.allowsMultipleSelection = false
         documentPicker.modalPresentationStyle = .formSheet
-        
         self.present(documentPicker, animated: true, completion: nil)
     }
     
@@ -93,22 +99,22 @@ extension ViewController: UIDocumentPickerDelegate {
             // They can be different depending on coordinator .options [] specified!
             
             // Create file URL to temp copy of file we will create:
-            //var tempURL = URL(fileURLWithPath: NSTemporaryDirectory())
-            var tempURL = url
-            tempURL!.appendPathComponent(externalFileURL.lastPathComponent)
-            print("Will attempt to copy file to tempURL = \(tempURL!)")
+            var tempURL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first!
+            //var tempURL = url!
+            tempURL.appendPathComponent(externalFileURL.lastPathComponent)
+            print("Will attempt to copy file to tempURL = \(tempURL)")
             
             // Attempt copy
             do {
                 // If file with same name exists remove it (replace file with new one)
-                if FileManager.default.fileExists(atPath: tempURL!.path) {
-                    print("Deleting existing file at: \(tempURL!.path) ")
-                    try FileManager.default.removeItem(atPath: tempURL!.path)
+                if FileManager.default.fileExists(atPath: tempURL.path) {
+                    print("Deleting existing file at: \(tempURL.path) ")
+                    try FileManager.default.removeItem(atPath: tempURL.path)
                 }
                 
                 // Move file from app_id-Inbox to tmp/filename
-                print("Attempting move file to: \(tempURL!.path) ")
-                try FileManager.default.moveItem(atPath: externalFileURL.path, toPath: tempURL!.path)
+                print("Attempting move file to: \(tempURL.path) ")
+                try FileManager.default.moveItem(atPath: externalFileURL.path, toPath: tempURL.path)
                 
                 blockSuccess = true
                 outputFileURL = tempURL
