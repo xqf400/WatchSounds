@@ -27,6 +27,9 @@
 		05BC48F428A3DEEA00402347 /* LaylaKurz.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 05BC48F328A3DEEA00402347 /* LaylaKurz.mp3 */; };
 		05BC48F528A3DEEA00402347 /* LaylaKurz.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 05BC48F328A3DEEA00402347 /* LaylaKurz.mp3 */; };
 		05BC48F728A3DFFC00402347 /* VolumeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC48F628A3DFFC00402347 /* VolumeViewController.swift */; };
+		05BC490C28A4287F00402347 /* CloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC490B28A4287F00402347 /* CloudManager.swift */; };
+		05BC490D28A4287F00402347 /* CloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC490B28A4287F00402347 /* CloudManager.swift */; };
+		05BC491028A4318500402347 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05BC490F28A4318500402347 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +100,8 @@
 		05BC48F628A3DFFC00402347 /* VolumeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeViewController.swift; sourceTree = "<group>"; };
 		05BC48FB28A3ED2100402347 /* WatchSounds.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WatchSounds.entitlements; sourceTree = "<group>"; };
 		05BC48FC28A3ED3700402347 /* WatchSoundsWatch WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WatchSoundsWatch WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		05BC490B28A4287F00402347 /* CloudManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudManager.swift; sourceTree = "<group>"; };
+		05BC490F28A4318500402347 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05BC491028A4318500402347 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,6 +130,7 @@
 				05BC48C528A3DA3800402347 /* WatchSoundsWatch WatchKit App */,
 				05BC48D328A3DA3A00402347 /* WatchSoundsWatch WatchKit Extension */,
 				05BC48A628A3D9FE00402347 /* Products */,
+				05BC490E28A4318500402347 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -151,6 +158,7 @@
 				05BC48B328A3DA0000402347 /* LaunchScreen.storyboard */,
 				05BC48B628A3DA0000402347 /* Info.plist */,
 				05BC48ED28A3DCD800402347 /* SoundModel.swift */,
+				05BC490B28A4287F00402347 /* CloudManager.swift */,
 			);
 			path = WatchSounds;
 			sourceTree = "<group>";
@@ -202,6 +210,14 @@
 				05BC48D828A3DA3A00402347 /* NotificationController.swift */,
 			);
 			path = "Not needed";
+			sourceTree = "<group>";
+		};
+		05BC490E28A4318500402347 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				05BC490F28A4318500402347 /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -364,6 +380,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05BC490C28A4287F00402347 /* CloudManager.swift in Sources */,
 				05BC48AD28A3D9FE00402347 /* ViewController.swift in Sources */,
 				05BC48EE28A3DCD900402347 /* SoundModel.swift in Sources */,
 				05BC48A928A3D9FE00402347 /* AppDelegate.swift in Sources */,
@@ -375,6 +392,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05BC490D28A4287F00402347 /* CloudManager.swift in Sources */,
 				05BC48F728A3DFFC00402347 /* VolumeViewController.swift in Sources */,
 				05BC48D928A3DA3A00402347 /* NotificationController.swift in Sources */,
 				05BC48EC28A3DB8900402347 /* SoundRow.swift in Sources */,
@@ -548,7 +566,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WatchSounds/WatchSounds.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = L2CJ78AL3T;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WatchSounds/Info.plist;
@@ -578,7 +596,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WatchSounds/WatchSounds.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = L2CJ78AL3T;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WatchSounds/Info.plist;

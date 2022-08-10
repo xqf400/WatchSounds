@@ -45,6 +45,13 @@
                                     <action selector="uploadFile:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TJx-kl-iPP"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Files:" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="iaK-zh-bj6">
+                                <rect key="frame" x="8" y="52" width="398" height="382.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -53,7 +60,11 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="XPF-2v-5Bv" secondAttribute="bottom" constant="8" id="STf-bX-iG4"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pZH-1L-cHi" secondAttribute="trailing" constant="20" id="T2Z-ey-HVd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XPF-2v-5Bv" secondAttribute="trailing" constant="8" id="b4C-ZR-D2b"/>
+                            <constraint firstItem="iaK-zh-bj6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="cg9-Vj-UwS"/>
                             <constraint firstItem="pZH-1L-cHi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="dr9-AH-akz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="iaK-zh-bj6" secondAttribute="trailing" constant="8" id="h9s-w9-eKC"/>
+                            <constraint firstItem="YJh-w6-fX0" firstAttribute="top" secondItem="iaK-zh-bj6" secondAttribute="bottom" constant="8" id="jB7-sb-dVA"/>
+                            <constraint firstItem="iaK-zh-bj6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="mow-KE-2Pp"/>
                             <constraint firstItem="pZH-1L-cHi" firstAttribute="top" secondItem="YJh-w6-fX0" secondAttribute="bottom" constant="20" id="ohd-wR-jPi"/>
                             <constraint firstItem="XPF-2v-5Bv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="sT2-zx-T6L"/>
                             <constraint firstItem="YJh-w6-fX0" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="yvE-NT-OnA"/>
@@ -61,6 +72,7 @@
                     </view>
                     <connections>
                         <outlet property="countLabel" destination="YJh-w6-fX0" id="q41-kx-zAE"/>
+                        <outlet property="textView" destination="iaK-zh-bj6" id="lQB-fI-mUH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -69,6 +81,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -11,16 +11,26 @@ import UniformTypeIdentifiers
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var countLabel: UILabel!
     //let url =FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.fku.watchSounds.SharingData")
     var mp3URL : URL?
     var names : [String] = []
+    let cloudManager = CloudDataManager()
     //var userDefaults = UserDefaults.init(suiteName: "group.fku.watchSounds.SharingData")
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+
+        //getLocalFiles()
+        getAllOnlineFiles()
+
+    }
+    
+    private func getLocalFiles(){
         let tempURL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first!
+        
         //print(tempURL)
         do {
             let directoryContents = try FileManager.default.contentsOfDirectory(at: tempURL, includingPropertiesForKeys: nil)
@@ -40,17 +50,57 @@ class ViewController: UIViewController {
             // if you want to get all mp3 files located at the documents directory:
             let mp3s = directoryContents.filter(\.isMP3).map { $0.localizedName ?? $0.lastPathComponent }
             print("mp3s:", mp3s)
-            for mp3File in mp3s {
-                names.append(mp3File)
-            }
-            countLabel.text = "Count: \(names.count)"
+//            for mp3File in mp3s {
+//                names.append(mp3File)
+//            }
+            //countLabel.text = "Count: \(names.count)"
             
         } catch {
             print(error)
         }
-
     }
+    
+    private func getAllOnlineFiles(){
+        if cloudManager.isCloudEnabled() {
+        let url = CloudDataManager.sharedInstance.getDocumentDiretoryURL()
+        //print("icloud works")
+        //cloudManager.enableCloudExample()
+        let tempURL = url
+        //print(tempURL)
+        do {
+            let directoryContents = try FileManager.default.contentsOfDirectory(at: tempURL, includingPropertiesForKeys: nil)
+            //print("directoryContents:", directoryContents.map { $0.localizedName ?? $0.lastPathComponent })
+            for url1 in directoryContents {
+                textView.text.append("Name:\(url1.localizedName!)\n")
+                print(url1.localizedName ?? url1.lastPathComponent)
+            }
+            
+            // if you would like to hide the file extension
+            //                    for var url in directoryContents {
+            //                        url.hasHiddenExtension = true
+            //                    }
+            //                    for url in directoryContents {
+            //                        print(url.localizedName ?? url.lastPathComponent)
+            //                    }
+            // if you want to get all mp3 files located at the documents directory:
+            let mp3s = directoryContents.filter(\.isMP3).map { $0.localizedName ?? $0.lastPathComponent }
+            print("mp3s:", mp3s)
+            for mp3File in mp3s {
+                names.append(mp3File)
+            }
+            countLabel.text = "Online Count: \(names.count)"
+            
+        } catch {
+            print(error)
+        }
+    }else{
+        print("enable cloud")
+    }
+    }
+    
     @IBAction func uploadFile(_ sender: Any) {
+
+           
     }
     
     @IBAction func addFile(_ sender: Any) {
@@ -145,6 +195,17 @@ extension ViewController: UIDocumentPickerDelegate {
         if let out = outputFileURL {
             print("fileURL: \(out)")
             mp3URL = out
+            do{
+                let data = try Data(contentsOf: out)
+                if let filename = urls.first?.lastPathComponent {
+                    cloudManager.uploadFileToCloud(name: filename, data: data)
+                }else{
+                    print("no file name")
+                }
+            }catch{
+                print("Error: \(error)")
+            }
+ 
         }
     }
 }
