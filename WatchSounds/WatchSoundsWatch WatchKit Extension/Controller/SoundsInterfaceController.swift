@@ -16,10 +16,16 @@ class SoundsInterfaceController: WKInterfaceController {
     
     @IBOutlet weak var tableView: WKInterfaceTable!
     var sounds : [SoundModel] = []
+    let url =
+    FileManager.default.containerURL(
+        forSecurityApplicationGroupIdentifier: "group.fku.watchSounds.SharingData")
+    var userDefaults = UserDefaults.init(suiteName: "group.fku.watchSounds.SharingData")
 
     override func awake(withContext context: Any?) {
-        // Configure interface objects here.
         super.awake(withContext: context)
+        
+        print(userDefaults!.string(forKey: "test"))
+
         getSounds()
         tableView.setNumberOfRows(sounds.count, withRowType: "SoundRow")
         for index in 0..<tableView.numberOfRows {
@@ -48,6 +54,27 @@ class SoundsInterfaceController: WKInterfaceController {
         sounds.removeAll()
         let Layla = SoundModel(soundId: 1, soundName: "Layla kurz", soundFile: "LaylaKurz")
         sounds.append(Layla)
+        
+//        do {
+//            let directoryContents = try FileManager.default.contentsOfDirectory(at: url!, includingPropertiesForKeys: nil)
+//            //print("directoryContents:", directoryContents.map { $0.localizedName ?? $0.lastPathComponent })
+//            for url1 in directoryContents {
+//                print(url1.localizedName ?? url1.lastPathComponent)
+//            }
+//            
+//            // if you would like to hide the file extension
+//            for var url in directoryContents {
+//                url.hasHiddenExtension = true
+//            }
+//            for url in directoryContents {
+//                print(url.localizedName ?? url.lastPathComponent)
+//            }
+//            // if you want to get all mp3 files located at the documents directory:
+//            let mp3s = directoryContents.filter(\.isMP3).map { $0.localizedName ?? $0.lastPathComponent }
+//            print("mp3s:", mp3s)
+//        } catch {
+//            print(error)
+//        }
         
     }
     
@@ -89,6 +116,20 @@ extension SoundsInterfaceController: AVAudioPlayerDelegate {
         if flag {
             print("player finished")
             //stopButtonOutlet.setBackgroundImage(UIImage(systemName: "shuffle"))
+        }
+    }
+}
+
+extension URL {
+    var typeIdentifier: String? { (try? resourceValues(forKeys: [.typeIdentifierKey]))?.typeIdentifier }
+    var isMP3: Bool { typeIdentifier == "public.mp3" }
+    var localizedName: String? { (try? resourceValues(forKeys: [.localizedNameKey]))?.localizedName }
+    var hasHiddenExtension: Bool {
+        get { (try? resourceValues(forKeys: [.hasHiddenExtensionKey]))?.hasHiddenExtension == true }
+        set {
+            var resourceValues = URLResourceValues()
+            resourceValues.hasHiddenExtension = newValue
+            try? setResourceValues(resourceValues)
         }
     }
 }

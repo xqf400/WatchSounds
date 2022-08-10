@@ -97,6 +97,8 @@
 		05BC48ED28A3DCD800402347 /* SoundModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundModel.swift; sourceTree = "<group>"; };
 		05BC48F328A3DEEA00402347 /* LaylaKurz.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = LaylaKurz.mp3; path = ../../LaylaKurz.mp3; sourceTree = "<group>"; };
 		05BC48F628A3DFFC00402347 /* VolumeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeViewController.swift; sourceTree = "<group>"; };
+		05BC48FB28A3ED2100402347 /* WatchSounds.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WatchSounds.entitlements; sourceTree = "<group>"; };
+		05BC48FC28A3ED3700402347 /* WatchSoundsWatch WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WatchSoundsWatch WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +143,7 @@
 		05BC48A728A3D9FE00402347 /* WatchSounds */ = {
 			isa = PBXGroup;
 			children = (
+				05BC48FB28A3ED2100402347 /* WatchSounds.entitlements */,
 				05BC48F328A3DEEA00402347 /* LaylaKurz.mp3 */,
 				05BC48A828A3D9FE00402347 /* AppDelegate.swift */,
 				05BC48AA28A3D9FE00402347 /* SceneDelegate.swift */,
@@ -166,6 +169,7 @@
 		05BC48D328A3DA3A00402347 /* WatchSoundsWatch WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				05BC48FC28A3ED3700402347 /* WatchSoundsWatch WatchKit Extension.entitlements */,
 				05BC48F228A3DD3C00402347 /* Not needed */,
 				05BC48F128A3DD2E00402347 /* Cells */,
 				05BC48F028A3DD1F00402347 /* Controller */,
@@ -546,6 +550,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WatchSounds/WatchSounds.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L2CJ78AL3T;
@@ -575,6 +580,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WatchSounds/WatchSounds.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L2CJ78AL3T;
@@ -603,6 +609,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "WatchSoundsWatch WatchKit Extension/WatchSoundsWatch WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L2CJ78AL3T;
@@ -634,6 +641,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "WatchSoundsWatch WatchKit Extension/WatchSoundsWatch WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L2CJ78AL3T;
