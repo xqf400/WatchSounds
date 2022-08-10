@@ -17,11 +17,17 @@
 		05BC48C828A3DA3800402347 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05BC48C628A3DA3800402347 /* Interface.storyboard */; };
 		05BC48CA28A3DA3A00402347 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05BC48C928A3DA3A00402347 /* Assets.xcassets */; };
 		05BC48D028A3DA3A00402347 /* WatchSoundsWatch WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 05BC48CF28A3DA3A00402347 /* WatchSoundsWatch WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		05BC48D528A3DA3A00402347 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC48D428A3DA3A00402347 /* InterfaceController.swift */; };
+		05BC48D528A3DA3A00402347 /* SoundsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC48D428A3DA3A00402347 /* SoundsInterfaceController.swift */; };
 		05BC48D728A3DA3A00402347 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC48D628A3DA3A00402347 /* ExtensionDelegate.swift */; };
 		05BC48D928A3DA3A00402347 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC48D828A3DA3A00402347 /* NotificationController.swift */; };
 		05BC48DB28A3DA3A00402347 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC48DA28A3DA3A00402347 /* ComplicationController.swift */; };
 		05BC48DD28A3DA3B00402347 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05BC48DC28A3DA3B00402347 /* Assets.xcassets */; };
+		05BC48EC28A3DB8900402347 /* SoundRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC48EB28A3DB8900402347 /* SoundRow.swift */; };
+		05BC48EE28A3DCD900402347 /* SoundModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC48ED28A3DCD800402347 /* SoundModel.swift */; };
+		05BC48EF28A3DCD900402347 /* SoundModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC48ED28A3DCD800402347 /* SoundModel.swift */; };
+		05BC48F428A3DEEA00402347 /* LaylaKurz.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 05BC48F328A3DEEA00402347 /* LaylaKurz.mp3 */; };
+		05BC48F528A3DEEA00402347 /* LaylaKurz.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 05BC48F328A3DEEA00402347 /* LaylaKurz.mp3 */; };
+		05BC48F728A3DFFC00402347 /* VolumeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BC48F628A3DFFC00402347 /* VolumeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,18 +81,22 @@
 		05BC48B128A3DA0000402347 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		05BC48B428A3DA0000402347 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		05BC48B628A3DA0000402347 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		05BC48BE28A3DA3800402347 /* WatchSoundsWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchSoundsWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		05BC48BE28A3DA3800402347 /* WatchSounds.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchSounds.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05BC48C128A3DA3800402347 /* WatchSoundsWatch WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatchSoundsWatch WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05BC48C728A3DA3800402347 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		05BC48C928A3DA3A00402347 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		05BC48CF28A3DA3A00402347 /* WatchSoundsWatch WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "WatchSoundsWatch WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		05BC48D428A3DA3A00402347 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		05BC48D428A3DA3A00402347 /* SoundsInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsInterfaceController.swift; sourceTree = "<group>"; };
 		05BC48D628A3DA3A00402347 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		05BC48D828A3DA3A00402347 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		05BC48DA28A3DA3A00402347 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		05BC48DC28A3DA3B00402347 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		05BC48DE28A3DA3B00402347 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05BC48DF28A3DA3B00402347 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		05BC48EB28A3DB8900402347 /* SoundRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundRow.swift; sourceTree = "<group>"; };
+		05BC48ED28A3DCD800402347 /* SoundModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundModel.swift; sourceTree = "<group>"; };
+		05BC48F328A3DEEA00402347 /* LaylaKurz.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = LaylaKurz.mp3; path = ../../LaylaKurz.mp3; sourceTree = "<group>"; };
+		05BC48F628A3DFFC00402347 /* VolumeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,7 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				05BC48A528A3D9FE00402347 /* WatchSounds.app */,
-				05BC48BE28A3DA3800402347 /* WatchSoundsWatch.app */,
+				05BC48BE28A3DA3800402347 /* WatchSounds.app */,
 				05BC48C128A3DA3800402347 /* WatchSoundsWatch WatchKit App.app */,
 				05BC48CF28A3DA3A00402347 /* WatchSoundsWatch WatchKit Extension.appex */,
 			);
@@ -131,6 +141,7 @@
 		05BC48A728A3D9FE00402347 /* WatchSounds */ = {
 			isa = PBXGroup;
 			children = (
+				05BC48F328A3DEEA00402347 /* LaylaKurz.mp3 */,
 				05BC48A828A3D9FE00402347 /* AppDelegate.swift */,
 				05BC48AA28A3D9FE00402347 /* SceneDelegate.swift */,
 				05BC48AC28A3D9FE00402347 /* ViewController.swift */,
@@ -138,6 +149,7 @@
 				05BC48B128A3DA0000402347 /* Assets.xcassets */,
 				05BC48B328A3DA0000402347 /* LaunchScreen.storyboard */,
 				05BC48B628A3DA0000402347 /* Info.plist */,
+				05BC48ED28A3DCD800402347 /* SoundModel.swift */,
 			);
 			path = WatchSounds;
 			sourceTree = "<group>";
@@ -154,15 +166,41 @@
 		05BC48D328A3DA3A00402347 /* WatchSoundsWatch WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
-				05BC48D428A3DA3A00402347 /* InterfaceController.swift */,
-				05BC48D628A3DA3A00402347 /* ExtensionDelegate.swift */,
-				05BC48D828A3DA3A00402347 /* NotificationController.swift */,
-				05BC48DA28A3DA3A00402347 /* ComplicationController.swift */,
+				05BC48F228A3DD3C00402347 /* Not needed */,
+				05BC48F128A3DD2E00402347 /* Cells */,
+				05BC48F028A3DD1F00402347 /* Controller */,
 				05BC48DC28A3DA3B00402347 /* Assets.xcassets */,
 				05BC48DE28A3DA3B00402347 /* Info.plist */,
 				05BC48DF28A3DA3B00402347 /* PushNotificationPayload.apns */,
 			);
 			path = "WatchSoundsWatch WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		05BC48F028A3DD1F00402347 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				05BC48D428A3DA3A00402347 /* SoundsInterfaceController.swift */,
+				05BC48F628A3DFFC00402347 /* VolumeViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		05BC48F128A3DD2E00402347 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				05BC48EB28A3DB8900402347 /* SoundRow.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		05BC48F228A3DD3C00402347 /* Not needed */ = {
+			isa = PBXGroup;
+			children = (
+				05BC48D628A3DA3A00402347 /* ExtensionDelegate.swift */,
+				05BC48D828A3DA3A00402347 /* NotificationController.swift */,
+				05BC48DA28A3DA3A00402347 /* ComplicationController.swift */,
+			);
+			path = "Not needed";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,7 +237,7 @@
 			);
 			name = WatchSoundsWatch;
 			productName = WatchSoundsWatch;
-			productReference = 05BC48BE28A3DA3800402347 /* WatchSoundsWatch.app */;
+			productReference = 05BC48BE28A3DA3800402347 /* WatchSounds.app */;
 			productType = "com.apple.product-type.application.watchapp2-container";
 		};
 		05BC48C028A3DA3800402347 /* WatchSoundsWatch WatchKit App */ = {
@@ -288,6 +326,7 @@
 			files = (
 				05BC48B528A3DA0000402347 /* LaunchScreen.storyboard in Resources */,
 				05BC48B228A3DA0000402347 /* Assets.xcassets in Resources */,
+				05BC48F428A3DEEA00402347 /* LaylaKurz.mp3 in Resources */,
 				05BC48B028A3D9FE00402347 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -312,6 +351,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05BC48F528A3DEEA00402347 /* LaylaKurz.mp3 in Resources */,
 				05BC48DD28A3DA3B00402347 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -324,6 +364,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				05BC48AD28A3D9FE00402347 /* ViewController.swift in Sources */,
+				05BC48EE28A3DCD900402347 /* SoundModel.swift in Sources */,
 				05BC48A928A3D9FE00402347 /* AppDelegate.swift in Sources */,
 				05BC48AB28A3D9FE00402347 /* SceneDelegate.swift in Sources */,
 			);
@@ -333,10 +374,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05BC48F728A3DFFC00402347 /* VolumeViewController.swift in Sources */,
 				05BC48D928A3DA3A00402347 /* NotificationController.swift in Sources */,
+				05BC48EC28A3DB8900402347 /* SoundRow.swift in Sources */,
 				05BC48DB28A3DA3A00402347 /* ComplicationController.swift in Sources */,
+				05BC48EF28A3DCD900402347 /* SoundModel.swift in Sources */,
 				05BC48D728A3DA3A00402347 /* ExtensionDelegate.swift in Sources */,
-				05BC48D528A3DA3A00402347 /* InterfaceController.swift in Sources */,
+				05BC48D528A3DA3A00402347 /* SoundsInterfaceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -582,7 +626,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.5;
+				WATCHOS_DEPLOYMENT_TARGET = 8.0;
 			};
 			name = Debug;
 		};
@@ -613,7 +657,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.5;
+				WATCHOS_DEPLOYMENT_TARGET = 8.0;
 			};
 			name = Release;
 		};
@@ -638,7 +682,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.5;
+				WATCHOS_DEPLOYMENT_TARGET = 8.0;
 			};
 			name = Debug;
 		};
@@ -663,7 +707,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.5;
+				WATCHOS_DEPLOYMENT_TARGET = 8.0;
 			};
 			name = Release;
 		};
@@ -675,7 +719,7 @@
 				DEVELOPMENT_TEAM = L2CJ78AL3T;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fku.WatchSoundsWatch;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = WatchSounds;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -688,7 +732,7 @@
 				DEVELOPMENT_TEAM = L2CJ78AL3T;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fku.WatchSoundsWatch;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = WatchSounds;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
