@@ -36,7 +36,9 @@ class CloudDataManager {
 
     func isCloudEnabled() -> Bool {
         if DocumentsDirectory.iCloudDocumentsURL != nil { return true }
-        else { return false }
+        else {
+            return false            
+        }
     }
 
     // Delete All files at URL

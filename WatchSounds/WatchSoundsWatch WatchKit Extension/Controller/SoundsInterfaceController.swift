@@ -9,24 +9,85 @@ import WatchKit
 import Foundation
 import AVFoundation
 import MediaPlayer
+import WatchConnectivity
+let cloudManager = CloudDataManager()
 
 var audioPlayer: AVAudioPlayer?
 
-class SoundsInterfaceController: WKInterfaceController {
+class SoundsInterfaceController: WKInterfaceController, WCSessionDelegate {
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        if error != nil {
+            print(error!)
+        }
+        print("Session: ", session.applicationContext)
+    }
+    func session(_ session: WCSession, didReceiveMessageData messageData: Data) {
+        print("got message")
+
+        guard let image = UIImage(data: messageData) else {
+            return
+        }
+        DispatchQueue.main.async{
+            self.topLeftImageView.setImage(image)
+        }
+
+    }
+    func session(_ session: WCSession, didReceiveMessageData messageData: Data, replyHandler: @escaping (Data) -> Void) {
+        print("got message")
+        guard let image = UIImage(data: messageData) else {
+            return
+        }
+        DispatchQueue.main.async{
+            self.topLeftImageView.setImage(image)
+        }
+        //WKInterfaceDevice.current().play(.notification)
+    }
+//    func session(session: WCSession, didReceiveMessageData messageData: NSData, replyHandler: (NSData) -> Void) {
+//print("got message")
+//        guard let image = UIImage(data: messageData) else {
+//            return
+//        }
+//
+//        // throw to the main queue to upate properly
+//        dispatch_async(dispatch_get_main_queue()) { [weak self] in
+//            // update your UI here
+//        }
+//
+//       replyHandler(messageData)
+//    }
     
+    
+    @IBOutlet weak var topLeftImageView: WKInterfaceImage!
+    @IBOutlet weak var soundsLabel: WKInterfaceLabel!
     @IBOutlet weak var tableView: WKInterfaceTable!
     var sounds : [SoundModel] = []
-    let url =
-    FileManager.default.containerURL(
-        forSecurityApplicationGroupIdentifier: "group.fku.watchSounds.SharingData")
-    var userDefaults = UserDefaults.init(suiteName: "group.fku.watchSounds.SharingData")
+    //let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.fku.watchSounds.SharingData")
+    //var userDefaults = UserDefaults.init(suiteName: "group.fku.watchSounds.SharingData")
+    
+    
+
 
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
-        print(userDefaults!.string(forKey: "test"))
+//        userDefaults!.set("Testwatch", forKey: "testwatch")
+//        userDefaults!.synchronize()
+//        soundsLabel.setText("Test: \(userDefaults!.string(forKey: "testphone"))")
+
+        if WCSession.isSupported() {
+            WCSession.default.delegate = self
+            WCSession.default.activate()
+        }
+        
+        let driveURL = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents")
+            if let unwrappedFU = driveURL {
+                print("iCloud available")
+            } else {
+                print("iCloud not available")
+            }
 
         getSounds()
+        getAllOnlineFiles()
         tableView.setNumberOfRows(sounds.count, withRowType: "SoundRow")
         for index in 0..<tableView.numberOfRows {
             guard let controller = tableView.rowController(at: index) as? SoundRow else { continue }
@@ -39,6 +100,7 @@ class SoundsInterfaceController: WKInterfaceController {
             controller.soundSeconds = seconds
             controller.sound = sounds[index]
         }
+        
 
     }
     
@@ -48,6 +110,42 @@ class SoundsInterfaceController: WKInterfaceController {
     
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
+    }
+    
+    
+    private func getAllOnlineFiles(){
+        if cloudManager.isCloudEnabled() {
+            let url = CloudDataManager.sharedInstance.getDocumentDiretoryURL()
+            print("icloud works")
+            //cloudManager.enableCloudExample()
+            let tempURL = url
+            //print(tempURL)
+            do {
+                let directoryContents = try FileManager.default.contentsOfDirectory(at: tempURL, includingPropertiesForKeys: nil)
+                //print("directoryContents:", directoryContents.map { $0.localizedName ?? $0.lastPathComponent })
+                for url1 in directoryContents {
+                    print(url1.localizedName ?? url1.lastPathComponent)
+                }
+                
+                // if you would like to hide the file extension
+                //                    for var url in directoryContents {
+                //                        url.hasHiddenExtension = true
+                //                    }
+                //                    for url in directoryContents {
+                //                        print(url.localizedName ?? url.lastPathComponent)
+                //                    }
+                // if you want to get all mp3 files located at the documents directory:
+                let mp3s = directoryContents.filter(\.isMP3).map { $0.localizedName ?? $0.lastPathComponent }
+                print("mp3s:", mp3s)
+                for mp3File in mp3s {
+                    //names.append(mp3File)
+                }
+            } catch {
+                print(error)
+            }
+        }else{
+            print("enable cloud")
+        }
     }
     
     private func getSounds(){

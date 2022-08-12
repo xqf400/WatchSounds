@@ -6,11 +6,33 @@
 	<dict>
 		<key>NSExtensionAttributes</key>
 		<dict>
+			<key>WKWatchOnly</key>
+			<false/>
 			<key>WKAppBundleIdentifier</key>
-			<string>com.fku.WatchSoundsWatch.watchkitapp</string>
+			<string>com.fku.WatchSoundboard.watchkitapp</string>
+			<key>WKCompanionAppBundleIdentifier</key>
+			<string>com.fku.WatchSoundboard</string>
 		</dict>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.watchkit</string>
+		<key>NSUbiquitousContainers</key>
+		<dict>
+			<key>iCloud.com.fku.WatchSounds</key>
+			<dict>
+				<key>NSUbiquitousContainerIsDocumentScopePublic</key>
+				<true/>
+				<key>NSUbiquitousContainerName</key>
+				<string>WatchSounds</string>
+				<key>NSUbiquitousContainerSupportedFolderLevels</key>
+				<string>Any</string>
+			</dict>
+		</dict>
 	</dict>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
+	<key>UIFileSharingEnabled</key>
+	<true/>
 </dict>
 </plist>

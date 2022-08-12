@@ -27,6 +27,7 @@
                     <items>
                         <group width="1" height="30" alignment="left" id="wR8-0a-xGA">
                             <items>
+                                <imageView width="30" height="1" alignment="left" image="pencil" catalog="system" id="ima-7K-hxf"/>
                                 <label alignment="center" verticalAlignment="center" text="Sounds" id="aA8-je-pwd"/>
                             </items>
                         </group>
@@ -50,7 +51,9 @@
                         </group>
                     </items>
                     <connections>
+                        <outlet property="soundsLabel" destination="aA8-je-pwd" id="fV6-UI-rEx"/>
                         <outlet property="tableView" destination="a9y-Bd-rjg" id="M2U-12-osb"/>
+                        <outlet property="topLeftImageView" destination="ima-7K-hxf" id="Sa6-Zr-Opl"/>
                         <segue destination="Qwh-Ii-k8F" kind="relationship" relationship="nextPage" id="yEu-NE-cFw"/>
                     </connections>
                 </controller>
@@ -89,4 +92,7 @@
             <point key="canvasLocation" x="551" y="543"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="pencil" catalog="system" width="128" height="116"/>
+    </resources>
 </document>

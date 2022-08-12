@@ -6,17 +6,14 @@
 	<dict>
 		<key>NSUbiquitousContainers</key>
 		<dict>
-			<key>NSUbiquitousContainers</key>
+			<key>iCloud.com.fku.WatchSounds</key>
 			<dict>
-				<key>iCloud.com.fku.WatchSounds</key>
-				<dict>
-					<key>NSUbiquitousContainerIsDocumentScopePublic</key>
-					<true/>
-					<key>NSUbiquitousContainerName</key>
-					<string>WatchSounds</string>
-					<key>NSUbiquitousContainerSupportedFolderLevels</key>
-					<string>One</string>
-				</dict>
+				<key>NSUbiquitousContainerIsDocumentScopePublic</key>
+				<true/>
+				<key>NSUbiquitousContainerName</key>
+				<string>WatchSounds</string>
+				<key>NSUbiquitousContainerSupportedFolderLevels</key>
+				<string>Any</string>
 			</dict>
 		</dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
