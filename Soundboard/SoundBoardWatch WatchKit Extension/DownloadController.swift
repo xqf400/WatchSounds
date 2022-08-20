@@ -47,9 +47,9 @@ class DownloadController: WKInterfaceController {
                 print("downloaded plist")
                 decodeClipFromData(data: data) { user in
                     print("decoded \(user.mail)")
-                    for soundName in user.sounds{
-                        print("Sound: \(soundName)")
-                        self.downloadSong(name: soundName)
+                    for sound in user.sounds{
+                        print("Sound: \(sound.soundName)\(sound.soundFile)")
+                        self.downloadSong(name: sound.soundFile)
                     }
                 } failure: { error in
                     print("Error 325 \(error)")
@@ -113,6 +113,7 @@ class DownloadController: WKInterfaceController {
     
     
 }//eoc
+
 extension DownloadController: URLSessionDelegate {
     
     

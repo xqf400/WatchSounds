@@ -31,9 +31,13 @@ class WatchController: UIViewController {
     
     var mp3URL : URL?
     var mp3Name: String?
+    var session : URLSession!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: OperationQueue())
         
         if UserDefaults.standard.string(forKey: "adress") != nil{
             //DispatchQueue.main.async {
@@ -86,7 +90,7 @@ class WatchController: UIViewController {
     @IBAction func transferMailToWatchButtonAction(_ sender: Any) {
         if mailTextfield.text != ""{
             let adress = mailTextfield.text
-            let user = User(id: 0, mail: adress!, maxFilesCount: 1, uploadedSoundsCount: 0, sounds: [])
+            let user = User(id: 0, mail: adress!, maxFilesCount: 2, uploadedSoundsCount: 0, sounds: [])
             UserDefaults.standard.set(adress, forKey: "adress")
             //uploadPlistToFirebase(user: user) { str in
             uploadUserToUserInFirebase(user: user) { str in
@@ -138,20 +142,73 @@ class WatchController: UIViewController {
                             uploadToFireBase(fileName: self.mp3Name!, data: encData, folder: "Soundfiles") { str in
                                 newAccount.sounds.append(self.mp3Name!)
                                 newAccount.uploadedSoundsCount = newAccount.uploadedSoundsCount + 1
-                                self.uploadPlistToFirebase(user: newAccount) { str in
-                                    self.uploadUserToUserInFirebase(user: newAccount) { str in
-                                        showHudSuccess(inView: self, text: "Uploaded", delay: 1.0)
-                                        self.mp3URL = nil
-                                        self.mp3Name = nil
-                                        self.selectedSoundLabel.text = "No sound selected"
+                                
+                                
+                                downloadDataFromFireBase(name: "\(id).plist", folder: "userLists", session: self.session) { data in
+                                    decodeClipFromData(data: data) { user in
+                                        let newAccount2 = UserPlist(id: newAccount.id, mail: newAccount.mail, maxFilesCount: newAccount.maxFilesCount, uploadedSoundsCount: newAccount.uploadedSoundsCount, sounds: user.sounds)
+                                        let newSound = SoundModel(soundId: 0, soundName: "", soundImage: self.mp3Name!, soundFile: self.mp3Name!, soundVolume: 1.0, soundFileURL: URL(string: "https://google.de")!)
+                                        newAccount2.sounds.append(newSound)
+                                        
+                                        self.uploadPlistToFirebase(user: newAccount2) { str in
+                                            self.uploadUserToUserInFirebase(user: newAccount) { str in
+                                                showHudSuccess(inView: self, text: "Uploaded", delay: 1.0)
+                                                self.mp3URL = nil
+                                                self.mp3Name = nil
+                                                self.selectedSoundLabel.text = "No sound selected"
+                                            } failure: { error in
+                                                print("Failed to save1 upload \(error)")
+                                                showHudError(inView: self, text: "Failed to save1 upload \(error)", delay: 2.0)
+                                            }
+                                        } failure: { error in
+                                            print("Failed to save2 upload \(error)")
+                                            showHudError(inView: self, text: "Failed to save2 upload \(error)", delay: 2.0)
+                                        }
+                                        
+                                        
                                     } failure: { error in
-                                        print("Failed to save1 upload \(error)")
-                                        showHudError(inView: self, text: "Failed to save1 upload \(error)", delay: 2.0)
+                                        print("Failed to decode plist upload \(error)")
+                                        showHudError(inView: self, text: "Failed to save2 upload \(error)", delay: 2.0)
                                     }
-                                } failure: { error in
-                                    print("Failed to save2 upload \(error)")
-                                    showHudError(inView: self, text: "Failed to save2 upload \(error)", delay: 2.0)
+
+                                } failure: { [self] error in
+                                    print("no error just no file do same")
+                                    
+                                    let newAccount2 = UserPlist(id: newAccount.id, mail: newAccount.mail, maxFilesCount: newAccount.maxFilesCount, uploadedSoundsCount: newAccount.uploadedSoundsCount, sounds: [])
+                                    let newSound = SoundModel(soundId: 0, soundName: "", soundImage: self.mp3Name!, soundFile: self.mp3Name!, soundVolume: 1.0, soundFileURL: URL(string: "https://google.de")!)
+                                    newAccount2.sounds.append(newSound)
+                                    
+                                    self.uploadPlistToFirebase(user: newAccount2) { str in
+                                        self.uploadUserToUserInFirebase(user: newAccount) { str in
+                                            showHudSuccess(inView: self, text: "Uploaded", delay: 1.0)
+                                            self.mp3URL = nil
+                                            self.mp3Name = nil
+                                            self.selectedSoundLabel.text = "No sound selected"
+                                        } failure: { error in
+                                            print("Failed to save1 upload \(error)")
+                                            showHudError(inView: self, text: "Failed to save1 upload \(error)", delay: 2.0)
+                                        }
+                                    } failure: { error in
+                                        print("Failed to save2 upload \(error)")
+                                        showHudError(inView: self, text: "Failed to save2 upload \(error)", delay: 2.0)
+                                    }
                                 }
+                                    
+//                                } failure: { error in
+//                                    print("Failed to decode plist upload \(error)")
+//                                    showHudError(inView: self, text: "Failed to save2 upload \(error)", delay: 2.0)
+//                                }
+                                    
+                                    
+//                                    print("Failed to download \(error)")
+//                                    showHudError(inView: self, text: "Failed to download plist \(error)", delay: 2.0)
+                                //}
+
+                                
+
+                                
+
+
                                 
                                 
                             } failure: { error in
@@ -222,7 +279,7 @@ class WatchController: UIViewController {
     }
     
     
-    private func uploadPlistToFirebase(user:User, success: @escaping (_ str: String) -> Void, failure: @escaping (_ error: String) -> Void){
+    private func uploadPlistToFirebase(user:UserPlist, success: @escaping (_ str: String) -> Void, failure: @escaping (_ error: String) -> Void){
         let encoder = PropertyListEncoder()
         do{
             let data = try encoder.encode(user)
@@ -344,5 +401,26 @@ extension WatchController: UIDocumentPickerDelegate {
         }
     }
     
+    
+}
+
+extension WatchController: URLSessionDelegate {
+    
+    
+    // MARK: protocol stub for tracking download progress
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+            
+        let percentDownloaded = totalBytesWritten / totalBytesExpectedToWrite
+            
+        // update the percentage label
+        //DispatchQueue.main.async {
+            print("\(percentDownloaded * 100)%")
+        //}
+    }
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+            
+        print("finished download \(location)")
+    }
     
 }

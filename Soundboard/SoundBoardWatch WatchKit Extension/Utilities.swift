@@ -168,22 +168,16 @@ func downloadDataFromFireBase(name:String, folder: String, session:URLSession, s
                     }
                 }
             }
-        
     } failure: { error in
         print("Error 1345 \(error)")
         failure("Error 1345 \(error)")
     }
-    
-    
-    
-    
-    
 }
 
-func decodeClipFromData(data:Data, success: @escaping (_ user: User) -> Void, failure: @escaping (_ error: String) -> Void){
+func decodeClipFromData(data:Data, success: @escaping (_ user: UserPlist) -> Void, failure: @escaping (_ error: String) -> Void){
     let decoder = PropertyListDecoder()
     do{
-        let user1 = try decoder.decode(User.self, from: data)
+        let user1 = try decoder.decode(UserPlist.self, from: data)
         success(user1)
     }catch{
         failure("Error reading: \(error)")
