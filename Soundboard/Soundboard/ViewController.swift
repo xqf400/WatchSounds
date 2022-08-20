@@ -164,13 +164,13 @@ class ViewController: UIViewController {
     
     func playSound(index: Int){
         
-        guard let url = Bundle.main.url(forResource: soundArray[index].soundFile, withExtension: "mp3") else { return }
+//        guard let url = Bundle.main.url(forResource: soundArray[index].soundFile, withExtension: "mp3") else { return }
         let volume = soundArray[index].soundVolume
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
             try AVAudioSession.sharedInstance().setActive(true)
             
-            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+            player = try AVAudioPlayer(contentsOf: soundArray[index].soundFileURL, fileTypeHint: AVFileType.mp3.rawValue)
             player?.delegate = self
             player?.setVolume(volume, fadeDuration: 10.0)
             //guard let player = player else { return }

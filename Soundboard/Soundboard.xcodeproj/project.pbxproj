@@ -21,8 +21,10 @@
 		054FB34A28B0EED700404202 /* RNCryptor in Frameworks */ = {isa = PBXBuildFile; productRef = 054FB34928B0EED700404202 /* RNCryptor */; };
 		054FB34C28B0EF1000404202 /* RNCryptor in Frameworks */ = {isa = PBXBuildFile; productRef = 054FB34B28B0EF1000404202 /* RNCryptor */; };
 		054FB34E28B0EF1900404202 /* RNCryptor in Frameworks */ = {isa = PBXBuildFile; productRef = 054FB34D28B0EF1900404202 /* RNCryptor */; };
-		0576DD7828159D44000FC1F6 /* VolumeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0576DD7728159D44000FC1F6 /* VolumeView.swift */; };
-		0576DD7A28199123000FC1F6 /* ConsultingSounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0576DD7928199123000FC1F6 /* ConsultingSounds.swift */; };
+		054FB35928B10A1B00404202 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FB35828B10A1B00404202 /* Utilities.swift */; };
+		054FB35B28B13DD500404202 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 054FB35A28B13DD500404202 /* Alamofire */; };
+		054FB35D28B13DDB00404202 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 054FB35C28B13DDB00404202 /* Alamofire */; };
+		054FB35F28B13DE000404202 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 054FB35E28B13DE000404202 /* Alamofire */; };
 		1442C0082805D8AA00DDA3D6 /* Sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1442C0072805D8AA00DDA3D6 /* Sounds.swift */; };
 		14830505276CF73300F14BF4 /* SearchCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14830504276CF73300F14BF4 /* SearchCollectionReusableView.swift */; };
 		14AA43642798714A0006F810 /* WatchSoundboard Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 14AA43632798714A0006F810 /* WatchSoundboard Watch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -126,8 +128,7 @@
 		0537B8E9286CBCCD002B7ACD /* Layla.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Layla.png; sourceTree = "<group>"; };
 		054FB34228B0E64A00404202 /* DownloadController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadController.swift; sourceTree = "<group>"; };
 		054FB34428B0E7FD00404202 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
-		0576DD7728159D44000FC1F6 /* VolumeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeView.swift; sourceTree = "<group>"; };
-		0576DD7928199123000FC1F6 /* ConsultingSounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsultingSounds.swift; sourceTree = "<group>"; };
+		054FB35828B10A1B00404202 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		1442C0072805D8AA00DDA3D6 /* Sounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sounds.swift; sourceTree = "<group>"; };
 		1482AEA727469764002003DD /* Soundboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Soundboard.entitlements; sourceTree = "<group>"; };
 		14830504276CF73300F14BF4 /* SearchCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -179,6 +180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				054FB34C28B0EF1000404202 /* RNCryptor in Frameworks */,
+				054FB35F28B13DE000404202 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				054FB34A28B0EED700404202 /* RNCryptor in Frameworks */,
+				054FB35D28B13DDB00404202 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,6 +223,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				054FB34E28B0EF1900404202 /* RNCryptor in Frameworks */,
+				054FB35B28B13DD500404202 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,9 +252,8 @@
 				14AA4393279878400006F810 /* SoundsInterfaceController.swift */,
 				14AA439727987B7D0006F810 /* SoundRow.swift */,
 				1442C0072805D8AA00DDA3D6 /* Sounds.swift */,
-				0576DD7728159D44000FC1F6 /* VolumeView.swift */,
-				0576DD7928199123000FC1F6 /* ConsultingSounds.swift */,
 				054FB34228B0E64A00404202 /* DownloadController.swift */,
+				054FB35828B10A1B00404202 /* Utilities.swift */,
 			);
 			path = "SoundBoardWatch WatchKit Extension";
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 			name = SoundBoardWatch;
 			packageProductDependencies = (
 				054FB34D28B0EF1900404202 /* RNCryptor */,
+				054FB35A28B13DD500404202 /* Alamofire */,
 			);
 			productName = SoundBoardWatch;
 			productReference = 14AA43602798714A0006F810 /* WatchSoundboardWatch.app */;
@@ -401,6 +405,7 @@
 			name = "SoundBoardWatch WatchKit App";
 			packageProductDependencies = (
 				054FB34928B0EED700404202 /* RNCryptor */,
+				054FB35C28B13DDB00404202 /* Alamofire */,
 			);
 			productName = "SoundBoardWatch WatchKit App";
 			productReference = 14AA43632798714A0006F810 /* WatchSoundboard Watch.app */;
@@ -421,6 +426,7 @@
 			name = "SoundBoardWatch WatchKit Extension";
 			packageProductDependencies = (
 				054FB34B28B0EF1000404202 /* RNCryptor */,
+				054FB35E28B13DE000404202 /* Alamofire */,
 			);
 			productName = "SoundBoardWatch WatchKit Extension";
 			productReference = 14AA43712798714C0006F810 /* SoundBoardWatch WatchKit Extension.appex */;
@@ -532,6 +538,7 @@
 			mainGroup = 14BB9C012738719D006DC0B7;
 			packageReferences = (
 				054FB34628B0EEAF00404202 /* XCRemoteSwiftPackageReference "RNCryptor" */,
+				054FB34F28B107F400404202 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 14BB9C0B2738719D006DC0B7 /* Products */;
 			projectDirPath = "";
@@ -737,8 +744,7 @@
 				14AA437D2798714C0006F810 /* ComplicationController.swift in Sources */,
 				14AA43792798714C0006F810 /* ExtensionDelegate.swift in Sources */,
 				1442C0082805D8AA00DDA3D6 /* Sounds.swift in Sources */,
-				0576DD7828159D44000FC1F6 /* VolumeView.swift in Sources */,
-				0576DD7A28199123000FC1F6 /* ConsultingSounds.swift in Sources */,
+				054FB35928B10A1B00404202 /* Utilities.swift in Sources */,
 				14AA4395279879B90006F810 /* SoundModel.swift in Sources */,
 				14AA439827987B7D0006F810 /* SoundRow.swift in Sources */,
 				14AA43772798714C0006F810 /* InterfaceController.swift in Sources */,
@@ -1334,6 +1340,14 @@
 				kind = branch;
 			};
 		};
+		054FB34F28B107F400404202 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1356,6 +1370,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 054FB34628B0EEAF00404202 /* XCRemoteSwiftPackageReference "RNCryptor" */;
 			productName = RNCryptor;
+		};
+		054FB35A28B13DD500404202 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 054FB34F28B107F400404202 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		054FB35C28B13DDB00404202 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 054FB34F28B107F400404202 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		054FB35E28B13DE000404202 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 054FB34F28B107F400404202 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

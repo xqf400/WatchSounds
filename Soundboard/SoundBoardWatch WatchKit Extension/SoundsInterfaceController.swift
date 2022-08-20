@@ -16,45 +16,29 @@ import MediaPlayer
 
 class SoundsInterfaceController: WKInterfaceController {
     
-    @IBOutlet weak var daysTillLabel: WKInterfaceLabel!
     @IBOutlet weak var stopButtonOutlet: WKInterfaceButton!
     @IBOutlet weak var tableView: WKInterfaceTable!
     
-    var soundsNormal : [SoundModel] = []
+
 
     //MARK: awake
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
-        //showConsultingSounds = UserDefaults.standard.bool(forKey: "showConsultingSounds")
-        settedDaysTill = UserDefaults.standard.integer(forKey: "settedDaysTill")
+
         addAllSound()
         tableView.setNumberOfRows(soundsNormal.count, withRowType: "SoundRow")
         for index in 0..<tableView.numberOfRows {
             guard let controller = tableView.rowController(at: index) as? SoundRow else { continue }
-            guard let url = Bundle.main.url(forResource: soundsNormal[index].soundFile, withExtension: "mp3") else {
-                print("File not found: \(soundsNormal[index].soundFile)")
-                return}
-            
-            let audioDurationSeconds = CMTimeGetSeconds(AVURLAsset(url: url, options: nil).duration)
+            let audioDurationSeconds = CMTimeGetSeconds(AVURLAsset(url: soundsNormal[index].soundFileURL, options: nil).duration)
             let seconds = String(format: "%.1fs", audioDurationSeconds)
             controller.soundSeconds = seconds
             controller.sound = soundsNormal[index]
         }
-        daysTillLabel.setText("\(settedDaysTill) Days ")
 
     }
     
     override func willActivate() {
         super.willActivate()
-
-        /*
-        let date = UserDefaults.standard.object(forKey: "selectedDate") as! Date
-        let days = getDaysBetweenDates(from: Date(), to: date)
-        settedDaysTill = days
-        UserDefaults.standard.set(settedDaysTill, forKey: "settedDaysTill")
-        
-        daysTillLabel.setText("\(settedDaysTill) Days ")
-        */
     }
     
     //MARK: Table did Select
@@ -64,21 +48,19 @@ class SoundsInterfaceController: WKInterfaceController {
     
     //MARK: Play Sound
     func play(sound: SoundModel){
-        print("play \(sound.soundName)")
-        guard let url = Bundle.main.url(forResource: sound.soundFile, withExtension: "mp3") else { print("nil"); return }
+
         stopButtonOutlet.setBackgroundImage(UIImage(systemName: "stop.fill"))
         let volume = 1.0
-        //WKInterfaceVolumeControl.
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
             try AVAudioSession.sharedInstance().setActive(true)
             
-            playerOrg = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+            playerOrg = try AVAudioPlayer(contentsOf: sound.soundFileURL, fileTypeHint: AVFileType.mp3.rawValue)
             playerOrg?.delegate = self
             playerOrg?.setVolume(Float(volume), fadeDuration: 10.0)
             
             guard let playerSave = playerOrg else { return }
-            //print("play \(playerSave.volume) and \(AVAudioSession.sharedInstance().outputVolume)")
+
             playerSave.play()
         } catch let error {
             print(error.localizedDescription)
@@ -105,43 +87,8 @@ class SoundsInterfaceController: WKInterfaceController {
     //MARK: Add all sounds
     func addAllSound(){
         soundsNormal.removeAll()
-        
-        /*
-        soundsNormal.append(lollipop_kurz)
-        soundsNormal.append(IDontcare)
-        soundsNormal.append(mimimi)
-        soundsNormal.append(tellmewhykurz)
-        soundsNormal.append(vielleichtsekt)
-        soundsNormal.append(lollipop_long)
-        soundsNormal.append(lollipop1)
-        soundsNormal.append(lollipop2)
-        soundsNormal.append(lollipop_pop)
-        soundsNormal.append(Iloveit)
-        soundsNormal.append(EsTutMirLeidPocahontas)
-        soundsNormal.append(IfYoureHappy)
-        soundsNormal.append(denken)
-        soundsNormal.append(excited_kurz)
-        soundsNormal.append(JedeZelleKurz)
-        soundsNormal.append(miracolikurz)
-        soundsNormal.append(SchoenerTagStuttgarter)
-        soundsNormal.append(Spass__kurz)
-        soundsNormal.append(Tag__kurz)
-        soundsNormal.append(tellmewhylang)
-        soundsNormal.append(VerstehIchNichtKurz)
-        soundsNormal.append(delfin)
-        soundsNormal.append(esel)
-        soundsNormal.append(gehdochzuhause)
-        soundsNormal.append(HitMeBabyOneMoreTime)
-        soundsNormal.append(imperialmarch)
-        soundsNormal.append(jajalang)
-        soundsNormal.append(jajakurz)
-        soundsNormal.append(Mallezuruck)
-        soundsNormal.append(wasmachensachen)
-        soundsNormal.append(CantinaBand)
-        soundsNormal.append(QuatschMerkschSelber)
-        soundsNormal.append(imperialmarchLong)
+        getLocalFiles()
 
-         */
         soundsNormal.append(Layla)
         
     }

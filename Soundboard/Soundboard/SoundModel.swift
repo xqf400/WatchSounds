@@ -14,14 +14,16 @@ class SoundModel:Codable{
     var soundImage : String
     var soundFile : String
     var soundVolume : Float
+    var soundFileURL: URL
 
     
-    init(soundId: Int, soundName: String, soundImage: String, soundFile: String, soundVolume: Float) {
+    init(soundId: Int, soundName: String, soundImage: String, soundFile: String, soundVolume: Float, soundFileURL: URL) {
         self.soundId = soundId
         self.soundName = soundName
         self.soundImage = soundImage
         self.soundFile = soundFile
         self.soundVolume = soundVolume
+        self.soundFileURL = soundFileURL
     }
     
     

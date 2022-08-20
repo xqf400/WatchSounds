@@ -88,7 +88,7 @@ let VerstehIchNichtLang = SoundModel(soundId: 52, soundName: "Versteh Ich Nicht 
 let CantinaBand = SoundModel(soundId: 53, soundName: "Cantina Band", soundImage: "CantinaBand.png", soundFile: "CantinaBand", soundVolume: soundVolume)
 let QuatschMerkschSelber = SoundModel(soundId: 54, soundName: "Merksch selber", soundImage: "QuatschMerkschSelber.png", soundFile: "QuatschMerkschSelber", soundVolume: soundVolume)
  */
-let Layla = SoundModel(soundId: 55, soundName: "Layla kurz", soundImage: "Layla.png", soundFile: "LaylaKurz", soundVolume: soundVolume)
+let Layla = SoundModel(soundId: 55, soundName: "Layla kurz", soundImage: "Layla.png", soundFile: "LaylaKurz", soundVolume: soundVolume, soundFileURL: Bundle.main.url(forResource: "LaylaKurz", withExtension: "mp3")!)
 
 /*
 let imperialmarchLong = SoundModel(soundId: 56, soundName: "Imperial March Long", soundImage: "ImperialMarchLong.png", soundFile: "ImperialMarchLong", soundVolume: soundVolume)
