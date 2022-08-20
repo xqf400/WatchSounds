@@ -40,7 +40,9 @@ class DownloadController: WKInterfaceController {
         
         //let songName = "esel.mp3"
         //downloadSong(name: songName)
-        
+        DispatchQueue.main.async {
+            self.testLabel.setText("loading...")
+        }
         if UserDefaults.standard.string(forKey: "adress") != nil{
             let mail = UserDefaults.standard.string(forKey: "adress")
             downloadDataFromFireBase(name: "\(mail!).plist", folder: "userLists", session: session) { data in
@@ -61,29 +63,39 @@ class DownloadController: WKInterfaceController {
                             count += 1
                             if count == user.sounds.count{
                                 writeArrayToFiles()
+                                DispatchQueue.main.async {
+                                    self.testLabel.setText("Downloaded")
+                                }
                             }
                         } failure: { error in
                             print("Error download mp3 \(error)")
                             count += 1
                             if count == user.sounds.count{
                                 writeArrayToFiles()
+                                DispatchQueue.main.async {
+                                    self.testLabel.setText("Downloaded")
+                                }
                             }
                         }
                     }
                 } failure: { error in
                     print("Error 325 \(error)")
+                    DispatchQueue.main.async {
+                        self.testLabel.setText("Error")
+                    }
                 }
             } failure: { error in
                 print("Error 67 \(error)")
+                DispatchQueue.main.async {
+                    self.testLabel.setText("Error")
+                }
             }
         }else{
             print("Mail empty")
             DispatchQueue.main.async {
                 self.testLabel.setText("Please syncronise mail empty")
             }
-        }
-        
-        
+        }        
     }
     
 
