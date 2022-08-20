@@ -51,7 +51,7 @@
 		14BB9C3E273872A7006DC0B7 /* SoundModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BB9C3D273872A7006DC0B7 /* SoundModel.swift */; };
 		14BB9C4027387663006DC0B7 /* SoundViewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BB9C3F27387663006DC0B7 /* SoundViewCollectionViewCell.swift */; };
 		14E585962760A32100B50757 /* Public.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E585952760A32100B50757 /* Public.swift */; };
-		14E585982760A61600B50757 /* FavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E585972760A61600B50757 /* FavViewController.swift */; };
+		14E585982760A61600B50757 /* WatchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E585972760A61600B50757 /* WatchController.swift */; };
 		778312346900D361EC6B4871 /* Pods_Soundboard_SoundboardUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3DEDDEEA760D66BBA276950 /* Pods_Soundboard_SoundboardUITests.framework */; };
 		E79943B0BF8A7EA8F10E2C2A /* Pods_Soundboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 969428E972A60599771D88A4 /* Pods_Soundboard.framework */; };
 		FB0D8BF4BD34C6A64F73DF10 /* Pods_SoundboardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C70B2B973C6F9B4D198F1C5E /* Pods_SoundboardTests.framework */; };
@@ -162,7 +162,7 @@
 		14BB9C3D273872A7006DC0B7 /* SoundModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundModel.swift; sourceTree = "<group>"; };
 		14BB9C3F27387663006DC0B7 /* SoundViewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundViewCollectionViewCell.swift; sourceTree = "<group>"; };
 		14E585952760A32100B50757 /* Public.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Public.swift; sourceTree = "<group>"; };
-		14E585972760A61600B50757 /* FavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavViewController.swift; sourceTree = "<group>"; };
+		14E585972760A61600B50757 /* WatchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchController.swift; sourceTree = "<group>"; };
 		352DC3AB90145DEEC0727FD8 /* Pods-Soundboard-SoundboardUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Soundboard-SoundboardUITests.release.xcconfig"; path = "Target Support Files/Pods-Soundboard-SoundboardUITests/Pods-Soundboard-SoundboardUITests.release.xcconfig"; sourceTree = "<group>"; };
 		37AA169FCA46E411973C6104 /* Pods-SoundboardTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoundboardTests.release.xcconfig"; path = "Target Support Files/Pods-SoundboardTests/Pods-SoundboardTests.release.xcconfig"; sourceTree = "<group>"; };
 		880570EE2F8C35F8A277C09A /* Pods-Soundboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Soundboard.debug.xcconfig"; path = "Target Support Files/Pods-Soundboard/Pods-Soundboard.debug.xcconfig"; sourceTree = "<group>"; };
@@ -230,6 +230,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		054FB36028B145D100404202 /* Not needed */ = {
+			isa = PBXGroup;
+			children = (
+				14AA437C2798714C0006F810 /* ComplicationController.swift */,
+				14AA43782798714C0006F810 /* ExtensionDelegate.swift */,
+				14AA43762798714C0006F810 /* InterfaceController.swift */,
+				14AA437A2798714C0006F810 /* NotificationController.swift */,
+				14AA43812798714D0006F810 /* PushNotificationPayload.apns */,
+			);
+			path = "Not needed";
+			sourceTree = "<group>";
+		};
 		14AA43672798714A0006F810 /* SoundBoardWatch WatchKit App */ = {
 			isa = PBXGroup;
 			children = (
@@ -242,13 +254,9 @@
 		14AA43752798714C0006F810 /* SoundBoardWatch WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
-				14AA43762798714C0006F810 /* InterfaceController.swift */,
-				14AA43782798714C0006F810 /* ExtensionDelegate.swift */,
-				14AA437A2798714C0006F810 /* NotificationController.swift */,
-				14AA437C2798714C0006F810 /* ComplicationController.swift */,
+				054FB36028B145D100404202 /* Not needed */,
 				14AA437E2798714D0006F810 /* Assets.xcassets */,
 				14AA43802798714D0006F810 /* Info.plist */,
-				14AA43812798714D0006F810 /* PushNotificationPayload.apns */,
 				14AA4393279878400006F810 /* SoundsInterfaceController.swift */,
 				14AA439727987B7D0006F810 /* SoundRow.swift */,
 				1442C0072805D8AA00DDA3D6 /* Sounds.swift */,
@@ -296,7 +304,7 @@
 				14BB9C0F2738719D006DC0B7 /* SceneDelegate.swift */,
 				14BB9C112738719D006DC0B7 /* ViewController.swift */,
 				14E585952760A32100B50757 /* Public.swift */,
-				14E585972760A61600B50757 /* FavViewController.swift */,
+				14E585972760A61600B50757 /* WatchController.swift */,
 				14BB9C132738719D006DC0B7 /* Main.storyboard */,
 				14BB9C162738719E006DC0B7 /* Assets.xcassets */,
 				14BB9C182738719E006DC0B7 /* LaunchScreen.storyboard */,
@@ -762,7 +770,7 @@
 				14BB9C3E273872A7006DC0B7 /* SoundModel.swift in Sources */,
 				14E585962760A32100B50757 /* Public.swift in Sources */,
 				14BB9C0E2738719D006DC0B7 /* AppDelegate.swift in Sources */,
-				14E585982760A61600B50757 /* FavViewController.swift in Sources */,
+				14E585982760A61600B50757 /* WatchController.swift in Sources */,
 				14BB9C102738719D006DC0B7 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

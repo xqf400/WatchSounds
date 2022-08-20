@@ -32,7 +32,7 @@ class InterfaceController: WKInterfaceController, AVAudioPlayerDelegate {
     @IBAction func playSound() {
         play()
     }
-    
+    /*
     func play(){
         guard let url = Bundle.main.url(forResource: "LaylaKurz", withExtension: "mp3") else { print("nil"); return }
         let volume = 1.0
@@ -49,6 +49,6 @@ class InterfaceController: WKInterfaceController, AVAudioPlayerDelegate {
         } catch let error {
             print(error.localizedDescription)
         }
-    }
+    }*/
     
 }

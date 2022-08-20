@@ -88,7 +88,7 @@
                         <volumeControlView alignment="left" controlsLocalVolume="NO" id="c4n-tx-auL"/>
                         <group width="1" alignment="left" verticalAlignment="bottom" id="hpB-YI-Gy6">
                             <items>
-                                <label width="1" alignment="center" verticalAlignment="bottom" text="Label" id="PK4-4K-izU"/>
+                                <label width="1" alignment="center" verticalAlignment="bottom" text="Label" numberOfLines="0" id="PK4-4K-izU"/>
                             </items>
                         </group>
                         <button width="1" alignment="left" verticalAlignment="bottom" title="Button" id="bFH-Nq-ixL">
