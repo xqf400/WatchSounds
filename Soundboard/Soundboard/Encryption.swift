@@ -10,10 +10,10 @@ import Foundation
 
 //ENtschlüssselung
 func decryptData(ID: String, data: Data,success: @escaping (_ response: Data) -> (), failure: @escaping (_ error: Error) -> ()){
-    var  ass = "ThatsItOrNot2702-90#imroot"
-    if ID != "" {
-        ass = ID
-    }
+    let  ass = "ThatsItOrNot2702-90#imroot"
+//    if ID == "" {
+//        ass = ID
+//    }
     do{
         let decData = try RNCryptor.decrypt(data: data, withPassword: ass)
         success(decData)
@@ -25,16 +25,16 @@ func decryptData(ID: String, data: Data,success: @escaping (_ response: Data) ->
 
 //Verschlüsselung
 func encryptData(ID: String, data: Data,success: @escaping (_ response: Data) -> (), failure: @escaping (_ error: String) -> ()){
-    var  ass = "ThatsItOrNot2702-90#imroot"
-    if ID != "" {
-        ass = ID
-    }
+    let  ass = "ThatsItOrNot2702-90#imroot"
+//    if ID == "" {
+//        ass = ID
+//    }
 
     let encryptedData = RNCryptor.encrypt(data: data, withPassword: ass)
     if !encryptedData.isEmpty{
         success(encryptedData)
     }else{
-        failure("data is empty")
+        failure("123 data is empty")
     }
 }
 

@@ -64,17 +64,17 @@ func downloadMp3FromFireBase(mp3Name:String, session: URLSession, success: @esca
                             id = UserDefaults.standard.string(forKey: "adress")!
                         }
                         if data != nil {
-                        decryptData(ID: id, data: data!) { response in
-                            do{
-                                try response.write(to: localURL)
-                                print("wrote \(localURL)")
-                                success(localURL)
-                            }catch{
-                                failure(error.localizedDescription)
+                            decryptData(ID: id, data: data!) { response in
+                                do{
+                                    try response.write(to: localURL)
+                                    print("wrote \(localURL)")
+                                    success(localURL)
+                                }catch{
+                                    failure(error.localizedDescription)
+                                }
+                            } failure: { error in
+                                failure("Error 99 \(error)")
                             }
-                        } failure: { error in
-                            failure("Error 99 \(error)")
-                        }
                         }else{
                             print("data nil")
                             failure("data nil")
@@ -121,6 +121,76 @@ func getLocalFiles(){
         print(error)
     }
 }
+
+
+
+
+func downloadDataFromFireBase(name:String, folder: String, session:URLSession, success: @escaping (_ data: Data) -> Void, failure: @escaping (_ error: String) -> Void){
+    
+    getTokenFromFirebase(folder: folder, name: name, session: session) { token in
+        let urlString = "https://firebasestorage.googleapis.com/v0/b/watchsoundboard.appspot.com/o/"+folder+"%2F"+name+"?alt=media&token="+token
+        
+        AF.request(urlString)
+            .responseData { (response) in
+                if response.error != nil{
+                    failure("error 55 \(response.error!)")
+                }else{
+                    if response.response!.statusCode > 300{
+                        let error = NSError(domain: urlString, code: response.response!.statusCode, userInfo: nil)
+                        failure("error 84 \(error)")
+                    }else if response.response!.statusCode == 200{
+                        if let data = response.data {
+                            switch response.result
+                            {
+                            case .success(data):
+                                var id = ""
+                                if UserDefaults.standard.string(forKey: "adress") != nil{
+                                    id = UserDefaults.standard.string(forKey: "adress")!
+                                }
+                                print("Id: \(id)")
+                                decryptData(ID: id, data: data) { response in
+                                    success(response)
+                                } failure: { error in
+                                    failure("Error 934 \(error)")
+                                }
+                            case .failure(let error):
+                                failure("\(error)")
+                            case .success(_):
+                                print("suc but not suc")
+                                break
+                            }
+                        }else{
+                            failure("dataerror")
+                        }
+                    }else{
+                        failure("Status code \(response.response!.statusCode)")
+                        
+                    }
+                }
+            }
+        
+    } failure: { error in
+        print("Error 1345 \(error)")
+        failure("Error 1345 \(error)")
+    }
+    
+    
+    
+    
+    
+}
+
+func decodeClipFromData(data:Data, success: @escaping (_ user: User) -> Void, failure: @escaping (_ error: String) -> Void){
+    let decoder = PropertyListDecoder()
+    do{
+        let user1 = try decoder.decode(User.self, from: data)
+        success(user1)
+    }catch{
+        failure("Error reading: \(error)")
+    }
+}
+
+
 
 
 //MARK: Extension URL

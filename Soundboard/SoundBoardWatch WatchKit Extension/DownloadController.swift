@@ -8,6 +8,7 @@
 import Foundation
 import WatchKit
 import RNCryptor
+import Alamofire
 
 class DownloadController: WKInterfaceController {
     
@@ -15,10 +16,12 @@ class DownloadController: WKInterfaceController {
     @IBOutlet weak var volumeView: WKInterfaceVolumeControl!
     
 
+    var session : URLSession!
     
     override func awake(withContext context: Any?) {
+        session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: OperationQueue())
         super.awake(withContext: context)
-
+        //UserDefaults.standard.set("8header8@googlemail.com", forKey: "adress")
         createFolder()
         volumeView.focus()
         setLabel()
@@ -35,19 +38,38 @@ class DownloadController: WKInterfaceController {
     
     @IBAction func downloadButtonAction() {
         
-        let songName = "esel.mp3"
-        downloadSong(name: songName)
+        //let songName = "esel.mp3"
+        //downloadSong(name: songName)
+        
+        if UserDefaults.standard.string(forKey: "adress") != nil{
+            let mail = UserDefaults.standard.string(forKey: "adress")
+            downloadDataFromFireBase(name: "\(mail!).plist", folder: "userLists", session: session) { data in
+                print("downloaded plist")
+                decodeClipFromData(data: data) { user in
+                    print("decoded \(user.mail)")
+                    for soundName in user.sounds{
+                        print("Sound: \(soundName)")
+                        self.downloadSong(name: soundName)
+                    }
+                } failure: { error in
+                    print("Error 325 \(error)")
+                }
+            } failure: { error in
+                print("Error 67 \(error)")
+            }
+        }else{
+            print("Mail empty")
+            DispatchQueue.main.async {
+                self.testLabel.setText("Please syncronise mail empty")
+            }
+        }
+        
         
     }
     
     private func downloadSong(name:String){
-        let sessionConfig = URLSessionConfiguration.default
-        let operationQueue = OperationQueue()
-        let session = URLSession(configuration: sessionConfig, delegate: self, delegateQueue: operationQueue)
-
         downloadMp3FromFireBase(mp3Name: name, session: session) { url in
             print(url)
-
         } failure: { error in
             print("Error download mp3 \(error)")
         }
@@ -74,7 +96,7 @@ class DownloadController: WKInterfaceController {
         if UserDefaults.standard.string(forKey: "adress") != nil{
             DispatchQueue.main.async {
                 let adress = UserDefaults.standard.string(forKey: "adress")
-                self.testLabel.setText("Mail: \(adress)")
+                self.testLabel.setText("Mail: \(adress!)")
             }
         }else{
             DispatchQueue.main.async {

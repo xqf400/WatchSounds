@@ -37,15 +37,15 @@ class WatchController: UIViewController {
         
         if UserDefaults.standard.string(forKey: "adress") != nil{
             //DispatchQueue.main.async {
-                let adress = UserDefaults.standard.string(forKey: "adress")
-                self.mailTextfield.text = adress
+            let adress = UserDefaults.standard.string(forKey: "adress")
+            self.mailTextfield.text = adress
             //self.transferMailToWatchButton.isEnabled = false
             //}
         }
         
     }
     
-
+    
     
     override func viewWillAppear(_ animated: Bool) {
         if loundSound {
@@ -65,10 +65,10 @@ class WatchController: UIViewController {
         if player != nil {
             player!.pause()
         }
-
+        
     }
-
-
+    
+    
     @IBAction func volumeButtonAction(_ sender: Any) {
         
         loundSound = !loundSound
@@ -82,12 +82,24 @@ class WatchController: UIViewController {
             volumeButtonOultet.image = UIImage(systemName: "volume")
         }
     }
-
+    
     @IBAction func transferMailToWatchButtonAction(_ sender: Any) {
         if mailTextfield.text != ""{
             let adress = mailTextfield.text
+            let user = User(id: 0, mail: adress!, maxFilesCount: 1, uploadedSoundsCount: 0, sounds: [])
             UserDefaults.standard.set(adress, forKey: "adress")
-            showHudSuccess(inView: self, text: "saved", delay: 1.0)
+            //uploadPlistToFirebase(user: user) { str in
+            uploadUserToUserInFirebase(user: user) { str in
+                showHudSuccess(inView: self, text: "saved", delay: 1.0)
+            } failure: { error in
+                print("Failed to save1 upload \(error)")
+                showHudError(inView: self, text: "Failed to save1 upload \(error)", delay: 2.0)
+            }
+            //            } failure: { error in
+            //                print("Failed to save2 upload \(error)")
+            //                showHudError(inView: self, text: "Failed to save2 upload \(error)", delay: 2.0)
+            //            }
+            
         }else{
             showHudError(inView: self, text: "Please fill in a mail", delay: 2.0)
         }
@@ -104,48 +116,118 @@ class WatchController: UIViewController {
     }
     
     @IBAction func uploadSoundButtonAction(_ sender: Any) {
-        if mp3URL != nil && mp3Name != nil{
-            guard let data = try? Data(contentsOf: mp3URL!) else {
-                print("data nil")
-                showHudError(inView: self, text: "data nil", delay: 2.0)
-                return
-            }
-            var id = ""
-            if UserDefaults.standard.string(forKey: "adress") != nil{
-                id = UserDefaults.standard.string(forKey: "adress")!
-            }
-            encryptData(ID: id, data: data) { encData in
-                uploadToFireBase(fileName: self.mp3Name!, data: encData, folder: "Soundfiles") { str in
-                    showHudSuccess(inView: self, text: "Uploaded", delay: 1.0)
-                    self.mp3URL = nil
-                    self.mp3Name = nil
-                    self.selectedSoundLabel.text = "No sound selected"
-                } failure: { error in
-                    print("error 12 \(error)")
-                    showHudError(inView: self, text: "Error 12: \(error)", delay: 2.0)
+        if UserDefaults.standard.string(forKey: "adress") != nil{
+            if mp3URL != nil && mp3Name != nil{
+                guard let data = try? Data(contentsOf: mp3URL!) else {
+                    print("data nil")
+                    showHudError(inView: self, text: "data nil", delay: 2.0)
+                    return
                 }
-            } failure: { error in
-                print("Error encrypt user: \(error)")
-                showHudError(inView: self, text: "Error 13: \(error)", delay: 2.0)
+                
+                var id = ""
+                if UserDefaults.standard.string(forKey: "adress") != nil{
+                    id = UserDefaults.standard.string(forKey: "adress")!
+                }
+                print("Id: /\(id)/")
+                //8header8@googlemail.com
+
+                self.getUserAccountIfExist(mail: id) { account in
+                    if account.sounds.count < account.maxFilesCount {
+                        let newAccount = account
+                        encryptData(ID: id, data: data) { encData in
+                            uploadToFireBase(fileName: self.mp3Name!, data: encData, folder: "Soundfiles") { str in
+                                newAccount.sounds.append(self.mp3Name!)
+                                newAccount.uploadedSoundsCount = newAccount.uploadedSoundsCount + 1
+                                self.uploadPlistToFirebase(user: newAccount) { str in
+                                    self.uploadUserToUserInFirebase(user: newAccount) { str in
+                                        showHudSuccess(inView: self, text: "Uploaded", delay: 1.0)
+                                        self.mp3URL = nil
+                                        self.mp3Name = nil
+                                        self.selectedSoundLabel.text = "No sound selected"
+                                    } failure: { error in
+                                        print("Failed to save1 upload \(error)")
+                                        showHudError(inView: self, text: "Failed to save1 upload \(error)", delay: 2.0)
+                                    }
+                                } failure: { error in
+                                    print("Failed to save2 upload \(error)")
+                                    showHudError(inView: self, text: "Failed to save2 upload \(error)", delay: 2.0)
+                                }
+                                
+                                
+                            } failure: { error in
+                                print("error 12 \(error)")
+                                showHudError(inView: self, text: "Error 12: \(error)", delay: 2.0)
+                            }
+                        } failure: { error in
+                            print("Error encrypt user: \(error)")
+                            showHudError(inView: self, text: "Error 13: \(error)", delay: 2.0)
+                        }
+                    }else{
+                        showHudError(inView: self, text: "max files buy more", delay: 2.0)
+                    }
+                } failure: { error in
+                    print("Failed get User Account If Exist \(error)")
+                    showHudError(inView: self, text: "Failed get User Account \(error)", delay: 2.0)
+                }
+                
+            }else{
+                showHudError(inView: self, text: "First select a sound file", delay: 2.0)
             }
         }else{
-            showHudError(inView: self, text: "First select a sound file", delay: 2.0)
+            showHudError(inView: self, text: "Please set up first a mail adress", delay: 2.0)
         }
     }
     
-
-    private func uploadUserToUserInFirebase(id:Int, user: User, success: @escaping (_ str: String) -> Void, failure: @escaping (_ error: String) -> Void){
-
-
-
+    
+    private func uploadUserToUserInFirebase(user: User, success: @escaping (_ str: String) -> Void, failure: @escaping (_ error: String) -> Void){
+        getUserAccountIfExist(mail: user.mail) { account in
+            db.collection("accounts").document(user.mail).setData(user.dictionary) { error in
+                if let err = error{
+                    failure("err user \(err)")
+                }else{
+                    print("suc1 \(user.uploadedSoundsCount)")
+                    success("suc1 \(user.uploadedSoundsCount)")
+                }
+            }
+        } failure: { error in
+            
+            db.collection("accounts").document(user.mail).setData(user.dictionary) { error in
+                if let err = error{
+                    failure("err user \(err)")
+                }else{
+                    print("suc1 \(user.uploadedSoundsCount)")
+                    success("suc1 \(user.uploadedSoundsCount)")
+                }
+            }
+            
+        }
+        
     }
     
-    private func uploadPlistToFirebase(drink:User, success: @escaping (_ str: String) -> Void, failure: @escaping (_ error: String) -> Void){
+    
+    func getUserAccountIfExist(mail: String,success: @escaping (_ account: User) -> Void, failure: @escaping (_ error: String) -> Void){
+        let docRef = db.collection("accounts").document(mail)
+        docRef.getDocument { (document, error) in
+            if document != nil {
+                if document!.exists {
+                    guard let UserAccount = User(dictionary: document!.data()!) else {return}
+                    success(UserAccount)
+                } else {
+                    failure("1Document does not exist1")
+                }
+            }else {
+                failure("2Document does not exist")
+            }
+        }
+    }
+    
+    
+    private func uploadPlistToFirebase(user:User, success: @escaping (_ str: String) -> Void, failure: @escaping (_ error: String) -> Void){
         let encoder = PropertyListEncoder()
         do{
-            let data = try encoder.encode(drink)
+            let data = try encoder.encode(user)
             encryptData(ID: "", data: data) { encData in
-                let storageref = storage.reference().child("userLists/\(drink.mail).plist")
+                let storageref = storage.reference().child("userLists/\(user.mail).plist")
                 _ = storageref.putData(encData, metadata: nil) { (metadata, error) in
                     if error != nil {
                         failure(error!.localizedDescription)
@@ -170,7 +252,7 @@ extension WatchController: AVAudioPlayerDelegate {
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         if flag {
-
+            
         }
     }
 }
