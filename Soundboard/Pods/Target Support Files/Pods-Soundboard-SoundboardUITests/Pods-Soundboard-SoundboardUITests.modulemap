@@ -1,0 +1,6 @@
+framework module Pods_Soundboard_SoundboardUITests {
+  umbrella header "Pods-Soundboard-SoundboardUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
