@@ -201,7 +201,7 @@
                                 </items>
                             </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sZf-ZG-W6A">
-                                <rect key="frame" x="0.0" y="733" width="414" height="80"/>
+                                <rect key="frame" x="0.0" y="662" width="414" height="151"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upload a sound" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aM1-HQ-bFV">
                                         <rect key="frame" x="8" y="8" width="398" height="20"/>
@@ -213,25 +213,57 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qub-tz-rA2">
-                                        <rect key="frame" x="148.5" y="36" width="117" height="36"/>
+                                        <rect key="frame" x="148.5" y="36" width="117" height="31"/>
                                         <color key="backgroundColor" systemColor="systemBlueColor"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Choose sound">
                                             <color key="baseForegroundColor" systemColor="labelColor"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="chooseSoundButtonAction:" destination="nkw-RO-0hQ" eventType="touchUpInside" id="87k-GA-87G"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No sound selected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yif-xV-vlb">
+                                        <rect key="frame" x="8" y="75" width="398" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="yxJ-dv-cYG"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DRF-kh-wcf">
+                                        <rect key="frame" x="141.5" y="113" width="131.5" height="30"/>
+                                        <color key="backgroundColor" systemColor="linkColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="m8r-a7-kNj"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Upload to server">
+                                            <color key="baseForegroundColor" systemColor="labelColor"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="uploadSoundButtonAction:" destination="nkw-RO-0hQ" eventType="touchUpInside" id="ev3-xf-dK6"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGray2Color"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DRF-kh-wcf" secondAttribute="trailing" constant="20" id="0qm-l3-6Kx"/>
                                     <constraint firstItem="Qub-tz-rA2" firstAttribute="centerX" secondItem="sZf-ZG-W6A" secondAttribute="centerX" id="3QZ-6z-ddM"/>
-                                    <constraint firstAttribute="bottom" secondItem="Qub-tz-rA2" secondAttribute="bottom" constant="8" id="4LW-Oh-Wc8"/>
+                                    <constraint firstAttribute="bottom" secondItem="DRF-kh-wcf" secondAttribute="bottom" constant="8" id="8DP-Vc-ofb"/>
                                     <constraint firstItem="aM1-HQ-bFV" firstAttribute="leading" secondItem="sZf-ZG-W6A" secondAttribute="leading" constant="8" id="8UC-D8-gYL"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Qub-tz-rA2" secondAttribute="trailing" constant="20" id="8zR-d9-gml"/>
+                                    <constraint firstItem="DRF-kh-wcf" firstAttribute="top" secondItem="Yif-xV-vlb" secondAttribute="bottom" constant="8" id="DTv-Yo-5Na"/>
+                                    <constraint firstItem="DRF-kh-wcf" firstAttribute="centerX" secondItem="sZf-ZG-W6A" secondAttribute="centerX" id="Lqy-im-GF9"/>
+                                    <constraint firstItem="Yif-xV-vlb" firstAttribute="leading" secondItem="sZf-ZG-W6A" secondAttribute="leading" constant="8" id="QsH-zz-xOT"/>
                                     <constraint firstItem="Qub-tz-rA2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="sZf-ZG-W6A" secondAttribute="leading" constant="20" id="SDy-Xe-hYA"/>
+                                    <constraint firstItem="Qub-tz-rA2" firstAttribute="top" secondItem="aM1-HQ-bFV" secondAttribute="bottom" constant="8" id="Y0N-NN-vD4"/>
+                                    <constraint firstAttribute="trailing" secondItem="Yif-xV-vlb" secondAttribute="trailing" constant="8" id="f55-T8-bQO"/>
                                     <constraint firstItem="aM1-HQ-bFV" firstAttribute="top" secondItem="sZf-ZG-W6A" secondAttribute="top" constant="8" id="hMm-V0-0xk"/>
+                                    <constraint firstItem="DRF-kh-wcf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="sZf-ZG-W6A" secondAttribute="leading" constant="20" id="jGN-s2-eL3"/>
                                     <constraint firstAttribute="trailing" secondItem="aM1-HQ-bFV" secondAttribute="trailing" constant="8" id="nWY-2K-7C0"/>
-                                    <constraint firstAttribute="height" constant="80" id="s0B-0h-HHA"/>
-                                    <constraint firstItem="Qub-tz-rA2" firstAttribute="top" secondItem="aM1-HQ-bFV" secondAttribute="bottom" constant="8" id="skS-Tu-8hE"/>
+                                    <constraint firstItem="Yif-xV-vlb" firstAttribute="top" secondItem="Qub-tz-rA2" secondAttribute="bottom" constant="8" id="v9w-Ys-RgA"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pWb-5M-Rno">
@@ -261,6 +293,9 @@
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Transfer Mail to Watch"/>
+                                        <connections>
+                                            <action selector="transferMailToWatchButtonAction:" destination="nkw-RO-0hQ" eventType="touchUpInside" id="BLh-Xq-2TM"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -295,8 +330,15 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Apple Watch" image="applewatch" catalog="system" id="5Ub-7a-RDT"/>
                     <connections>
+                        <outlet property="actualMailLabel" destination="F9R-k1-PpU" id="3eK-wF-DGe"/>
+                        <outlet property="chooseSoundButtonOutlet" destination="Qub-tz-rA2" id="hAT-hm-u1R"/>
+                        <outlet property="mailTextfield" destination="pH4-SF-Yqq" id="vXv-nz-LCJ"/>
                         <outlet property="navBar" destination="ja0-rL-lcU" id="7Mh-AK-vXc"/>
                         <outlet property="navBarTitle" destination="syl-Ed-Kx6" id="L2h-zj-We8"/>
+                        <outlet property="selectedSoundLabel" destination="Yif-xV-vlb" id="ezO-1c-KqH"/>
+                        <outlet property="transferMailToWatchButton" destination="Qe8-Tk-3M6" id="4PK-8q-Atq"/>
+                        <outlet property="uploadButtonOutlet" destination="DRF-kh-wcf" id="DNj-Xx-KVb"/>
+                        <outlet property="uploadSoundView" destination="sZf-ZG-W6A" id="YQo-xN-weu"/>
                         <outlet property="volumeButtonOultet" destination="s6Z-DF-sqE" id="zxS-C0-xYB"/>
                     </connections>
                 </viewController>

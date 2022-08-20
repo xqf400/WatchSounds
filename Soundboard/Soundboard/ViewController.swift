@@ -202,7 +202,7 @@ class ViewController: UIViewController {
                 showHudSuccess(inView: self, text: "\(song.soundName) zu Favoriten hinzugefügt", delay: 1.0)
                 //}
                 
-                saveFavoritesLocal()
+                //saveFavoritesLocal()
             } else {
                 print("couldn't find index path")
             }

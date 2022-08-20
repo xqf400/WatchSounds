@@ -18,7 +18,6 @@ func getTokenFromFirebase(folder:String, name: String, session: URLSession, succ
     let url = "https://firebasestorage.googleapis.com/v0/b/watchsoundboard.appspot.com/o/"+folder+"%2F" + name
     
     AF.request(url, method: .get).responseJSON { response in
-        //let data: JSON = JSON(response.value)
         if response.response?.statusCode == 200 {
             switch response.result {
             case .success(let value):
@@ -42,7 +41,6 @@ func getTokenFromFirebase(folder:String, name: String, session: URLSession, succ
         }
     }
     
-    
 }
 
 //MARK: Download Mp3 firebase
@@ -50,7 +48,6 @@ func downloadMp3FromFireBase(mp3Name:String, session: URLSession, success: @esca
     let localURL = soundsURL.appendingPathComponent("\(mp3Name)")
     if FileManager.default.fileExists(atPath: localURL.path) {
         success(localURL)
-        
     }else{
         getTokenFromFirebase(folder: "Soundfiles", name: mp3Name, session: session) { token in
             let downloadURL = "https://firebasestorage.googleapis.com/v0/b/watchsoundboard.appspot.com/o/Soundfiles%2F"+mp3Name+"?alt=media&token="+token
@@ -62,12 +59,25 @@ func downloadMp3FromFireBase(mp3Name:String, session: URLSession, success: @esca
                         print(error!)
                         failure(error!.localizedDescription)
                     }else{
-                        do{
-                            try data?.write(to: localURL)
-                            print("wrote \(localURL)")
-                            success(localURL)
-                        }catch{
-                            failure(error.localizedDescription)
+                        var id = ""
+                        if UserDefaults.standard.string(forKey: "adress") != nil{
+                            id = UserDefaults.standard.string(forKey: "adress")!
+                        }
+                        if data != nil {
+                        decryptData(ID: id, data: data!) { response in
+                            do{
+                                try response.write(to: localURL)
+                                print("wrote \(localURL)")
+                                success(localURL)
+                            }catch{
+                                failure(error.localizedDescription)
+                            }
+                        } failure: { error in
+                            failure("Error 99 \(error)")
+                        }
+                        }else{
+                            print("data nil")
+                            failure("data nil")
                         }
                     }
                 }

@@ -24,7 +24,6 @@ class SoundsInterfaceController: WKInterfaceController {
     //MARK: awake
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
-
         addAllSound()
         tableView.setNumberOfRows(soundsNormal.count, withRowType: "SoundRow")
         for index in 0..<tableView.numberOfRows {
@@ -35,10 +34,20 @@ class SoundsInterfaceController: WKInterfaceController {
             controller.sound = soundsNormal[index]
         }
 
+
     }
     
     override func willActivate() {
         super.willActivate()
+        addAllSound()
+        tableView.setNumberOfRows(soundsNormal.count, withRowType: "SoundRow")
+        for index in 0..<tableView.numberOfRows {
+            guard let controller = tableView.rowController(at: index) as? SoundRow else { continue }
+            let audioDurationSeconds = CMTimeGetSeconds(AVURLAsset(url: soundsNormal[index].soundFileURL, options: nil).duration)
+            let seconds = String(format: "%.1fs", audioDurationSeconds)
+            controller.soundSeconds = seconds
+            controller.sound = soundsNormal[index]
+        }
     }
     
     //MARK: Table did Select

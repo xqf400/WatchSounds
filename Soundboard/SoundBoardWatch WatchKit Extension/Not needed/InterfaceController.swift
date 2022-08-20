@@ -30,7 +30,7 @@ class InterfaceController: WKInterfaceController, AVAudioPlayerDelegate {
     }
 
     @IBAction func playSound() {
-        play()
+        //play()
     }
     /*
     func play(){

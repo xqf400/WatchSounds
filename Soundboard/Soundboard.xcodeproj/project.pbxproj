@@ -25,6 +25,10 @@
 		054FB35B28B13DD500404202 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 054FB35A28B13DD500404202 /* Alamofire */; };
 		054FB35D28B13DDB00404202 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 054FB35C28B13DDB00404202 /* Alamofire */; };
 		054FB35F28B13DE000404202 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 054FB35E28B13DE000404202 /* Alamofire */; };
+		054FB36228B150AA00404202 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FB36128B150AA00404202 /* User.swift */; };
+		054FB36328B1525300404202 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FB36128B150AA00404202 /* User.swift */; };
+		054FB36528B1529700404202 /* Encryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FB36428B1529700404202 /* Encryption.swift */; };
+		054FB36628B1529D00404202 /* Encryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FB36428B1529700404202 /* Encryption.swift */; };
 		1442C0082805D8AA00DDA3D6 /* Sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1442C0072805D8AA00DDA3D6 /* Sounds.swift */; };
 		14830505276CF73300F14BF4 /* SearchCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14830504276CF73300F14BF4 /* SearchCollectionReusableView.swift */; };
 		14AA43642798714A0006F810 /* WatchSoundboard Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 14AA43632798714A0006F810 /* WatchSoundboard Watch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -129,6 +133,8 @@
 		054FB34228B0E64A00404202 /* DownloadController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadController.swift; sourceTree = "<group>"; };
 		054FB34428B0E7FD00404202 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		054FB35828B10A1B00404202 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		054FB36128B150AA00404202 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		054FB36428B1529700404202 /* Encryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encryption.swift; sourceTree = "<group>"; };
 		1442C0072805D8AA00DDA3D6 /* Sounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sounds.swift; sourceTree = "<group>"; };
 		1482AEA727469764002003DD /* Soundboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Soundboard.entitlements; sourceTree = "<group>"; };
 		14830504276CF73300F14BF4 /* SearchCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -312,6 +318,8 @@
 				14BB9C3D273872A7006DC0B7 /* SoundModel.swift */,
 				14BB9C3F27387663006DC0B7 /* SoundViewCollectionViewCell.swift */,
 				14830504276CF73300F14BF4 /* SearchCollectionReusableView.swift */,
+				054FB36128B150AA00404202 /* User.swift */,
+				054FB36428B1529700404202 /* Encryption.swift */,
 			);
 			path = Soundboard;
 			sourceTree = "<group>";
@@ -753,10 +761,12 @@
 				14AA43792798714C0006F810 /* ExtensionDelegate.swift in Sources */,
 				1442C0082805D8AA00DDA3D6 /* Sounds.swift in Sources */,
 				054FB35928B10A1B00404202 /* Utilities.swift in Sources */,
+				054FB36628B1529D00404202 /* Encryption.swift in Sources */,
 				14AA4395279879B90006F810 /* SoundModel.swift in Sources */,
 				14AA439827987B7D0006F810 /* SoundRow.swift in Sources */,
 				14AA43772798714C0006F810 /* InterfaceController.swift in Sources */,
 				14AA4394279878400006F810 /* SoundsInterfaceController.swift in Sources */,
+				054FB36328B1525300404202 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -769,8 +779,10 @@
 				14BB9C122738719D006DC0B7 /* ViewController.swift in Sources */,
 				14BB9C3E273872A7006DC0B7 /* SoundModel.swift in Sources */,
 				14E585962760A32100B50757 /* Public.swift in Sources */,
+				054FB36228B150AA00404202 /* User.swift in Sources */,
 				14BB9C0E2738719D006DC0B7 /* AppDelegate.swift in Sources */,
 				14E585982760A61600B50757 /* WatchController.swift in Sources */,
+				054FB36528B1529700404202 /* Encryption.swift in Sources */,
 				14BB9C102738719D006DC0B7 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

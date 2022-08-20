@@ -35,7 +35,7 @@ class DownloadController: WKInterfaceController {
     
     @IBAction func downloadButtonAction() {
         
-        let songName = "Iloveit.mp3"
+        let songName = "esel.mp3"
         downloadSong(name: songName)
         
     }
@@ -74,11 +74,11 @@ class DownloadController: WKInterfaceController {
         if UserDefaults.standard.string(forKey: "adress") != nil{
             DispatchQueue.main.async {
                 let adress = UserDefaults.standard.string(forKey: "adress")
-                testLabel.setText("Mail: \(adress)")
+                self.testLabel.setText("Mail: \(adress)")
             }
         }else{
             DispatchQueue.main.async {
-                testLabel.setText("Mail is empty")
+                self.testLabel.setText("Mail is empty")
             }
         }
     }
