@@ -99,7 +99,7 @@ class SoundsInterfaceController: WKInterfaceController {
         getLocalFiles()
 
         soundsNormal.append(Layla)
-        
+        soundsNormal = soundsNormal.sorted { $0.soundName < $1.soundName }
     }
     
     

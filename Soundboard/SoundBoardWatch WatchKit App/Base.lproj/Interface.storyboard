@@ -34,7 +34,6 @@
                                         <items>
                                             <imageView width="30" height="30" alignment="left" verticalAlignment="center" id="JSw-7s-PWK"/>
                                             <label alignment="left" verticalAlignment="center" text="Label" textAlignment="left" numberOfLines="2" minimumScaleFactor="0.10000000000000001" id="S0w-k3-2bN">
-                                                <color key="textColor" red="0.12884005900000001" green="0.31761550900000002" blue="0.58826351170000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <fontDescription key="font" style="UICTFontTextStyleBody"/>
                                             </label>
                                         </items>

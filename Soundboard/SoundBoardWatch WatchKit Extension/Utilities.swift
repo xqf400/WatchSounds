@@ -113,7 +113,7 @@ func getLocalFiles(){
         print("mp3s:", mp3s)
         for mp3File in mp3s {
             let url = soundsURL.appendingPathComponent(mp3File)
-            let sound = SoundModel(soundId: soundsNormal.count+1, soundName: mp3File, soundImage: "Layla.png", soundFile: mp3File, soundVolume: 1.0, soundFileURL: url)
+            let sound = SoundModel(soundId: soundsNormal.count+1, soundName: mp3File, soundImage: "NoName", soundFile: mp3File, soundVolume: 1.0, soundFileURL: url)
             soundsNormal.append(sound)
         }
         

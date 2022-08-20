@@ -6,6 +6,7 @@
 //
 
 import WatchKit
+import UIKit
 
 class SoundRow : NSObject {
     
@@ -16,7 +17,11 @@ class SoundRow : NSObject {
     var sound: SoundModel? {
       didSet {
           labelSound.setText("\(sound!.soundName) \(soundSeconds!)")
-          imageSound.setImage(UIImage(named: sound!.soundImage))
+          if sound!.soundImage == "NoName"{
+              imageSound.setImage(UIImage(systemName: "music.note"))
+          }else{
+              imageSound.setImage(UIImage(named: sound!.soundImage))
+          }
           //soundLength.setText(soundSeconds)
       }
     }
