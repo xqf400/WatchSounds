@@ -11,7 +11,7 @@ import Foundation
 import AVFoundation
 import MediaPlayer
 
-
+/*
 class ConsultingSoundsController: WKInterfaceController {
     
     @IBOutlet weak var daysTillLabel: WKInterfaceLabel!
@@ -25,6 +25,7 @@ class ConsultingSoundsController: WKInterfaceController {
         super.awake(withContext: context)
         settedDaysTill = UserDefaults.standard.integer(forKey: "settedDaysTill")
         addAllSound()
+        /*
         tableView.setNumberOfRows(soundsCon.count, withRowType: "SoundRow")
         for index in 0..<tableView.numberOfRows {
             guard let controller = tableView.rowController(at: index) as? SoundRow else { continue }
@@ -37,6 +38,7 @@ class ConsultingSoundsController: WKInterfaceController {
             controller.soundSeconds = seconds
             controller.sound = soundsCon[index]
         }
+         */
         daysTillLabel.setText("\(settedDaysTill) D.")
  
     }
@@ -103,6 +105,7 @@ class ConsultingSoundsController: WKInterfaceController {
     func addAllSound(){
         soundsCon.removeAll()
         
+        /*
         soundsCon.append(mse_richtig)
         soundsCon.append(mse_wunderbar)
         soundsCon.append(mse_guuuut)
@@ -121,7 +124,7 @@ class ConsultingSoundsController: WKInterfaceController {
         soundsCon.append(smartMatze)
         soundsCon.append(MSE_Und_ich_sag_aber_ok)
         soundsCon.append(halloPascalkurz)
-        
+        */
     }
     
     
@@ -137,4 +140,5 @@ extension ConsultingSoundsController: AVAudioPlayerDelegate {
         }
     }
 }
+*/
 

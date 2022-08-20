@@ -93,6 +93,7 @@ class ViewController: UIViewController {
         
         soundArray.removeAll()
         
+        /*
         soundArray.append(Tag__kurz)
         soundArray.append(delfin)
         soundArray.append(excited_kurz)
@@ -152,6 +153,7 @@ class ViewController: UIViewController {
         soundArray.append(CantinaBand)
         soundArray.append(QuatschMerkschSelber)
         soundArray.append(imperialmarchLong)
+         */
         soundArray.append(Layla)
         
         soundArray = soundArray.sorted(by: { $0.soundName < $1.soundName })

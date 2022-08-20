@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UPs-Wi-5VW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UPs-Wi-5VW">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -21,7 +21,6 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="NiB-st-IvQ" kind="relationship" relationship="viewControllers" id="FAz-1n-E6u"/>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="25r-Xz-b79"/>
                         <segue destination="nkw-RO-0hQ" kind="relationship" relationship="viewControllers" id="uKb-Xw-KUo"/>
                     </connections>
@@ -29,146 +28,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qpd-N1-Bq2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1119" y="-225"/>
-        </scene>
-        <!--Consulting-->
-        <scene sceneID="S8U-vL-Sbx">
-            <objects>
-                <viewController id="NiB-st-IvQ" customClass="ConsultingViewController" customModule="Soundboard" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Zct-RE-ujx">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Tw0-aT-b7s">
-                                <rect key="frame" x="4" y="80" width="406" height="816"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yNa-7Q-1LK">
-                                    <size key="itemSize" width="200" height="210"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="4lM-L7-SkC" customClass="SoundViewCollectionViewCell" customModule="Soundboard" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="200" height="210"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="tVG-zk-PnA">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="210"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iAN-xg-8Kw">
-                                                    <rect key="frame" x="0.0" y="0.0" width="200" height="210"/>
-                                                    <color key="backgroundColor" systemColor="linkColor"/>
-                                                </view>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cXM-oA-lzH">
-                                                    <rect key="frame" x="8" y="8" width="184" height="158"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="8"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ARk-LI-Wgl">
-                                                    <rect key="frame" x="4" y="166" width="192" height="40"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="40" id="rcO-Q5-1EG"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="iAN-xg-8Kw" firstAttribute="top" secondItem="tVG-zk-PnA" secondAttribute="top" id="4IM-NE-M51"/>
-                                                <constraint firstItem="cXM-oA-lzH" firstAttribute="top" secondItem="tVG-zk-PnA" secondAttribute="top" constant="8" id="5Fc-4t-8Ps"/>
-                                                <constraint firstItem="cXM-oA-lzH" firstAttribute="leading" secondItem="tVG-zk-PnA" secondAttribute="leading" constant="8" id="FmW-nk-ztB"/>
-                                                <constraint firstItem="ARk-LI-Wgl" firstAttribute="leading" secondItem="tVG-zk-PnA" secondAttribute="leading" constant="4" id="Jm1-a9-pBS"/>
-                                                <constraint firstAttribute="bottom" secondItem="iAN-xg-8Kw" secondAttribute="bottom" id="N4F-a6-1X1"/>
-                                                <constraint firstAttribute="trailing" secondItem="cXM-oA-lzH" secondAttribute="trailing" constant="8" id="Oo2-U3-JMy"/>
-                                                <constraint firstItem="ARk-LI-Wgl" firstAttribute="top" secondItem="cXM-oA-lzH" secondAttribute="bottom" id="akl-Ji-goa"/>
-                                                <constraint firstAttribute="trailing" secondItem="ARk-LI-Wgl" secondAttribute="trailing" constant="4" id="dHB-sD-gtf"/>
-                                                <constraint firstItem="iAN-xg-8Kw" firstAttribute="leading" secondItem="tVG-zk-PnA" secondAttribute="leading" id="hgl-hF-eMQ"/>
-                                                <constraint firstAttribute="bottom" secondItem="ARk-LI-Wgl" secondAttribute="bottom" constant="4" id="u1m-2T-kkQ"/>
-                                                <constraint firstAttribute="trailing" secondItem="iAN-xg-8Kw" secondAttribute="trailing" id="vwx-9S-nml"/>
-                                            </constraints>
-                                        </collectionViewCellContentView>
-                                        <size key="customSize" width="200" height="210"/>
-                                        <connections>
-                                            <outlet property="backGroundView" destination="iAN-xg-8Kw" id="D0l-en-FKS"/>
-                                            <outlet property="cellImageView" destination="cXM-oA-lzH" id="rQn-u7-7JO"/>
-                                            <outlet property="cellLabel" destination="ARk-LI-Wgl" id="fES-n3-ygZ"/>
-                                            <outlet property="contentView" destination="tVG-zk-PnA" id="QTZ-Ab-lQF"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eBb-mY-xqL">
-                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="KP7-jE-tqt"/>
-                                </constraints>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="barTintColor" systemColor="linkColor"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </textAttributes>
-                                <textAttributes key="largeTitleTextAttributes">
-                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="Consulting" id="aSR-1F-Cfm">
-                                        <leftBarButtonItems>
-                                            <barButtonItem image="stop.circle" catalog="system" id="vXe-FV-oz9">
-                                                <connections>
-                                                    <action selector="stopAction:" destination="NiB-st-IvQ" id="MAg-Ur-2nv"/>
-                                                </connections>
-                                            </barButtonItem>
-                                            <barButtonItem image="volume.3" catalog="system" id="LqL-ie-NMu">
-                                                <connections>
-                                                    <action selector="volumeButtonAction:" destination="NiB-st-IvQ" id="nI5-PV-nOj"/>
-                                                </connections>
-                                            </barButtonItem>
-                                        </leftBarButtonItems>
-                                        <rightBarButtonItems>
-                                            <barButtonItem title="Item" image="lock" catalog="system" id="EAA-LN-GN0">
-                                                <connections>
-                                                    <action selector="passwordAction:" destination="NiB-st-IvQ" id="TWM-vk-GCO"/>
-                                                </connections>
-                                            </barButtonItem>
-                                            <barButtonItem image="shuffle" catalog="system" id="ZVx-MU-DVl">
-                                                <connections>
-                                                    <action selector="schuffleAction:" destination="NiB-st-IvQ" id="JU6-gi-v9n"/>
-                                                </connections>
-                                            </barButtonItem>
-                                        </rightBarButtonItems>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="vhk-8E-tBA"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="eBb-mY-xqL" firstAttribute="trailing" secondItem="vhk-8E-tBA" secondAttribute="trailing" id="0al-1z-D5a"/>
-                            <constraint firstItem="eBb-mY-xqL" firstAttribute="leading" secondItem="vhk-8E-tBA" secondAttribute="leading" id="HeJ-tg-G1K"/>
-                            <constraint firstAttribute="bottom" secondItem="Tw0-aT-b7s" secondAttribute="bottom" id="L7k-Rz-4lI"/>
-                            <constraint firstItem="Tw0-aT-b7s" firstAttribute="leading" secondItem="vhk-8E-tBA" secondAttribute="leading" constant="4" id="Mrt-eI-5fj"/>
-                            <constraint firstItem="vhk-8E-tBA" firstAttribute="trailing" secondItem="Tw0-aT-b7s" secondAttribute="trailing" constant="4" id="Ofc-BK-WXG"/>
-                            <constraint firstItem="Tw0-aT-b7s" firstAttribute="top" secondItem="eBb-mY-xqL" secondAttribute="bottom" constant="-8" id="leK-Pe-PfL"/>
-                            <constraint firstItem="eBb-mY-xqL" firstAttribute="top" secondItem="vhk-8E-tBA" secondAttribute="top" id="ydH-To-710"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Consulting" image="music.mic" catalog="system" id="qJw-nL-4Df"/>
-                    <connections>
-                        <outlet property="collectionTopCOnstraint" destination="leK-Pe-PfL" id="mtX-yy-yxS"/>
-                        <outlet property="collectionView" destination="Tw0-aT-b7s" id="NeJ-oY-J9T"/>
-                        <outlet property="unlockSoundsButtonOutlet" destination="EAA-LN-GN0" id="ZKA-ZP-hSn"/>
-                        <outlet property="volumeButtonOultet" destination="LqL-ie-NMu" id="Nyd-qE-mRA"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JUC-Uy-orZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="18.840579710144929" y="-590.625"/>
         </scene>
         <!--Sounds-->
         <scene sceneID="tne-QT-ifu">
@@ -448,17 +307,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="lock" catalog="system" width="128" height="128"/>
-        <image name="music.mic" catalog="system" width="128" height="121"/>
         <image name="music.quarternote.3" catalog="system" width="128" height="103"/>
         <image name="person.fill.questionmark.rtl" catalog="system" width="128" height="104"/>
         <image name="shuffle" catalog="system" width="128" height="95"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <image name="stop.circle" catalog="system" width="128" height="121"/>
         <image name="volume.3" catalog="system" width="128" height="86"/>
-        <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

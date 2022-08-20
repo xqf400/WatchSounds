@@ -52,7 +52,7 @@
                         <outlet property="daysTillLabel" destination="Cl6-Ut-MEK" id="hQr-Bf-0dA"/>
                         <outlet property="stopButtonOutlet" destination="bFH-LM-5cR" id="fE8-dO-rOi"/>
                         <outlet property="tableView" destination="Niz-FB-bqr" id="kHB-wG-vqs"/>
-                        <segue destination="fTU-av-h17" kind="relationship" relationship="nextPage" id="ICV-SD-7hN"/>
+                        <segue destination="gGR-Lo-5aT" kind="relationship" relationship="nextPage" id="Ibf-NW-gT1"/>
                     </connections>
                 </controller>
             </objects>
@@ -78,58 +78,35 @@
         <!--Notification Controller-->
         <scene sceneID="ZPc-GJ-vnh">
             <objects>
-                <controller id="4sK-HA-Art" customClass="NotificationController" customModule="Soundboard_Watch" customModuleProvider="target"/>
+                <controller id="4sK-HA-Art" customClass="NotificationController" customModule="WatchSoundboard_Watch" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="599" y="790"/>
         </scene>
-        <!--Consulting Sounds Controller-->
-        <scene sceneID="ZAK-tF-7Ak">
+        <!--Download Controller-->
+        <scene sceneID="zaf-vN-133">
             <objects>
-                <controller id="7vI-DA-DqF" customClass="ConsultingSoundsController" customModule="SoundBoardWatch_WatchKit_Extension">
+                <controller id="gGR-Lo-5aT" customClass="DownloadController" customModule="SoundBoardWatch_WatchKit_Extension">
                     <items>
-                        <group width="1" alignment="left" id="QQD-Fa-sYu">
+                        <volumeControlView alignment="left" controlsLocalVolume="NO" id="c4n-tx-auL"/>
+                        <group width="1" alignment="left" verticalAlignment="bottom" id="hpB-YI-Gy6">
                             <items>
-                                <button width="25" alignment="right" verticalAlignment="center" backgroundImage="shuffle" catalog="system" id="kSg-IY-Jsg">
-                                    <color key="backgroundColor" red="0.97364097829999996" green="0.9127491713" blue="0.3213799" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                    <fontDescription key="font" type="system" pointSize="8"/>
-                                    <connections>
-                                        <action selector="stopButtonAction" destination="7vI-DA-DqF" id="9AM-DS-kTh"/>
-                                    </connections>
-                                </button>
-                                <label alignment="left" text="0" id="e8D-Yc-Yql">
-                                    <color key="textColor" red="0.96470588450000005" green="0.85490196939999996" blue="0.2941176593" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </label>
-                                <label alignment="center" verticalAlignment="center" text="ConSounds" textAlignment="right" minimumScaleFactor="0.20000000000000001" id="DcR-Pp-LEz"/>
+                                <label width="1" alignment="center" verticalAlignment="bottom" text="Label" id="PK4-4K-izU"/>
                             </items>
                         </group>
-                        <table alignment="left" id="wGq-cb-QMl">
-                            <items>
-                                <tableRow identifier="SoundRow" id="vuq-57-M5I" customClass="SoundRow" customModule="SoundBoardWatch_WatchKit_Extension">
-                                    <group key="rootItem" width="1" alignment="left" id="xWM-mY-JW3">
-                                        <items>
-                                            <imageView width="30" height="30" alignment="left" verticalAlignment="center" id="v5O-Vz-srH"/>
-                                            <label alignment="left" verticalAlignment="center" text="Label" textAlignment="left" numberOfLines="2" minimumScaleFactor="0.10000000000000001" id="wZA-WB-BgB">
-                                                <color key="textColor" red="0.12884005900000001" green="0.31761550900000002" blue="0.58826351170000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <fontDescription key="font" style="UICTFontTextStyleBody"/>
-                                            </label>
-                                        </items>
-                                    </group>
-                                    <connections>
-                                        <outlet property="imageSound" destination="v5O-Vz-srH" id="BAU-Wx-bf8"/>
-                                        <outlet property="labelSound" destination="wZA-WB-BgB" id="O8I-F0-Ysv"/>
-                                    </connections>
-                                </tableRow>
-                            </items>
-                        </table>
+                        <button width="1" alignment="left" verticalAlignment="bottom" title="Button" id="bFH-Nq-ixL">
+                            <connections>
+                                <action selector="downloadButtonAction" destination="gGR-Lo-5aT" id="0B7-Hi-smo"/>
+                            </connections>
+                        </button>
                     </items>
                     <connections>
-                        <outlet property="daysTillLabel" destination="e8D-Yc-Yql" id="TQS-SL-Z7R"/>
-                        <outlet property="stopButtonOutlet" destination="kSg-IY-Jsg" id="jln-3a-Jy1"/>
-                        <outlet property="tableView" destination="wGq-cb-QMl" id="Uze-U0-3tn"/>
+                        <outlet property="testLabel" destination="PK4-4K-izU" id="YI6-fM-PdA"/>
+                        <outlet property="volumeView" destination="c4n-tx-auL" id="1CL-TF-Ent"/>
+                        <segue destination="fTU-av-h17" kind="relationship" relationship="nextPage" id="M4Y-qm-AED"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="775" y="172"/>
+            <point key="canvasLocation" x="498" y="181"/>
         </scene>
         <!--Volume Interface Controller-->
         <scene sceneID="i3Q-uJ-w72">
@@ -191,16 +168,15 @@
                         <outlet property="monthPicker" destination="EMR-cc-n1T" id="Drs-hm-Hlz"/>
                         <outlet property="volumeView" destination="x7l-Wb-5sb" id="Z9k-6S-FUy"/>
                         <outlet property="yearPicker" destination="FrT-IS-mf1" id="UWt-KM-vbL"/>
-                        <segue destination="7vI-DA-DqF" kind="relationship" relationship="nextPage" id="xCg-Jr-rS5"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="493" y="172"/>
+            <point key="canvasLocation" x="785" y="177"/>
         </scene>
         <!--Notification Controller-->
         <scene sceneID="Niz-AI-uX2">
             <objects>
-                <controller id="eXb-UN-Cd0" customClass="NotificationController" customModule="Soundboard_Watch" customModuleProvider="target"/>
+                <controller id="eXb-UN-Cd0" customClass="NotificationController" customModule="WatchSoundboard_Watch" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="570" y="480"/>
         </scene>

@@ -12,6 +12,7 @@ let soundVolume:Float = 1
 var playerOrg: AVAudioPlayer?
 var settedDaysTill : Int = 0
 
+/*
 let IfYoureHappy = SoundModel(soundId: 49, soundName: "If Youre Happy", soundImage: "IfYoureHappy.png", soundFile: "IfYoureHappyShort", soundVolume: 1.0)
 let EsTutMirLeidPocahontas = SoundModel(soundId: 48, soundName: "Es Tut Mir Leid", soundImage: "EsTutMirLeid.png", soundFile: "EsTutMirLeidPocahontas", soundVolume: 1.0)
 let Iloveit = SoundModel(soundId: 37, soundName: "I love it", soundImage: "Iloveit.png", soundFile: "Iloveit", soundVolume: 1.0)
@@ -67,8 +68,10 @@ let Mallezuruck = SoundModel(soundId: 10, soundName: "Malle zurück", soundImage
 let wasmachensachen = SoundModel(soundId: 40, soundName: "was machen sachen", soundImage: "wasmachensachen.png", soundFile: "wasmachensachen", soundVolume: soundVolume)
 let CantinaBand = SoundModel(soundId: 40, soundName: "Cantina Band", soundImage: "CantinaBand.png", soundFile: "CantinaBand", soundVolume: soundVolume)
 let QuatschMerkschSelber = SoundModel(soundId: 54, soundName: "Merksch selber", soundImage: "QuatschMerkschSelber.png", soundFile: "QuatschMerkschSelber", soundVolume: soundVolume)
+ let imperialmarchLong = SoundModel(soundId: 56, soundName: "Imperial March Long", soundImage: "ImperialMarchLong.png", soundFile: "ImperialMarchLong", soundVolume: soundVolume)
+ */
 let Layla = SoundModel(soundId: 55, soundName: "Layla kurz", soundImage: "Layla.png", soundFile: "LaylaKurz", soundVolume: soundVolume)
-let imperialmarchLong = SoundModel(soundId: 56, soundName: "Imperial March Long", soundImage: "ImperialMarchLong.png", soundFile: "ImperialMarchLong", soundVolume: soundVolume)
+
 
 func getDaysBetweenDates(from date1:Date, to date2: Date) -> Int{
     let calendar = Calendar.current

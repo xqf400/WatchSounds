@@ -20,13 +20,14 @@ var esoSoundArray: [SoundModel] = []
 var fkuSoundArray:[SoundModel] = []
 
 var favSoundsArray:[SoundModel] = []
-var nluImageNames :[String] = ["nils.png","nils2.png","nils3.png","nils4.png","nils5.png","nils6.png","nils7.png"]
+//var nluImageNames :[String] = ["nils.png","nils2.png","nils3.png","nils4.png","nils5.png","nils6.png","nils7.png"]
 var cachesURL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first!
 var messagesAreAllowed = false
 var playAMessage = false
 var playSoundString = ""
 var loundSound = true
 
+/*
 let denken = SoundModel(soundId: 0, soundName: "Denken", soundImage: "denken.png", soundFile: "denken", soundVolume: soundVolume)
 let Spass__kurz = SoundModel(soundId: 1, soundName: "Spass kurz", soundImage: "spass.png", soundFile: "Spass__kurz", soundVolume: soundVolume)
 let Spass__mittel = SoundModel(soundId: 2, soundName: "Spass mittel", soundImage: "spass.png", soundFile: "Spass__mittel", soundVolume: soundVolume)
@@ -86,7 +87,10 @@ let VerstehIchNichtKurz = SoundModel(soundId: 51, soundName: "Versteh Ich Nicht 
 let VerstehIchNichtLang = SoundModel(soundId: 52, soundName: "Versteh Ich Nicht Lang", soundImage: "VerstehIchNicht.png", soundFile: "VerstehIchNichtLang", soundVolume: 1.0)
 let CantinaBand = SoundModel(soundId: 53, soundName: "Cantina Band", soundImage: "CantinaBand.png", soundFile: "CantinaBand", soundVolume: soundVolume)
 let QuatschMerkschSelber = SoundModel(soundId: 54, soundName: "Merksch selber", soundImage: "QuatschMerkschSelber.png", soundFile: "QuatschMerkschSelber", soundVolume: soundVolume)
+ */
 let Layla = SoundModel(soundId: 55, soundName: "Layla kurz", soundImage: "Layla.png", soundFile: "LaylaKurz", soundVolume: soundVolume)
+
+/*
 let imperialmarchLong = SoundModel(soundId: 56, soundName: "Imperial March Long", soundImage: "ImperialMarchLong.png", soundFile: "ImperialMarchLong", soundVolume: soundVolume)
 
 //MARK: Fabi Sounds
@@ -193,6 +197,7 @@ let echtJetzt = SoundModel(soundId: 590, soundName: "echt Jetzt", soundImage: "e
 let findeEineLoesung = SoundModel(soundId: 591, soundName: "finde eine Loesung", soundImage: "enrico.png", soundFile: "findeEineLoesung", soundVolume: 1)
 let okay = SoundModel(soundId: 592, soundName: "okay", soundImage: "enrico.png", soundFile: "okay", soundVolume: 1)
 
+ */
 
 
 public func addAllSound(){
@@ -202,6 +207,9 @@ public func addAllSound(){
     //allsSoundArray.append(matzeToilette)
     //allsSoundArray.append(gutDasWirdasAufnehmen)
 
+    allsSoundArray.append(Layla)
+
+    /*
     allsSoundArray.append(hallohieristPascal)
     allsSoundArray.append(halloPascalkurz)
     allsSoundArray.append(halloPascalvonkuk)
@@ -343,7 +351,6 @@ public func addAllSound(){
     allsSoundArray.append(VerstehIchNichtLang)
     allsSoundArray.append(CantinaBand)
     allsSoundArray.append(QuatschMerkschSelber)
-    allsSoundArray.append(Layla)
     
     
     //MARK: Add to their arrays
@@ -441,7 +448,7 @@ public func addAllSound(){
     mseSoundArray = mseSoundArray.sorted(by: { $0.soundName < $1.soundName })
     ploSoundArray = ploSoundArray.sorted(by: { $0.soundName < $1.soundName })
     fkuSoundArray = fkuSoundArray.sorted(by: { $0.soundName < $1.soundName })
-    
+    */
     
     
 }

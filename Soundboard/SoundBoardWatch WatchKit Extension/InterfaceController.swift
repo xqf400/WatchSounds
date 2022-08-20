@@ -33,7 +33,7 @@ class InterfaceController: WKInterfaceController, AVAudioPlayerDelegate {
     }
     
     func play(){
-        guard let url = Bundle.main.url(forResource: "Iloveit", withExtension: "mp3") else { print("nil"); return }
+        guard let url = Bundle.main.url(forResource: "LaylaKurz", withExtension: "mp3") else { print("nil"); return }
         let volume = 1.0
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)

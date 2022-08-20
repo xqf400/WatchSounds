@@ -85,7 +85,10 @@ class VolumeInterfaceController: WKInterfaceController {
         settedMonth = UserDefaults.standard.integer(forKey: "settedMonth")
         settedYear = UserDefaults.standard.integer(forKey: "settedYear")
         
-        let date = UserDefaults.standard.object(forKey: "selectedDate") as! Date
+        guard let date = UserDefaults.standard.object(forKey: "selectedDate") as? Date else {
+            print("no date found")
+            return
+        }
         let days = getDaysBetweenDates(from: Date(), to: date)
         settedDaysTill = days
         UserDefaults.standard.set(settedDaysTill, forKey: "settedDaysTill")

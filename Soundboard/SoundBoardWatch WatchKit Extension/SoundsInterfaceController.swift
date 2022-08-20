@@ -47,12 +47,14 @@ class SoundsInterfaceController: WKInterfaceController {
     override func willActivate() {
         super.willActivate()
 
+        /*
         let date = UserDefaults.standard.object(forKey: "selectedDate") as! Date
         let days = getDaysBetweenDates(from: Date(), to: date)
         settedDaysTill = days
         UserDefaults.standard.set(settedDaysTill, forKey: "settedDaysTill")
         
         daysTillLabel.setText("\(settedDaysTill) Days ")
+        */
     }
     
     //MARK: Table did Select
@@ -62,7 +64,7 @@ class SoundsInterfaceController: WKInterfaceController {
     
     //MARK: Play Sound
     func play(sound: SoundModel){
-        
+        print("play \(sound.soundName)")
         guard let url = Bundle.main.url(forResource: sound.soundFile, withExtension: "mp3") else { print("nil"); return }
         stopButtonOutlet.setBackgroundImage(UIImage(systemName: "stop.fill"))
         let volume = 1.0
@@ -104,6 +106,7 @@ class SoundsInterfaceController: WKInterfaceController {
     func addAllSound(){
         soundsNormal.removeAll()
         
+        /*
         soundsNormal.append(lollipop_kurz)
         soundsNormal.append(IDontcare)
         soundsNormal.append(mimimi)
@@ -136,8 +139,10 @@ class SoundsInterfaceController: WKInterfaceController {
         soundsNormal.append(wasmachensachen)
         soundsNormal.append(CantinaBand)
         soundsNormal.append(QuatschMerkschSelber)
-        soundsNormal.append(Layla)
         soundsNormal.append(imperialmarchLong)
+
+         */
+        soundsNormal.append(Layla)
         
     }
     

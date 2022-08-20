@@ -314,7 +314,7 @@ extension FavViewController: UICollectionViewDataSource, UICollectionViewDelegat
             cell.cellImageView.clipsToBounds = true
         }else{
             if favSoundsArray[indexPath.row].soundImage.contains("nils"){
-                cell.cellImageView.image = UIImage(named: nluImageNames.randomElement()!)
+                //cell.cellImageView.image = UIImage(named: nluImageNames.randomElement()!)
             }else{
                 cell.cellImageView.image = UIImage(named: favSoundsArray[indexPath.row].soundImage)?.roundedImage
             }
