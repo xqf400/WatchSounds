@@ -7,6 +7,7 @@
 
 import Foundation
 import WatchKit
+import RNCryptor
 
 class DownloadController: WKInterfaceController {
     

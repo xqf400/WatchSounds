@@ -16,6 +16,11 @@
 		0537B8ED286CBCCD002B7ACD /* Layla.png in Resources */ = {isa = PBXBuildFile; fileRef = 0537B8E9286CBCCD002B7ACD /* Layla.png */; };
 		0537B8EE286CBCCD002B7ACD /* Layla.png in Resources */ = {isa = PBXBuildFile; fileRef = 0537B8E9286CBCCD002B7ACD /* Layla.png */; };
 		054FB34328B0E64A00404202 /* DownloadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FB34228B0E64A00404202 /* DownloadController.swift */; };
+		054FB34528B0E7FD00404202 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 054FB34428B0E7FD00404202 /* GoogleService-Info.plist */; };
+		054FB34828B0EEAF00404202 /* RNCryptor in Frameworks */ = {isa = PBXBuildFile; productRef = 054FB34728B0EEAF00404202 /* RNCryptor */; };
+		054FB34A28B0EED700404202 /* RNCryptor in Frameworks */ = {isa = PBXBuildFile; productRef = 054FB34928B0EED700404202 /* RNCryptor */; };
+		054FB34C28B0EF1000404202 /* RNCryptor in Frameworks */ = {isa = PBXBuildFile; productRef = 054FB34B28B0EF1000404202 /* RNCryptor */; };
+		054FB34E28B0EF1900404202 /* RNCryptor in Frameworks */ = {isa = PBXBuildFile; productRef = 054FB34D28B0EF1900404202 /* RNCryptor */; };
 		0576DD7828159D44000FC1F6 /* VolumeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0576DD7728159D44000FC1F6 /* VolumeView.swift */; };
 		0576DD7A28199123000FC1F6 /* ConsultingSounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0576DD7928199123000FC1F6 /* ConsultingSounds.swift */; };
 		1442C0082805D8AA00DDA3D6 /* Sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1442C0072805D8AA00DDA3D6 /* Sounds.swift */; };
@@ -120,6 +125,7 @@
 		0537B8DF286CBBDF002B7ACD /* LaylaKurz.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = LaylaKurz.mp3; sourceTree = "<group>"; };
 		0537B8E9286CBCCD002B7ACD /* Layla.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Layla.png; sourceTree = "<group>"; };
 		054FB34228B0E64A00404202 /* DownloadController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadController.swift; sourceTree = "<group>"; };
+		054FB34428B0E7FD00404202 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		0576DD7728159D44000FC1F6 /* VolumeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeView.swift; sourceTree = "<group>"; };
 		0576DD7928199123000FC1F6 /* ConsultingSounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsultingSounds.swift; sourceTree = "<group>"; };
 		1442C0072805D8AA00DDA3D6 /* Sounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sounds.swift; sourceTree = "<group>"; };
@@ -172,6 +178,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				054FB34C28B0EF1000404202 /* RNCryptor in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +186,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				054FB34828B0EEAF00404202 /* RNCryptor in Frameworks */,
 				E79943B0BF8A7EA8F10E2C2A /* Pods_Soundboard.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -203,6 +211,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				054FB34A28B0EED700404202 /* RNCryptor in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +219,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				054FB34E28B0EF1900404202 /* RNCryptor in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				1482AEA727469764002003DD /* Soundboard.entitlements */,
+				054FB34428B0E7FD00404202 /* GoogleService-Info.plist */,
 				14BB9C0D2738719D006DC0B7 /* AppDelegate.swift */,
 				14BB9C422738787A006DC0B7 /* Sounds */,
 				14BB9C412738786C006DC0B7 /* Images */,
@@ -367,6 +378,9 @@
 				14AA43662798714A0006F810 /* PBXTargetDependency */,
 			);
 			name = SoundBoardWatch;
+			packageProductDependencies = (
+				054FB34D28B0EF1900404202 /* RNCryptor */,
+			);
 			productName = SoundBoardWatch;
 			productReference = 14AA43602798714A0006F810 /* WatchSoundboardWatch.app */;
 			productType = "com.apple.product-type.application.watchapp2-container";
@@ -385,6 +399,9 @@
 				14AA43742798714C0006F810 /* PBXTargetDependency */,
 			);
 			name = "SoundBoardWatch WatchKit App";
+			packageProductDependencies = (
+				054FB34928B0EED700404202 /* RNCryptor */,
+			);
 			productName = "SoundBoardWatch WatchKit App";
 			productReference = 14AA43632798714A0006F810 /* WatchSoundboard Watch.app */;
 			productType = "com.apple.product-type.application.watchapp2";
@@ -402,6 +419,9 @@
 			dependencies = (
 			);
 			name = "SoundBoardWatch WatchKit Extension";
+			packageProductDependencies = (
+				054FB34B28B0EF1000404202 /* RNCryptor */,
+			);
 			productName = "SoundBoardWatch WatchKit Extension";
 			productReference = 14AA43712798714C0006F810 /* SoundBoardWatch WatchKit Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
@@ -423,6 +443,9 @@
 			dependencies = (
 			);
 			name = Soundboard;
+			packageProductDependencies = (
+				054FB34728B0EEAF00404202 /* RNCryptor */,
+			);
 			productName = Soundboard;
 			productReference = 14BB9C0A2738719D006DC0B7 /* Soundboard.app */;
 			productType = "com.apple.product-type.application";
@@ -507,6 +530,9 @@
 				Base,
 			);
 			mainGroup = 14BB9C012738719D006DC0B7;
+			packageReferences = (
+				054FB34628B0EEAF00404202 /* XCRemoteSwiftPackageReference "RNCryptor" */,
+			);
 			productRefGroup = 14BB9C0B2738719D006DC0B7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -561,6 +587,7 @@
 				14BB9C172738719E006DC0B7 /* Assets.xcassets in Resources */,
 				0537B8E1286CBBDF002B7ACD /* LaylaKurz.mp3 in Resources */,
 				14BB9C152738719D006DC0B7 /* Main.storyboard in Resources */,
+				054FB34528B0E7FD00404202 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1297,6 +1324,40 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		054FB34628B0EEAF00404202 /* XCRemoteSwiftPackageReference "RNCryptor" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RNCryptor/RNCryptor.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		054FB34728B0EEAF00404202 /* RNCryptor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 054FB34628B0EEAF00404202 /* XCRemoteSwiftPackageReference "RNCryptor" */;
+			productName = RNCryptor;
+		};
+		054FB34928B0EED700404202 /* RNCryptor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 054FB34628B0EEAF00404202 /* XCRemoteSwiftPackageReference "RNCryptor" */;
+			productName = RNCryptor;
+		};
+		054FB34B28B0EF1000404202 /* RNCryptor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 054FB34628B0EEAF00404202 /* XCRemoteSwiftPackageReference "RNCryptor" */;
+			productName = RNCryptor;
+		};
+		054FB34D28B0EF1900404202 /* RNCryptor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 054FB34628B0EEAF00404202 /* XCRemoteSwiftPackageReference "RNCryptor" */;
+			productName = RNCryptor;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 14BB9C022738719D006DC0B7 /* Project object */;
 }

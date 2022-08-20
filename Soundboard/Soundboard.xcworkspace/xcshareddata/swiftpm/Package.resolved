@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "rncryptor",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/RNCryptor/RNCryptor.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "f5198d21049bd22e904fdef9a4c5d8c37cac505b"
+      }
+    }
+  ],
+  "version" : 2
+}

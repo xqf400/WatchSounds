@@ -10,6 +10,11 @@ pod 'JGProgressHUD'
 #pod 'Firebase/Core'
 #pod 'Firebase/Messaging'
 #pod 'OneSignalXCFramework', '>= 3.0.0', '< 4.0'
+pod 'Firebase/Core'
+pod 'Firebase/Database'
+pod 'Firebase/Firestore'
+pod 'Firebase/Storage'
+pod 'FirebaseAuth', '~> 8.9'
 
   target 'SoundboardTests' do
     inherit! :search_paths
