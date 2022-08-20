@@ -32,7 +32,7 @@
 		054FB36828B16C8F00404202 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 054FB36728B16C8F00404202 /* Alamofire */; };
 		1442C0082805D8AA00DDA3D6 /* Sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1442C0072805D8AA00DDA3D6 /* Sounds.swift */; };
 		14830505276CF73300F14BF4 /* SearchCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14830504276CF73300F14BF4 /* SearchCollectionReusableView.swift */; };
-		14AA43642798714A0006F810 /* WatchSoundboard Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 14AA43632798714A0006F810 /* WatchSoundboard Watch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		14AA43642798714A0006F810 /* WatchSoundboard.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 14AA43632798714A0006F810 /* WatchSoundboard.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		14AA436A2798714A0006F810 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14AA43682798714A0006F810 /* Interface.storyboard */; };
 		14AA436C2798714C0006F810 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14AA436B2798714C0006F810 /* Assets.xcassets */; };
 		14AA43722798714C0006F810 /* SoundBoardWatch WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 14AA43712798714C0006F810 /* SoundBoardWatch WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -100,7 +100,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				14AA43642798714A0006F810 /* WatchSoundboard Watch.app in Embed Watch Content */,
+				14AA43642798714A0006F810 /* WatchSoundboard.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -140,7 +140,7 @@
 		1482AEA727469764002003DD /* Soundboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Soundboard.entitlements; sourceTree = "<group>"; };
 		14830504276CF73300F14BF4 /* SearchCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionReusableView.swift; sourceTree = "<group>"; };
 		14AA43602798714A0006F810 /* WatchSoundboardWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchSoundboardWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		14AA43632798714A0006F810 /* WatchSoundboard Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatchSoundboard Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		14AA43632798714A0006F810 /* WatchSoundboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchSoundboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14AA43692798714A0006F810 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		14AA436B2798714C0006F810 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		14AA43712798714C0006F810 /* SoundBoardWatch WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "SoundBoardWatch WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -295,7 +295,7 @@
 				14BB9C202738719F006DC0B7 /* SoundboardTests.xctest */,
 				14BB9C2A2738719F006DC0B7 /* SoundboardUITests.xctest */,
 				14AA43602798714A0006F810 /* WatchSoundboardWatch.app */,
-				14AA43632798714A0006F810 /* WatchSoundboard Watch.app */,
+				14AA43632798714A0006F810 /* WatchSoundboard.app */,
 				14AA43712798714C0006F810 /* SoundBoardWatch WatchKit Extension.appex */,
 			);
 			name = Products;
@@ -426,7 +426,7 @@
 				054FB35C28B13DDB00404202 /* Alamofire */,
 			);
 			productName = "SoundBoardWatch WatchKit App";
-			productReference = 14AA43632798714A0006F810 /* WatchSoundboard Watch.app */;
+			productReference = 14AA43632798714A0006F810 /* WatchSoundboard.app */;
 			productType = "com.apple.product-type.application.watchapp2";
 		};
 		14AA43702798714C0006F810 /* SoundBoardWatch WatchKit Extension */ = {
@@ -902,7 +902,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fku.WatchSoundboardWatch.watchkitapp;
-				PRODUCT_NAME = "WatchSoundboard Watch";
+				PRODUCT_NAME = WatchSoundboard;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -926,7 +926,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fku.WatchSoundboardWatch.watchkitapp;
-				PRODUCT_NAME = "WatchSoundboard Watch";
+				PRODUCT_NAME = WatchSoundboard;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;

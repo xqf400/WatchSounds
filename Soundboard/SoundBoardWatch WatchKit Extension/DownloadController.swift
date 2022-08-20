@@ -22,7 +22,7 @@ class DownloadController: WKInterfaceController {
         session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: OperationQueue())
         super.awake(withContext: context)
         //UserDefaults.standard.set("8header8@googlemail.com", forKey: "adress")
-        createFolder()
+        
         volumeView.focus()
         setLabel()
 
@@ -46,10 +46,29 @@ class DownloadController: WKInterfaceController {
             downloadDataFromFireBase(name: "\(mail!).plist", folder: "userLists", session: session) { data in
                 print("downloaded plist")
                 decodeClipFromData(data: data) { user in
-                    print("decoded \(user.mail)")
+                    print("decoded")
+                    var count = 0
                     for sound in user.sounds{
-                        print("Sound: \(sound.soundName)\(sound.soundFile)")
-                        self.downloadSong(name: sound.soundFile)
+                        let soundX = sound
+                        downloadMp3FromFireBase(mp3Name: soundX.soundFile, session: self.session) { url in
+                            soundX.soundFileURL = url
+                            print("Sound: \(soundX.soundName) \nURL: \(soundX.soundFileURL) \nFile: \(sound.soundFile)")
+                            if soundsNormal.first(where: { $0.soundFile == soundX.soundFile }) != nil {
+                                print("already in")
+                            }else{
+                                soundsNormal.append(soundX)
+                            }
+                            count += 1
+                            if count == user.sounds.count{
+                                writeArrayToFiles()
+                            }
+                        } failure: { error in
+                            print("Error download mp3 \(error)")
+                            count += 1
+                            if count == user.sounds.count{
+                                writeArrayToFiles()
+                            }
+                        }
                     }
                 } failure: { error in
                     print("Error 325 \(error)")
@@ -67,30 +86,9 @@ class DownloadController: WKInterfaceController {
         
     }
     
-    private func downloadSong(name:String){
-        downloadMp3FromFireBase(mp3Name: name, session: session) { url in
-            print(url)
-        } failure: { error in
-            print("Error download mp3 \(error)")
-        }
-    }
+
     
-    private func createFolder(){
-        if let libraryDirectoryURL5 = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first{
-            let subfolder5 = libraryDirectoryURL5.appendingPathComponent("Soundfiles")
-            do {
-                try FileManager.default.createDirectory(at: subfolder5, withIntermediateDirectories: false, attributes: nil)
-                print("Here directory created")
-            }
-            catch let error as NSError {
-                if error.code == 516 {
-                    //myDebug("Here The directory already exists")
-                } else {
-                    print("directory createt error: \(error)")
-                }
-            }
-        }
-    }
+
     
     private func setLabel(){
         if UserDefaults.standard.string(forKey: "adress") != nil{

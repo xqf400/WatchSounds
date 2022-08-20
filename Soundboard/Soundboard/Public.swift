@@ -148,7 +148,6 @@ func downloadDataFromFireBase(name:String, folder: String, session:URLSession, s
                                 if UserDefaults.standard.string(forKey: "adress") != nil{
                                     id = UserDefaults.standard.string(forKey: "adress")!
                                 }
-                                print("Id: \(id)")
                                 decryptData(ID: id, data: data) { response in
                                     success(response)
                                 } failure: { error in

@@ -92,14 +92,18 @@ func downloadMp3FromFireBase(mp3Name:String, session: URLSession, success: @esca
 
 //MARK: Get local mp3 files
 func getLocalFiles(){
-    
+    /*
     do {
         let directoryContents = try FileManager.default.contentsOfDirectory(at: soundsURL, includingPropertiesForKeys: nil)
         //print("directoryContents:", directoryContents.map { $0.localizedName ?? $0.lastPathComponent })
-        //                    for url1 in directoryContents {
-        //
-        //                        print(url1.localizedName ?? url1.lastPathComponent)
-        //                    }
+        for url1 in directoryContents {
+            let filename: NSString = url1.path as NSString
+            let pathExtention = filename.pathExtension
+            //print(pathExtention)
+            if pathExtention == "plist"{
+                print(url1.localizedName ?? url1.lastPathComponent)
+            }
+        }
         
         // if you would like to hide the file extension
         //                    for var url in directoryContents {
@@ -111,18 +115,57 @@ func getLocalFiles(){
         // if you want to get all mp3 files located at the documents directory:
         let mp3s = directoryContents.filter(\.isMP3).map { $0.localizedName ?? $0.lastPathComponent }
         print("mp3s:", mp3s)
-        for mp3File in mp3s {
-            let url = soundsURL.appendingPathComponent(mp3File)
-            let sound = SoundModel(soundId: soundsNormal.count+1, soundName: mp3File, soundImage: "NoName", soundFile: mp3File, soundVolume: 1.0, soundFileURL: url)
-            soundsNormal.append(sound)
-        }
+//        for mp3File in mp3s {
+//            let url = soundsURL.appendingPathComponent(mp3File)
+//            let sound = SoundModel(soundId: soundsNormal.count+1, soundName: mp3File, soundImage: "NoName", soundFile: mp3File, soundVolume: 1.0, soundFileURL: url)
+//            soundsNormal.append(sound)
+//        }
+        
+        //writeArrayToFiles()
+
+        
+        
         
     } catch {
         print(error)
+    }*/
+     
+    //getSoundFromFiles()
+}
+
+func writeArrayToFiles(){
+    let encoder = PropertyListEncoder()
+    do{
+        let data = try encoder.encode(soundsNormal)
+        try data.write(to: soundsURL.appendingPathComponent("sounds.plist"))
+        print("wrote sounds.plist")
+    }catch{
+        print("Error encoding plist: \(error)")
     }
 }
 
+func getSoundFromFiles(success: @escaping (_ str: String) -> Void, failure: @escaping (_ error: String) -> Void){
+    print("get sounds")
+    let decoder = PropertyListDecoder()
+    do{
+        let data = try Data(contentsOf: soundsURL.appendingPathComponent("sounds.plist"))
+        do{
+            let soundArray = try decoder.decode([SoundModel].self, from: data)
+            soundsNormal = soundArray
+            for sound in soundArray {
+                print("\(sound.soundName) \n\(sound.soundFileURL)")
+            }
+            success("got all sounds Count: \(soundsNormal.count)")
+        }catch{
+            print("Error encoding plist: \(error)")
+            failure("Error encoding plist: \(error)")
+        }
+    }catch{
+        print("Error getting data plist: \(error)")
+        failure("Error getting data plist: \(error)")
+    }
 
+}
 
 
 func downloadDataFromFireBase(name:String, folder: String, session:URLSession, success: @escaping (_ data: Data) -> Void, failure: @escaping (_ error: String) -> Void){
@@ -147,7 +190,6 @@ func downloadDataFromFireBase(name:String, folder: String, session:URLSession, s
                                 if UserDefaults.standard.string(forKey: "adress") != nil{
                                     id = UserDefaults.standard.string(forKey: "adress")!
                                 }
-                                print("Id: \(id)")
                                 decryptData(ID: id, data: data) { response in
                                     success(response)
                                 } failure: { error in
