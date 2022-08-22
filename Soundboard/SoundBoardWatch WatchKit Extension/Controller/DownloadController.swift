@@ -187,10 +187,10 @@ class DownloadController: WKInterfaceController {
     
 }//eoc
 
+//MARK: URL Session
 extension DownloadController: URLSessionDelegate {
     
     
-    // MARK: protocol stub for tracking download progress
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
             
         let percentDownloaded = totalBytesWritten / totalBytesExpectedToWrite

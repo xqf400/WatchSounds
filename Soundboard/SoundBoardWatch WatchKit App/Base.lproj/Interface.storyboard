@@ -5,6 +5,7 @@
         <deployment identifier="watchOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="20006"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
     </dependencies>
     <scenes>
         <!--Sounds Interface Controller-->
@@ -79,6 +80,52 @@
             </objects>
             <point key="canvasLocation" x="599" y="790"/>
         </scene>
+        <!--Mail And Secret Controller-->
+        <scene sceneID="XEX-eQ-amC">
+            <objects>
+                <controller id="I86-UW-aMX" customClass="MailAndSecretController" customModule="SoundBoardWatch_WatchKit_Extension">
+                    <items>
+                        <group width="1" alignment="left" id="vp3-2o-Pew">
+                            <items>
+                                <label alignment="center" text="Mail and Secret" id="gao-Fa-9VJ"/>
+                            </items>
+                        </group>
+                        <textField width="1" alignment="left" placeholder="Set Mail" id="1dt-Sd-2mv">
+                            <color key="textColor" name="AccentColor"/>
+                            <connections>
+                                <action selector="mailTextFieldAction:" destination="I86-UW-aMX" id="jwq-Ld-fyR"/>
+                            </connections>
+                        </textField>
+                        <label alignment="center" text="Mail empty" textAlignment="center" minimumScaleFactor="0.20000000000000001" id="rRw-YR-Tn4">
+                            <color key="textColor" name="AccentColor"/>
+                        </label>
+                        <textField width="1" alignment="left" placeholder="Set Secret" id="YpL-6l-T1e">
+                            <color key="textColor" red="0.96470588450000005" green="0.85490196939999996" blue="0.2941176593" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <connections>
+                                <action selector="secretTextFieldAction:" destination="I86-UW-aMX" id="ySR-36-j3V"/>
+                            </connections>
+                        </textField>
+                        <label alignment="center" text="Secret empty" textAlignment="center" minimumScaleFactor="0.5" id="BP3-NZ-u5K">
+                            <color key="textColor" red="0.96470588450000005" green="0.85490196939999996" blue="0.2941176593" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </label>
+                        <button width="1" alignment="left" title="Check both" id="ggJ-Yt-8da">
+                            <color key="backgroundColor" red="0.063306999339426753" green="0.56276175902061853" blue="0.05259168723093989" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <connections>
+                                <action selector="checkButtonAction" destination="I86-UW-aMX" id="neS-De-Sz6"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="checkButtonOutlet" destination="ggJ-Yt-8da" id="cka-xc-kZT"/>
+                        <outlet property="mailLabel" destination="rRw-YR-Tn4" id="KCj-Ix-V0p"/>
+                        <outlet property="mailTextField" destination="1dt-Sd-2mv" id="JLE-GJ-WPq"/>
+                        <outlet property="secretLabel" destination="BP3-NZ-u5K" id="MJO-r8-fCI"/>
+                        <outlet property="secretTextField" destination="YpL-6l-T1e" id="Jqb-mu-POc"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="739" y="172"/>
+        </scene>
         <!--Download Controller-->
         <scene sceneID="zaf-vN-133">
             <objects>
@@ -89,13 +136,18 @@
                                 <label alignment="center" text="Download" id="Jg9-qO-haS"/>
                             </items>
                         </group>
-                        <volumeControlView alignment="left" controlsLocalVolume="NO" id="c4n-tx-auL"/>
-                        <group width="1" alignment="left" verticalAlignment="bottom" id="hpB-YI-Gy6">
+                        <group height="50" alignment="left" id="fPd-ZR-vWt">
                             <items>
-                                <label width="1" alignment="center" verticalAlignment="bottom" text="Label" numberOfLines="0" id="PK4-4K-izU"/>
+                                <volumeControlView alignment="left" verticalAlignment="center" controlsLocalVolume="NO" id="c4n-tx-auL"/>
+                                <label height="1" alignment="left" verticalAlignment="center" text="Volume" id="GQ2-GV-xoV"/>
                             </items>
                         </group>
-                        <button width="1" alignment="left" verticalAlignment="bottom" title="Button" id="bFH-Nq-ixL">
+                        <group width="1" alignment="left" verticalAlignment="bottom" id="hpB-YI-Gy6">
+                            <items>
+                                <label width="1" alignment="center" verticalAlignment="bottom" text="Infolabel" textAlignment="center" numberOfLines="0" id="PK4-4K-izU"/>
+                            </items>
+                        </group>
+                        <button width="1" alignment="left" verticalAlignment="bottom" title="Download Songs" id="bFH-Nq-ixL">
                             <connections>
                                 <action selector="downloadButtonAction" destination="gGR-Lo-5aT" id="0B7-Hi-smo"/>
                             </connections>
@@ -104,10 +156,11 @@
                     <connections>
                         <outlet property="testLabel" destination="PK4-4K-izU" id="YI6-fM-PdA"/>
                         <outlet property="volumeView" destination="c4n-tx-auL" id="1CL-TF-Ent"/>
+                        <segue destination="I86-UW-aMX" kind="relationship" relationship="nextPage" id="2Xd-9j-PfK"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="498" y="181"/>
+            <point key="canvasLocation" x="493" y="172"/>
         </scene>
         <!--Notification Controller-->
         <scene sceneID="Niz-AI-uX2">
@@ -120,5 +173,8 @@
     <resources>
         <image name="music.note" catalog="system" width="99" height="128"/>
         <image name="shuffle" catalog="system" width="128" height="93"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

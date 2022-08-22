@@ -30,6 +30,7 @@
 		054FB36528B1529700404202 /* Encryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FB36428B1529700404202 /* Encryption.swift */; };
 		054FB36628B1529D00404202 /* Encryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FB36428B1529700404202 /* Encryption.swift */; };
 		054FB36828B16C8F00404202 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 054FB36728B16C8F00404202 /* Alamofire */; };
+		057C88FC28B38CA300A3E16A /* MailAndSecretController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057C88FB28B38CA300A3E16A /* MailAndSecretController.swift */; };
 		05DE629C28B3604400C69178 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05DE629B28B3604400C69178 /* CloudKit.framework */; };
 		05DE629F28B3605900C69178 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05DE629E28B3605900C69178 /* CloudKit.framework */; };
 		05DE62A228B360C000C69178 /* UserInfo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05DE62A028B360C000C69178 /* UserInfo.xcdatamodeld */; };
@@ -140,6 +141,7 @@
 		054FB36128B150AA00404202 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		054FB36428B1529700404202 /* Encryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encryption.swift; sourceTree = "<group>"; };
 		057C88F628B3744600A3E16A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS8.5.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
+		057C88FB28B38CA300A3E16A /* MailAndSecretController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailAndSecretController.swift; sourceTree = "<group>"; };
 		05DE629B28B3604400C69178 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		05DE629D28B3605700C69178 /* SoundBoardWatch WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SoundBoardWatch WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		05DE629E28B3605900C69178 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS8.5.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -260,6 +262,16 @@
 			path = "Not needed";
 			sourceTree = "<group>";
 		};
+		057C88FD28B38CBF00A3E16A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				14AA4393279878400006F810 /* SoundsInterfaceController.swift */,
+				057C88FB28B38CA300A3E16A /* MailAndSecretController.swift */,
+				054FB34228B0E64A00404202 /* DownloadController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		14AA43672798714A0006F810 /* SoundBoardWatch WatchKit App */ = {
 			isa = PBXGroup;
 			children = (
@@ -276,10 +288,9 @@
 				054FB36028B145D100404202 /* Not needed */,
 				14AA437E2798714D0006F810 /* Assets.xcassets */,
 				14AA43802798714D0006F810 /* Info.plist */,
-				14AA4393279878400006F810 /* SoundsInterfaceController.swift */,
+				057C88FD28B38CBF00A3E16A /* Controller */,
 				14AA439727987B7D0006F810 /* SoundRow.swift */,
 				1442C0072805D8AA00DDA3D6 /* Sounds.swift */,
-				054FB34228B0E64A00404202 /* DownloadController.swift */,
 				054FB35828B10A1B00404202 /* Utilities.swift */,
 			);
 			path = "SoundBoardWatch WatchKit Extension";
@@ -784,6 +795,7 @@
 				14AA439827987B7D0006F810 /* SoundRow.swift in Sources */,
 				14AA43772798714C0006F810 /* InterfaceController.swift in Sources */,
 				14AA4394279878400006F810 /* SoundsInterfaceController.swift in Sources */,
+				057C88FC28B38CA300A3E16A /* MailAndSecretController.swift in Sources */,
 				054FB36328B1525300404202 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

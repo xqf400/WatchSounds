@@ -147,7 +147,7 @@ class WatchController: UIViewController {
                     DispatchQueue.main.async {
                         self.secretLabel.text = "Secret: \(secret)"
                     }
-                    showHudSuccess(inView: self, text: "User and secret created", delay: 1.0)
+                    showHudSuccess(inView: self, text: "User and secret created. Please open th Watch App and enter the mail and secret.", delay: 2.0)
                     
                     /*
                      guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
@@ -390,7 +390,7 @@ class WatchController: UIViewController {
     
     
     func randomString(length: Int) -> String {
-        let letters = "abcdefghijklmnopqrstuvwxyz0123456789"
+        let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         //let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         return String((0..<length).map{ _ in letters.randomElement()! })
     }
