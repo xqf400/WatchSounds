@@ -107,7 +107,8 @@ class DownloadController: WKInterfaceController {
             downloadDataFromFireBase(name: "\(mail!).plist", folder: "userLists", session: session) { data in
                 print("downloaded plist")
                 decodeClipFromData(data: data) { user in
-                    print("decoded")
+                    print("decoded todo check if secret is same as this : \(user.secret)")
+                    //UserDefaults.standard.set(user.secret, forKey: "secret")
                     var count = 0
                     for sound in user.sounds{
                         let soundX = sound

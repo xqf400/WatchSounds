@@ -311,7 +311,7 @@
                                             <action selector="transferMailToWatchButtonAction:" destination="nkw-RO-0hQ" eventType="touchUpInside" id="BLh-Xq-2TM"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Secret:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kGz-Uk-ua8">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Secret available" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kGz-Uk-ua8">
                                         <rect key="frame" x="8" y="130" width="398" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="duh-jk-tDL"/>

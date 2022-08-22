@@ -51,6 +51,10 @@ class WatchController: UIViewController {
             //self.transferMailToWatchButton.isEnabled = false
             //}
         }
+        if UserDefaults.standard.string(forKey: "secret") != nil{
+            let secret = UserDefaults.standard.string(forKey: "secret")!
+            self.secretLabel.text = "Secret: \(secret)"
+        }
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         view.addGestureRecognizer(tap)
         
@@ -69,41 +73,45 @@ class WatchController: UIViewController {
         }else{
             volumeButtonOultet.image = UIImage(systemName: "volume")
         }
+        
+        let secret = randomString(length: 4)
+        print(secret)
+        
         //wcsession
-//        if WCSession.isSupported() {
-//            self.wcsession = WCSession.default
-//            self.wcsession!.delegate = self
-//            self.wcsession!.activate()
-//            print("startet")
-//            let alert = UIAlertController(title: "started", message: nil, preferredStyle: .alert)
-//            self.present(alert, animated: true, completion: nil)
-//            let when = DispatchTime.now() + 1
-//            DispatchQueue.main.asyncAfter(deadline: when){
-//              alert.dismiss(animated: true, completion: nil)
-//            }
-//        }
+        //        if WCSession.isSupported() {
+        //            self.wcsession = WCSession.default
+        //            self.wcsession!.delegate = self
+        //            self.wcsession!.activate()
+        //            print("startet")
+        //            let alert = UIAlertController(title: "started", message: nil, preferredStyle: .alert)
+        //            self.present(alert, animated: true, completion: nil)
+        //            let when = DispatchTime.now() + 1
+        //            DispatchQueue.main.asyncAfter(deadline: when){
+        //              alert.dismiss(animated: true, completion: nil)
+        //            }
+        //        }
         
         //online Cloud data
-//        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-//            return
-//        }
-//        let managedContext = appDelegate.persistentContainer.viewContext
-//        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Userinfo")
-//        do {
-//            infoUser = try managedContext.fetch(fetchRequest)
-//            for info in infoUser {
-//                let mail = (info.value(forKeyPath: "mail") as! String)
-//                print("mail: \(mail)")
-//            }
-//
-//        } catch let error as NSError {
-//            print("Could not fetch. \(error), \(error.userInfo)")
-//        }
+        //        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+        //            return
+        //        }
+        //        let managedContext = appDelegate.persistentContainer.viewContext
+        //        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Userinfo")
+        //        do {
+        //            infoUser = try managedContext.fetch(fetchRequest)
+        //            for info in infoUser {
+        //                let mail = (info.value(forKeyPath: "mail") as! String)
+        //                print("mail: \(mail)")
+        //            }
+        //
+        //        } catch let error as NSError {
+        //            print("Could not fetch. \(error), \(error.userInfo)")
+        //        }
         
     }
     
     
-    
+    //MARK: Actions
     @IBAction func stopAction(_ sender: Any) {
         if player != nil {
             player!.pause()
@@ -129,44 +137,58 @@ class WatchController: UIViewController {
     @IBAction func transferMailToWatchButtonAction(_ sender: Any) {
         if mailTextfield.text != ""{
             let adress = mailTextfield.text
-            let user = User(id: 0, mail: adress!, maxFilesCount: 2, uploadedSoundsCount: 0, sounds: [])
+            let secret = randomString(length: 4)
+            let user = User(id: 0, mail: adress!, maxFilesCount: 2, uploadedSoundsCount: 0, secret: secret, sounds: [])
             UserDefaults.standard.set(adress, forKey: "adress")
+            UserDefaults.standard.set(secret, forKey: "secret")
             uploadUserToUserInFirebase(user: user) { str in
-
-            /*
-                guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-                    return
-                }
-                let managedContext = appDelegate.persistentContainer.viewContext
-                let entity = NSEntityDescription.entity(forEntityName: "Userinfo", in: managedContext)!
-                let soundObject = NSManagedObject(entity: entity, insertInto: managedContext)
-                soundObject.setValue(adress, forKeyPath: "mail")
-
-                do {
-                    try managedContext.save()
-                    infoUser.append(soundObject)
-                    print("suc database")
-                } catch let error as NSError {
-                    print("Could not save. \(error)")
-                }
- 
-
-            
-                let alert = UIAlertController(title: "Please open Apple watch and go do the second page", message: "To tranfser your mail to your Watch the WatchSoundboard app must be open. Please open the WatchSoundboard app and go to the Download page and press the upload Button. If nothing happens please repeat it. \n\nIf you change your mail all sounds will be deleted!!!", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Upload", style: .default, handler: { alert in
-                    self.sendMailToWatch(mail: adress!) { str in
-                        showHudSuccess(inView: self, text: "uploaded mail. You should see your mail on the Watch", delay: 1.0)
-                    } failure: { error in
-                        showHudError(inView: self, text: "Error watch app is not running", delay: 2.0)
+                let userPlist = UserPlist(id: user.id, mail: user.mail, maxFilesCount: user.maxFilesCount, uploadedSoundsCount: user.uploadedSoundsCount, secret: user.secret, sounds: [])
+                self.uploadPlistToFirebase(user: userPlist) { str in
+                    DispatchQueue.main.async {
+                        self.secretLabel.text = "Secret: \(secret)"
                     }
-                }))
-                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-                self.present(alert, animated: true)
-*/
+                    showHudSuccess(inView: self, text: "User and secret created", delay: 1.0)
+                    
+                    /*
+                     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+                     return
+                     }
+                     let managedContext = appDelegate.persistentContainer.viewContext
+                     let entity = NSEntityDescription.entity(forEntityName: "Userinfo", in: managedContext)!
+                     let soundObject = NSManagedObject(entity: entity, insertInto: managedContext)
+                     soundObject.setValue(adress, forKeyPath: "mail")
+                     
+                     do {
+                     try managedContext.save()
+                     infoUser.append(soundObject)
+                     print("suc database")
+                     } catch let error as NSError {
+                     print("Could not save. \(error)")
+                     }
+                     
+                     
+                     
+                     let alert = UIAlertController(title: "Please open Apple watch and go do the second page", message: "To tranfser your mail to your Watch the WatchSoundboard app must be open. Please open the WatchSoundboard app and go to the Download page and press the upload Button. If nothing happens please repeat it. \n\nIf you change your mail all sounds will be deleted!!!", preferredStyle: .alert)
+                     alert.addAction(UIAlertAction(title: "Upload", style: .default, handler: { alert in
+                     self.sendMailToWatch(mail: adress!) { str in
+                     showHudSuccess(inView: self, text: "uploaded mail. You should see your mail on the Watch", delay: 1.0)
+                     } failure: { error in
+                     showHudError(inView: self, text: "Error watch app is not running", delay: 2.0)
+                     }
+                     }))
+                     alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+                     self.present(alert, animated: true)
+                     */
+                } failure: { error in
+                    print("Failed to save1 upload \(error)")
+                    showHudError(inView: self, text: "Failed to save1 upload \(error)", delay: 2.0)
+                }
             } failure: { error in
-                print("Failed to save1 upload \(error)")
-                showHudError(inView: self, text: "Failed to save1 upload \(error)", delay: 2.0)
+                print("Failed to save2 upload \(error)")
+                showHudError(inView: self, text: "Failed to save2 upload \(error)", delay: 2.0)
             }
+            
+            
             
         }else{
             showHudError(inView: self, text: "Please fill in a mail", delay: 2.0)
@@ -174,18 +196,18 @@ class WatchController: UIViewController {
     }
     
     /*
-    private func sendMailToWatch(mail:String, success: @escaping (_ str: String) -> Void, failure: @escaping (_ error: String) -> Void){
-        if let validSession = self.wcsession, validSession.isReachable {
-          let data: [String: Any] = ["mail": mail as Any]
-          validSession.sendMessage(data, replyHandler: nil, errorHandler: nil)
-            validSession.sendMessage(["msg" : "\(mail)" as AnyObject]) { test in
-                print(test)
-                showHudSuccess(inView: self, text: "sended", delay: 1.0)
-            }
-        }else{
-            showHudError(inView: self, text: "No Session available", delay: 2.0)
+     private func sendMailToWatch(mail:String, success: @escaping (_ str: String) -> Void, failure: @escaping (_ error: String) -> Void){
+     if let validSession = self.wcsession, validSession.isReachable {
+     let data: [String: Any] = ["mail": mail as Any]
+     validSession.sendMessage(data, replyHandler: nil, errorHandler: nil)
+     validSession.sendMessage(["msg" : "\(mail)" as AnyObject]) { test in
+     print(test)
+     showHudSuccess(inView: self, text: "sended", delay: 1.0)
      }
-    }*/
+     }else{
+     showHudError(inView: self, text: "No Session available", delay: 2.0)
+     }
+     }*/
     
     @IBAction func chooseSoundButtonAction(_ sender: Any) {
         var documentPicker: UIDocumentPickerViewController!
@@ -223,8 +245,8 @@ class WatchController: UIViewController {
                                     
                                     downloadDataFromFireBase(name: "\(id).plist", folder: "userLists", session: self.session) { data in
                                         decodeClipFromData(data: data) { user in
-                                            let newAccount2 = UserPlist(id: newAccount.id, mail: newAccount.mail, maxFilesCount: newAccount.maxFilesCount, uploadedSoundsCount: newAccount.uploadedSoundsCount, sounds: user.sounds)
-
+                                            let newAccount2 = UserPlist(id: newAccount.id, mail: newAccount.mail, maxFilesCount: newAccount.maxFilesCount, uploadedSoundsCount: newAccount.uploadedSoundsCount, secret: newAccount.secret, sounds: user.sounds)
+                                            
                                             let newSound = SoundModel(soundId: 0, soundName: self.soundNameTextlabel.text!, soundImage: "NoName", soundFile: self.mp3Name!, soundVolume: 1.0, soundFileURL: URL(string: "https://google.de")!)
                                             newAccount2.sounds.append(newSound)
                                             
@@ -253,7 +275,7 @@ class WatchController: UIViewController {
                                     } failure: { [self] error in
                                         print("no error just no file do same")
                                         
-                                        let newAccount2 = UserPlist(id: newAccount.id, mail: newAccount.mail, maxFilesCount: newAccount.maxFilesCount, uploadedSoundsCount: newAccount.uploadedSoundsCount, sounds: [])
+                                        let newAccount2 = UserPlist(id: newAccount.id, mail: newAccount.mail, maxFilesCount: newAccount.maxFilesCount, uploadedSoundsCount: newAccount.uploadedSoundsCount, secret: newAccount.secret, sounds: [])
                                         let newSound = SoundModel(soundId: 0, soundName: self.soundNameTextlabel.text!, soundImage: "NoName", soundFile: self.mp3Name!, soundVolume: 1.0, soundFileURL: URL(string: "https://google.de")!)
                                         newAccount2.sounds.append(newSound)
                                         self.uploadPlistToFirebase(user: newAccount2) { str in
@@ -299,27 +321,25 @@ class WatchController: UIViewController {
         }
     }
     
-    
+    //MARK: Functions
     private func uploadUserToUserInFirebase(user: User, success: @escaping (_ secret: String) -> Void, failure: @escaping (_ error: String) -> Void){
         getUserAccountIfExist(mail: user.mail) { account in
             db.collection("accounts").document(user.mail).setData(user.dictionary) { error in
                 if let err = error{
                     failure("err user \(err)")
                 }else{
-                    let secret = "account.secret"
+                    let secret = account.secret
                     print("suc1 \(user.uploadedSoundsCount)")
                     success(secret)
                 }
             }
         } failure: { error in
-            print("todo: generate secret")
-            let secret = "test"
             db.collection("accounts").document(user.mail).setData(user.dictionary) { error in
                 if let err = error{
                     failure("err user \(err)")
                 }else{
                     print("suc1 \(user.uploadedSoundsCount)")
-                    success(secret)
+                    success(user.secret)
                 }
             }
             
@@ -366,6 +386,13 @@ class WatchController: UIViewController {
             print("Error encoding drink: \(error)")
             failure(error.localizedDescription)
         }
+    }
+    
+    
+    func randomString(length: Int) -> String {
+        let letters = "abcdefghijklmnopqrstuvwxyz0123456789"
+        //let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        return String((0..<length).map{ _ in letters.randomElement()! })
     }
     
 }//eoc
@@ -493,25 +520,25 @@ extension WatchController: URLSessionDelegate {
 
 //MARK: WCSession delegate functions
 /*
-extension WatchController: WCSessionDelegate {
-  
-  func sessionDidBecomeInactive(_ session: WCSession) {
-  }
-  
-  func sessionDidDeactivate(_ session: WCSession) {
-  }
-  
-  func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-  }
-  
-  func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-    print("received message: \(message)")
-    DispatchQueue.main.async { //6
-      if let value = message["watch"] as? String {
-        print("watch got \(value)")
-          self.transferMailToWatchButton.setTitle("sended to watch", for: .normal)
-          self.transferMailToWatchButton.titleLabel?.text = "sended to watch"
-      }
-    }
-  }
-}*/
+ extension WatchController: WCSessionDelegate {
+ 
+ func sessionDidBecomeInactive(_ session: WCSession) {
+ }
+ 
+ func sessionDidDeactivate(_ session: WCSession) {
+ }
+ 
+ func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+ }
+ 
+ func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+ print("received message: \(message)")
+ DispatchQueue.main.async { //6
+ if let value = message["watch"] as? String {
+ print("watch got \(value)")
+ self.transferMailToWatchButton.setTitle("sended to watch", for: .normal)
+ self.transferMailToWatchButton.titleLabel?.text = "sended to watch"
+ }
+ }
+ }
+ }*/
