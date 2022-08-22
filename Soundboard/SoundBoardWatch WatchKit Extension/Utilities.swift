@@ -152,9 +152,11 @@ func getSoundFromFiles(success: @escaping (_ str: String) -> Void, failure: @esc
         do{
             let soundArray = try decoder.decode([SoundModel].self, from: data)
             soundsNormal = soundArray
-            for sound in soundArray {
-                print("\(sound.soundName) \n\(sound.soundFileURL)")
-            }
+            soundsNormal = soundsNormal.sorted(by: { $0.soundName < $1.soundName })
+
+//            for sound in soundArray {
+//                print("\(sound.soundName) \n\(sound.soundFileURL)")
+//            }
             success("got all sounds Count: \(soundsNormal.count)")
         }catch{
             print("Error encoding plist: \(error)")

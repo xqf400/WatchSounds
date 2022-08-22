@@ -69,7 +69,7 @@ class MailAndSecretController: WKInterfaceController {
     
     @IBAction func secretTextFieldAction(_ value: NSString?) {
         if value != nil {
-            secretString = value! as String
+            secretString = (value! as String).uppercased()
             secretLabel.setText(secretString)
         }
     }
@@ -77,7 +77,7 @@ class MailAndSecretController: WKInterfaceController {
     @IBAction func checkButtonAction() {
         if secretString != nil && mailString != nil{
 
-            
+            self.checkButtonOutlet.setTitle("Checking...")
             downloadDataFromFireBase(name: "\(mailString!).plist", folder: "userLists", session: session) { data in
                 print("downloaded plist")
                 decodeClipFromData(data: data) { user in
@@ -88,19 +88,48 @@ class MailAndSecretController: WKInterfaceController {
                         self.mailString = nil
                         print("correct secret for mail")
                         self.checkButtonOutlet.setTitle("Correct secret for mail")
+                        var count = 0
+                        for sound in user.sounds{
+                            let soundX = sound
+                            downloadMp3FromFireBase(mp3Name: soundX.soundFile, session: self.session) { url in
+                                soundX.soundFileURL = url
+                                print("Sound: \(soundX.soundName) \nURL: \(soundX.soundFileURL) \nFile: \(sound.soundFile)")
+                                if soundsNormal.first(where: { $0.soundFile == soundX.soundFile }) != nil {
+                                    print("already in")
+                                }else{
+                                    soundsNormal.append(soundX)
+                                }
+                                count += 1
+                                if count == user.sounds.count{
+                                    writeArrayToFiles()
+                                    print("wrote array1")
+                                }
+                            } failure: { error in
+                                print("Error download mp3 \(error)")
+                                count += 1
+                                if count == user.sounds.count{
+                                    writeArrayToFiles()
+                                    print("wrote array2")
+
+                                }
+                            }
+                        }
                     }else{
                         print("not correct")
+                        DispatchQueue.main.async {
+                            self.checkButtonOutlet.setTitle("Secret not correct!")
+                        }
                     }
                 }failure: { error in
                     print("Error 2 Checking \(error)")
                     DispatchQueue.main.async {
-                        //self.testLabel.setText("Error")
+                        self.checkButtonOutlet.setTitle("Error 2")
                     }
                 }
             } failure: { error in
                 print("Error 1 Checking \(error)")
                 DispatchQueue.main.async {
-                    //self.testLabel.setText("Error")
+                    self.checkButtonOutlet.setTitle("Error 1")
                 }
             }
 

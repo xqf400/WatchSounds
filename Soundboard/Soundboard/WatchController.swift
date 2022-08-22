@@ -53,7 +53,7 @@ class WatchController: UIViewController {
         }
         if UserDefaults.standard.string(forKey: "secret") != nil{
             let secret = UserDefaults.standard.string(forKey: "secret")!
-            self.secretLabel.text = "Secret: \(secret)"
+            self.secretLabel.text = "Upper and lower case is unimportant on the watch app. \nSecret: \(secret)"
         }
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -75,7 +75,6 @@ class WatchController: UIViewController {
         }
         
         let secret = randomString(length: 4)
-        print(secret)
         
         //wcsession
         //        if WCSession.isSupported() {
@@ -145,7 +144,7 @@ class WatchController: UIViewController {
                 let userPlist = UserPlist(id: user.id, mail: user.mail, maxFilesCount: user.maxFilesCount, uploadedSoundsCount: user.uploadedSoundsCount, secret: user.secret, sounds: [])
                 self.uploadPlistToFirebase(user: userPlist) { str in
                     DispatchQueue.main.async {
-                        self.secretLabel.text = "Secret: \(secret)"
+                        self.secretLabel.text = "Upper and lower case is unimportant on the watch app. \nSecret: \(secret)"
                     }
                     showHudSuccess(inView: self, text: "User and secret created. Please open th Watch App and enter the mail and secret.", delay: 2.0)
                     
