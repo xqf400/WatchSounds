@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "05BC48C028A3DA3800402347"
-               BuildableName = "WatchSoundsWatch WatchKit App.app"
-               BlueprintName = "WatchSoundsWatch WatchKit App"
-               ReferencedContainer = "container:WatchSounds.xcodeproj">
+               BlueprintIdentifier = "14AA43622798714A0006F810"
+               BuildableName = "WatchSoundboard.app"
+               BlueprintName = "SoundBoardWatch WatchKit App"
+               ReferencedContainer = "container:Soundboard.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -28,10 +28,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "05BC48BD28A3DA3800402347"
-               BuildableName = "WatchSounds.app"
-               BlueprintName = "WatchSoundsWatch"
-               ReferencedContainer = "container:WatchSounds.xcodeproj">
+               BlueprintIdentifier = "14AA435F2798714A0006F810"
+               BuildableName = "WatchSoundboardWatch.app"
+               BlueprintName = "SoundBoardWatch"
+               ReferencedContainer = "container:Soundboard.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -54,20 +54,17 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
-      launchAutomaticallySubstyle = "8"
-      notificationPayloadFile = "WatchSoundsWatch WatchKit Extension/PushNotificationPayload.apns">
-      <RemoteRunnable
-         runnableDebuggingMode = "2"
-         BundleIdentifier = "com.apple.Carousel"
-         RemotePath = "/WatchSoundsWatch WatchKit App">
+      launchAutomaticallySubstyle = "32">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "05BC48C028A3DA3800402347"
-            BuildableName = "WatchSoundsWatch WatchKit App.app"
-            BlueprintName = "WatchSoundsWatch WatchKit App"
-            ReferencedContainer = "container:WatchSounds.xcodeproj">
+            BlueprintIdentifier = "14AA43622798714A0006F810"
+            BuildableName = "WatchSoundboard.app"
+            BlueprintName = "SoundBoardWatch WatchKit App"
+            ReferencedContainer = "container:Soundboard.xcodeproj">
          </BuildableReference>
-      </RemoteRunnable>
+      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -75,29 +72,17 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES"
-      launchAutomaticallySubstyle = "8"
-      notificationPayloadFile = "WatchSoundsWatch WatchKit Extension/PushNotificationPayload.apns">
-      <RemoteRunnable
-         runnableDebuggingMode = "2"
-         BundleIdentifier = "com.apple.Carousel"
-         RemotePath = "/WatchSoundsWatch WatchKit App">
+      launchAutomaticallySubstyle = "32">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "05BC48C028A3DA3800402347"
-            BuildableName = "WatchSoundsWatch WatchKit App.app"
-            BlueprintName = "WatchSoundsWatch WatchKit App"
-            ReferencedContainer = "container:WatchSounds.xcodeproj">
+            BlueprintIdentifier = "14AA43622798714A0006F810"
+            BuildableName = "WatchSoundboard.app"
+            BlueprintName = "SoundBoardWatch WatchKit App"
+            ReferencedContainer = "container:Soundboard.xcodeproj">
          </BuildableReference>
-      </RemoteRunnable>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "05BC48C028A3DA3800402347"
-            BuildableName = "WatchSoundsWatch WatchKit App.app"
-            BlueprintName = "WatchSoundsWatch WatchKit App"
-            ReferencedContainer = "container:WatchSounds.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

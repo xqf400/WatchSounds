@@ -30,6 +30,9 @@
 		054FB36528B1529700404202 /* Encryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FB36428B1529700404202 /* Encryption.swift */; };
 		054FB36628B1529D00404202 /* Encryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FB36428B1529700404202 /* Encryption.swift */; };
 		054FB36828B16C8F00404202 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 054FB36728B16C8F00404202 /* Alamofire */; };
+		05DE629C28B3604400C69178 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05DE629B28B3604400C69178 /* CloudKit.framework */; };
+		05DE629F28B3605900C69178 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05DE629E28B3605900C69178 /* CloudKit.framework */; };
+		05DE62A228B360C000C69178 /* UserInfo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05DE62A028B360C000C69178 /* UserInfo.xcdatamodeld */; };
 		1442C0082805D8AA00DDA3D6 /* Sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1442C0072805D8AA00DDA3D6 /* Sounds.swift */; };
 		14830505276CF73300F14BF4 /* SearchCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14830504276CF73300F14BF4 /* SearchCollectionReusableView.swift */; };
 		14AA43642798714A0006F810 /* WatchSoundboard.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 14AA43632798714A0006F810 /* WatchSoundboard.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -136,6 +139,11 @@
 		054FB35828B10A1B00404202 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		054FB36128B150AA00404202 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		054FB36428B1529700404202 /* Encryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encryption.swift; sourceTree = "<group>"; };
+		057C88F628B3744600A3E16A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS8.5.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
+		05DE629B28B3604400C69178 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		05DE629D28B3605700C69178 /* SoundBoardWatch WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SoundBoardWatch WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		05DE629E28B3605900C69178 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS8.5.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
+		05DE62A128B360C000C69178 /* UserInfo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserInfo.xcdatamodel; sourceTree = "<group>"; };
 		1442C0072805D8AA00DDA3D6 /* Sounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sounds.swift; sourceTree = "<group>"; };
 		1482AEA727469764002003DD /* Soundboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Soundboard.entitlements; sourceTree = "<group>"; };
 		14830504276CF73300F14BF4 /* SearchCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -186,6 +194,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05DE629F28B3605900C69178 /* CloudKit.framework in Frameworks */,
 				054FB34C28B0EF1000404202 /* RNCryptor in Frameworks */,
 				054FB35F28B13DE000404202 /* Alamofire in Frameworks */,
 			);
@@ -196,6 +205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				054FB36828B16C8F00404202 /* Alamofire in Frameworks */,
+				05DE629C28B3604400C69178 /* CloudKit.framework in Frameworks */,
 				054FB34828B0EEAF00404202 /* RNCryptor in Frameworks */,
 				E79943B0BF8A7EA8F10E2C2A /* Pods_Soundboard.framework in Frameworks */,
 			);
@@ -262,6 +272,7 @@
 		14AA43752798714C0006F810 /* SoundBoardWatch WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				05DE629D28B3605700C69178 /* SoundBoardWatch WatchKit Extension.entitlements */,
 				054FB36028B145D100404202 /* Not needed */,
 				14AA437E2798714D0006F810 /* Assets.xcassets */,
 				14AA43802798714D0006F810 /* Info.plist */,
@@ -304,6 +315,7 @@
 		14BB9C0C2738719D006DC0B7 /* Soundboard */ = {
 			isa = PBXGroup;
 			children = (
+				05DE62A028B360C000C69178 /* UserInfo.xcdatamodeld */,
 				1482AEA727469764002003DD /* Soundboard.entitlements */,
 				054FB34428B0E7FD00404202 /* GoogleService-Info.plist */,
 				14BB9C0D2738719D006DC0B7 /* AppDelegate.swift */,
@@ -375,6 +387,9 @@
 		728F2FDAF055F60D8F359F96 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				057C88F628B3744600A3E16A /* CoreData.framework */,
+				05DE629E28B3605900C69178 /* CloudKit.framework */,
+				05DE629B28B3604400C69178 /* CloudKit.framework */,
 				969428E972A60599771D88A4 /* Pods_Soundboard.framework */,
 				D3DEDDEEA760D66BBA276950 /* Pods_Soundboard_SoundboardUITests.framework */,
 				C70B2B973C6F9B4D198F1C5E /* Pods_SoundboardTests.framework */,
@@ -781,6 +796,7 @@
 				14BB9C4027387663006DC0B7 /* SoundViewCollectionViewCell.swift in Sources */,
 				14BB9C122738719D006DC0B7 /* ViewController.swift in Sources */,
 				14BB9C3E273872A7006DC0B7 /* SoundModel.swift in Sources */,
+				05DE62A228B360C000C69178 /* UserInfo.xcdatamodeld in Sources */,
 				14E585962760A32100B50757 /* Public.swift in Sources */,
 				054FB36228B150AA00404202 /* User.swift in Sources */,
 				14BB9C0E2738719D006DC0B7 /* AppDelegate.swift in Sources */,
@@ -940,6 +956,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "SoundBoardWatch WatchKit Extension/SoundBoardWatch WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L2CJ78AL3T;
@@ -971,6 +988,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "SoundBoardWatch WatchKit Extension/SoundBoardWatch WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L2CJ78AL3T;
@@ -1415,6 +1433,19 @@
 			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		05DE62A028B360C000C69178 /* UserInfo.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				05DE62A128B360C000C69178 /* UserInfo.xcdatamodel */,
+			);
+			currentVersion = 05DE62A128B360C000C69178 /* UserInfo.xcdatamodel */;
+			path = UserInfo.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 14BB9C022738719D006DC0B7 /* Project object */;
 }

@@ -11,6 +11,7 @@ import SafariServices
 import AVFoundation
 import MediaPlayer
 import FirebaseCore
+//import CoreData
 
 
 @main
@@ -60,7 +61,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate{ //, MessagingDelegate
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
     
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        //self.saveDatabase()
+    }
+    
+    /*
+    lazy var persistentContainer: NSPersistentCloudKitContainer = {
+      let container = NSPersistentCloudKitContainer(name: "UserInfo")
+//        let description = container.persistentStoreDescriptions.first
+//
+//                description?.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "iCloud.com.fku.WatchSoundboard")
 
+        
+//      container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+//        if let error = error as NSError? {
+//          fatalError("Unresolved error \(error), \(error.userInfo)")
+//        }
+//      })
+        container.loadPersistentStores(completionHandler: { (_, error) in
+                    if let error = error as NSError? {
+                        fatalError("Unresolved error \(error), \(error.userInfo)")
+                    }
+                })
+      return container
+    }()
+    
+    func saveDatabase () {
+      let context = persistentContainer.viewContext
+      if context.hasChanges {
+        do {
+          try context.save()
+        } catch {
+          let nserror = error as NSError
+          fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+      }
+    }*/
 
 }
 

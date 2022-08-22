@@ -25,6 +25,7 @@ class SoundsInterfaceController: WKInterfaceController {
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         createFolder()
+        addAllSound()
         /*
         addAllSound()
         tableView.setNumberOfRows(soundsNormal.count, withRowType: "SoundRow")

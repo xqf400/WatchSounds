@@ -9,6 +9,10 @@ import Foundation
 import WatchKit
 import RNCryptor
 import Alamofire
+//import WatchConnectivity
+//import CoreData
+
+
 
 class DownloadController: WKInterfaceController {
     
@@ -17,14 +21,42 @@ class DownloadController: WKInterfaceController {
     
 
     var session : URLSession!
+    //var wcsession : WCSession?
+    //private var infoUser :[NSManagedObject] = []
+    
+
     
     override func awake(withContext context: Any?) {
         session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: OperationQueue())
         super.awake(withContext: context)
         //UserDefaults.standard.set("8header8@googlemail.com", forKey: "adress")
-        
         volumeView.focus()
         setLabel()
+        
+        //online Cloud data
+        /*
+        guard let appDelegate = WKExtension.shared().delegate as? ExtensionDelegate else {
+            print("not found")
+            return
+        }
+
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Userinfo")
+        print("Fetch \(fetchRequest)")
+        do {
+            infoUser = try managedContext.fetch(fetchRequest)
+            print("Info: \(infoUser)")
+            for info in infoUser {
+                let mail = (info.value(forKeyPath: "mail") as! String)
+                print("mail: \(mail)")
+                UserDefaults.standard.set(mail, forKey: "adress")
+                setLabel()
+            }
+
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }*/
 
     }
     
@@ -34,12 +66,39 @@ class DownloadController: WKInterfaceController {
     
     override func willActivate() {
         super.willActivate()
+        /*
+        if WCSession.isSupported() {
+            wcsession = WCSession.default
+            wcsession!.delegate = self
+            wcsession!.activate()
+            print("startet wc session")
+        }*/
     }
     
     @IBAction func downloadButtonAction() {
         
-        //let songName = "esel.mp3"
-        //downloadSong(name: songName)
+        
+        /*
+         guard let appDelegate = WKExtension.shared().delegate as? ExtensionDelegate else {
+             print("not found")
+             return
+         }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "Userinfo", in: managedContext)!
+        let soundObject = NSManagedObject(entity: entity, insertInto: managedContext)
+        soundObject.setValue(adress, forKeyPath: "mail")
+
+        do {
+            try managedContext.save()
+            infoUser.append(soundObject)
+            print("suc database")
+            appDelegate.saveDatabase()
+        } catch let error as NSError {
+            print("Could not save. \(error)")
+        }*/
+        
+        
+        
         DispatchQueue.main.async {
             self.testLabel.setText("loading...")
         }
@@ -116,7 +175,10 @@ class DownloadController: WKInterfaceController {
     }
 
     
-    
+//    private func sendToiPhone() {
+//        let data: [String: Any] = ["watch": "got data" as Any]
+//        wcsession.sendMessage(data, replyHandler: nil, errorHandler: nil)
+//      }
     
     
    
@@ -144,3 +206,76 @@ extension DownloadController: URLSessionDelegate {
     }
     
 }
+
+/*
+extension DownloadController: WCSessionDelegate {
+  
+  
+  func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+    
+    print("received data: \(message)")
+    if let value = message["mail"] as? String {
+        DispatchQueue.main.async {
+            self.testLabel.setText(value)
+        }
+    }
+  }
+    
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        if error != nil {
+            print("error: \(error!)")
+        }
+    }
+    func session(_ session: WCSession, didFinish fileTransfer: WCSessionFileTransfer, error: Error?) {
+        print("Got file \(fileTransfer)")
+        //WKInterfaceDevice.current().play(.notification)
+    }
+    func session(_ session: WCSession, didReceiveMessageData messageData: Data, replyHandler: @escaping (Data) -> Void) {
+        print("got message")
+
+        //WKInterfaceDevice.current().play(.notification)
+    }
+    func session(_ session: WCSession, didReceive file: WCSessionFile) {
+        print("file? \(file)")
+        //WKInterfaceDevice.current().play(.notification)
+
+    }
+
+    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
+        print("applic \(applicationContext)")
+        WKInterfaceDevice.current().play(.notification)
+        //WKInterfaceDevice.current().play(.notification)
+    }
+    func session(_ session: WCSession, didReceiveUserInfo userInfo: [String : Any] = [:]) {
+        print("userinfo")
+        //WKInterfaceDevice.current().play(.notification)
+    }
+    func sessionReachabilityDidChange(_ session: WCSession) {
+        print("session isReachable \(session.isReachable)")
+        print("session applicationContext \(session.applicationContext)")
+        print("session hasContentPending \(session.hasContentPending)")
+        print("session receivedApplicationContext \(session.receivedApplicationContext)")
+        print("session isCompanionAppInstalled \(session.isCompanionAppInstalled)")
+    }
+    func session(_ session: WCSession, didFinish userInfoTransfer: WCSessionUserInfoTransfer, error: Error?) {
+        print("userinfo")
+       // WKInterfaceDevice.current().play(.notification)
+    }
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
+        print("message: \(message)")
+        WKInterfaceDevice.current().play(.notification)
+        //if let msg = message["mail"] {
+        //}
+    }
+    func session(_ session: WCSession, didReceiveMessageData messageData: Data) {
+        print("daa \(messageData)")
+        //WKInterfaceDevice.current().play(.notification)
+
+    }
+    
+    
+    
+}//end
+*/
+
+

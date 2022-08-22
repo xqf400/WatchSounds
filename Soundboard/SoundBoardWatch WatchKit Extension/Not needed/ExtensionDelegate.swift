@@ -6,11 +6,16 @@
 //
 
 import WatchKit
+//import CoreData
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
 
     func applicationDidFinishLaunching() {
         // Perform any final initialization of your application.
+//        persistentContainer.loadPersistentStores(completionHandler: { (storeDescription, error) in
+//            // handle this
+//            print("Eror? \(error)")
+//        })
     }
 
     func applicationDidBecomeActive() {
@@ -51,5 +56,43 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
             }
         }
     }
+
+
+    
+    /*
+    lazy var persistentContainer: NSPersistentCloudKitContainer = {
+      let container = NSPersistentCloudKitContainer(name: "UserInfo")
+        
+//        let description = container.persistentStoreDescriptions.first
+//
+//                description?.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "com.fku.watchsoundboard")
+
+        
+//      container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+//        if let error = error as NSError? {
+//          fatalError("Unresolved error \(error), \(error.userInfo)")
+//        }
+//      })
+        container.loadPersistentStores(completionHandler: { (_, error) in
+                    if let error = error as NSError? {
+                        fatalError("Unresolved error \(error), \(error.userInfo)")
+                    }
+                })
+        print("loaded")
+      return container
+    }()
+    
+    func saveDatabase() {
+      let context = persistentContainer.viewContext
+      if context.hasChanges {
+        do {
+          try context.save()
+            print("saved")
+        } catch {
+          let nserror = error as NSError
+          fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+      }
+    }*/
 
 }

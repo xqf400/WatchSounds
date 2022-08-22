@@ -201,7 +201,7 @@
                                 </items>
                             </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sZf-ZG-W6A">
-                                <rect key="frame" x="0.0" y="210" width="414" height="189"/>
+                                <rect key="frame" x="0.0" y="246" width="414" height="189"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upload a sound" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aM1-HQ-bFV">
                                         <rect key="frame" x="8" y="8" width="398" height="20"/>
@@ -278,7 +278,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pWb-5M-Rno">
-                                <rect key="frame" x="0.0" y="88" width="414" height="122"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="158"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Actual Mail" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F9R-k1-PpU">
                                         <rect key="frame" x="8" y="8" width="398" height="20"/>
@@ -298,28 +298,43 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qe8-Tk-3M6">
-                                        <rect key="frame" x="8" y="84" width="398" height="30"/>
+                                        <rect key="frame" x="105" y="84" width="204.5" height="30"/>
+                                        <color key="backgroundColor" systemColor="linkColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="p9d-Wu-IDB"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Transfer Mail to Watch"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Transfer Mail and get secret">
+                                            <color key="baseForegroundColor" systemColor="labelColor"/>
+                                        </buttonConfiguration>
                                         <connections>
                                             <action selector="transferMailToWatchButtonAction:" destination="nkw-RO-0hQ" eventType="touchUpInside" id="BLh-Xq-2TM"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Secret:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kGz-Uk-ua8">
+                                        <rect key="frame" x="8" y="130" width="398" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="duh-jk-tDL"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGray3Color"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="kGz-Uk-ua8" secondAttribute="trailing" constant="8" id="56a-QG-ViT"/>
                                     <constraint firstItem="F9R-k1-PpU" firstAttribute="top" secondItem="pWb-5M-Rno" secondAttribute="top" constant="8" id="6Yl-jp-Y85"/>
                                     <constraint firstItem="Qe8-Tk-3M6" firstAttribute="top" secondItem="pH4-SF-Yqq" secondAttribute="bottom" constant="8" id="8k3-T8-mlk"/>
-                                    <constraint firstAttribute="height" constant="122" id="99L-xK-Qog"/>
                                     <constraint firstAttribute="trailing" secondItem="pH4-SF-Yqq" secondAttribute="trailing" constant="16" id="AmD-yW-vpD"/>
-                                    <constraint firstAttribute="trailing" secondItem="Qe8-Tk-3M6" secondAttribute="trailing" constant="8" id="RPl-AR-Bsh"/>
-                                    <constraint firstAttribute="bottom" secondItem="Qe8-Tk-3M6" secondAttribute="bottom" constant="8" id="RvF-aj-Xdw"/>
-                                    <constraint firstItem="Qe8-Tk-3M6" firstAttribute="leading" secondItem="pWb-5M-Rno" secondAttribute="leading" constant="8" id="anl-hO-ncJ"/>
+                                    <constraint firstItem="Qe8-Tk-3M6" firstAttribute="centerX" secondItem="pWb-5M-Rno" secondAttribute="centerX" id="Neb-9O-85X"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Qe8-Tk-3M6" secondAttribute="trailing" constant="20" id="RPl-AR-Bsh"/>
+                                    <constraint firstItem="kGz-Uk-ua8" firstAttribute="top" secondItem="Qe8-Tk-3M6" secondAttribute="bottom" constant="16" id="XSF-sp-a75"/>
+                                    <constraint firstItem="Qe8-Tk-3M6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pWb-5M-Rno" secondAttribute="leading" constant="20" id="anl-hO-ncJ"/>
                                     <constraint firstItem="pH4-SF-Yqq" firstAttribute="top" secondItem="F9R-k1-PpU" secondAttribute="bottom" constant="8" id="efs-2a-xen"/>
                                     <constraint firstAttribute="trailing" secondItem="F9R-k1-PpU" secondAttribute="trailing" constant="8" id="gCs-nH-nKI"/>
+                                    <constraint firstAttribute="bottom" secondItem="kGz-Uk-ua8" secondAttribute="bottom" constant="8" id="ogT-Ve-93r"/>
+                                    <constraint firstItem="kGz-Uk-ua8" firstAttribute="leading" secondItem="pWb-5M-Rno" secondAttribute="leading" constant="8" id="tjR-5z-hiI"/>
                                     <constraint firstItem="F9R-k1-PpU" firstAttribute="leading" secondItem="pWb-5M-Rno" secondAttribute="leading" constant="8" id="xGS-05-B1V"/>
                                     <constraint firstItem="pH4-SF-Yqq" firstAttribute="leading" secondItem="pWb-5M-Rno" secondAttribute="leading" constant="16" id="xsb-PW-FYW"/>
                                 </constraints>
@@ -346,6 +361,7 @@
                         <outlet property="mailTextfield" destination="pH4-SF-Yqq" id="vXv-nz-LCJ"/>
                         <outlet property="navBar" destination="ja0-rL-lcU" id="7Mh-AK-vXc"/>
                         <outlet property="navBarTitle" destination="syl-Ed-Kx6" id="L2h-zj-We8"/>
+                        <outlet property="secretLabel" destination="kGz-Uk-ua8" id="T0F-CX-TRa"/>
                         <outlet property="selectedSoundLabel" destination="Yif-xV-vlb" id="ezO-1c-KqH"/>
                         <outlet property="soundNameTextlabel" destination="L2M-qS-jZm" id="erP-Mb-dQp"/>
                         <outlet property="transferMailToWatchButton" destination="Qe8-Tk-3M6" id="4PK-8q-Atq"/>

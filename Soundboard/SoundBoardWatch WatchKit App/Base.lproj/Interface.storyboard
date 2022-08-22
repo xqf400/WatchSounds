@@ -75,7 +75,7 @@
         <!--Notification Controller-->
         <scene sceneID="ZPc-GJ-vnh">
             <objects>
-                <controller id="4sK-HA-Art" customClass="NotificationController" customModule="WatchSoundboard_Watch" customModuleProvider="target"/>
+                <controller id="4sK-HA-Art" customClass="NotificationController" customModule="WatchSoundboard" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="599" y="790"/>
         </scene>
@@ -84,6 +84,11 @@
             <objects>
                 <controller id="gGR-Lo-5aT" customClass="DownloadController" customModule="SoundBoardWatch_WatchKit_Extension">
                     <items>
+                        <group width="1" alignment="left" id="MFp-M1-ILW">
+                            <items>
+                                <label alignment="center" text="Download" id="Jg9-qO-haS"/>
+                            </items>
+                        </group>
                         <volumeControlView alignment="left" controlsLocalVolume="NO" id="c4n-tx-auL"/>
                         <group width="1" alignment="left" verticalAlignment="bottom" id="hpB-YI-Gy6">
                             <items>
@@ -107,7 +112,7 @@
         <!--Notification Controller-->
         <scene sceneID="Niz-AI-uX2">
             <objects>
-                <controller id="eXb-UN-Cd0" customClass="NotificationController" customModule="WatchSoundboard_Watch" customModuleProvider="target"/>
+                <controller id="eXb-UN-Cd0" customClass="NotificationController" customModule="WatchSoundboard" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="570" y="480"/>
         </scene>
