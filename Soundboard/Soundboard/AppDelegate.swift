@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{ //, MessagingDelegate
         // Override point for customization after application launch.
         //FirebaseApp.configure()
         FirebaseApp.configure()
-        addAllSound()
+        createFolder()
         loundSound = UserDefaults.standard.bool(forKey: "loundSound")
         
 

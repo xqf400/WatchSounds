@@ -16,13 +16,9 @@ import Alamofire
 var player: AVAudioPlayer?
 let soundVolume:Float = 0.7
 var allsSoundArray: [SoundModel] = []
-var mseSoundArray: [SoundModel] = []
-var nluSoundArray: [SoundModel] = []
-var ploSoundArray: [SoundModel] = []
-var esoSoundArray: [SoundModel] = []
-var fkuSoundArray:[SoundModel] = []
 
-var favSoundsArray:[SoundModel] = []
+var soundsURL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first!.appendingPathComponent("Soundfiles")
+
 //var nluImageNames :[String] = ["nils.png","nils2.png","nils3.png","nils4.png","nils5.png","nils6.png","nils7.png"]
 var cachesURL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first!
 var messagesAreAllowed = false
@@ -32,8 +28,85 @@ var loundSound = true
 
 let Layla = SoundModel(soundId: 55, soundName: "Layla kurz", soundImage: "Layla.png", soundFile: "LaylaKurz", soundVolume: soundVolume, soundFileURL: Bundle.main.url(forResource: "LaylaKurz", withExtension: "mp3")!)
 
-public func addAllSound(){
-    allsSoundArray.append(Layla)
+public func addAllSounds(success: @escaping (_ str: String) -> Void, failure: @escaping (_ error: String) -> Void){
+    //allsSoundArray.append(Layla)
+    
+    allsSoundArray.removeAll()
+    getSoundFromFiles { str in
+        print(str)
+        //soundsNormal.append(Layla)
+        success(str)
+    } failure: { error in
+        failure("Error 9667: \(error)")
+    }
+}
+
+func getSoundFromFiles(success: @escaping (_ str: String) -> Void, failure: @escaping (_ error: String) -> Void){
+    let decoder = PropertyListDecoder()
+    do{
+        let data = try Data(contentsOf: soundsURL.appendingPathComponent("sounds.plist"))
+        do{
+            let soundArray = try decoder.decode([SoundModel].self, from: data)
+            allsSoundArray = soundArray
+            allsSoundArray = allsSoundArray.sorted(by: { $0.soundName < $1.soundName })
+            success("got all sounds Count: \(allsSoundArray.count)")
+        }catch{
+            print("Error encoding plist: \(error)")
+            failure("Error encoding plist: \(error)")
+        }
+    }catch{
+        print("Error getting data plist: \(error)")
+        failure("Error getting data plist: \(error)")
+    }
+}
+
+func saveSongLocal(song: SoundModel, data:Data, success: @escaping (_ str: String) -> Void, failure: @escaping (_ error: String) -> Void){
+    let localURL = soundsURL.appendingPathComponent("\(song.soundFile)")
+    if FileManager.default.fileExists(atPath: localURL.path) {
+    }else{
+        do{
+            try data.write(to: localURL)
+            print("wrote \(localURL)")
+            allsSoundArray.append(song)
+            writeArrayToFiles { str in
+                success("Wrote array and song")
+            } failure: { error in
+                print("Error 36 \(error)")
+                failure("Error 36 \(error)")
+            }
+        }catch{
+            print("Error 35 \(error.localizedDescription)")
+            failure("Error 35 \(error.localizedDescription)")
+        }
+    }
+}
+func writeArrayToFiles(success: @escaping (_ str: String) -> Void, failure: @escaping (_ error: String) -> Void){
+    let encoder = PropertyListEncoder()
+    do{
+        let data = try encoder.encode(allsSoundArray)
+        try data.write(to: soundsURL.appendingPathComponent("sounds.plist"))
+        success("wrote sounds.plist")
+    }catch{
+        failure("Error encoding plist: \(error)")
+    }
+}
+
+
+func createFolder(){
+    if let libraryDirectoryURL5 = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first{
+        let subfolder5 = libraryDirectoryURL5.appendingPathComponent("Soundfiles")
+        do {
+            try FileManager.default.createDirectory(at: subfolder5, withIntermediateDirectories: false, attributes: nil)
+            print("Here directory created")
+        }
+        catch let error as NSError {
+            if error.code == 516 {
+                //myDebug("Here The directory already exists")
+            } else {
+                print("directory createt error: \(error)")
+            }
+        }
+    }
 }
 
     

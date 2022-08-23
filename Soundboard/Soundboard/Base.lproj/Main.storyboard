@@ -67,7 +67,7 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SKe-i2-JQ5">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="SKe-i2-JQ5">
                                                     <rect key="frame" x="4" y="166" width="192" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="N19-H7-ffm"/>
@@ -123,7 +123,7 @@
                                                     <action selector="stopButtonAction:" destination="BYZ-38-t0r" id="ztH-rT-Z4n"/>
                                                 </connections>
                                             </barButtonItem>
-                                            <barButtonItem image="volume.3" catalog="system" id="1qc-S4-3Pf">
+                                            <barButtonItem image="speaker.wave.3" catalog="system" id="1qc-S4-3Pf">
                                                 <connections>
                                                     <action selector="volumeButtonAction:" destination="BYZ-38-t0r" id="c8f-dI-000"/>
                                                 </connections>
@@ -191,7 +191,7 @@
                                                     <action selector="stopAction:" destination="nkw-RO-0hQ" id="8Bi-sK-zGF"/>
                                                 </connections>
                                             </barButtonItem>
-                                            <barButtonItem image="volume.3" catalog="system" id="s6Z-DF-sqE">
+                                            <barButtonItem image="speaker.wave.3" catalog="system" id="s6Z-DF-sqE">
                                                 <connections>
                                                     <action selector="volumeButtonAction:" destination="nkw-RO-0hQ" id="OCw-Xx-qgE"/>
                                                 </connections>
@@ -233,13 +233,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DRF-kh-wcf">
-                                        <rect key="frame" x="141.5" y="151" width="131.5" height="30"/>
+                                        <rect key="frame" x="172" y="151" width="70.5" height="30"/>
                                         <color key="backgroundColor" systemColor="linkColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="m8r-a7-kNj"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Upload to server">
+                                        <buttonConfiguration key="configuration" style="plain" title="Upload">
                                             <color key="baseForegroundColor" systemColor="labelColor"/>
                                         </buttonConfiguration>
                                         <connections>
@@ -379,8 +379,8 @@
         <image name="applewatch" catalog="system" width="112" height="128"/>
         <image name="music.quarternote.3" catalog="system" width="128" height="103"/>
         <image name="shuffle" catalog="system" width="128" height="95"/>
+        <image name="speaker.wave.3" catalog="system" width="128" height="86"/>
         <image name="stop.circle" catalog="system" width="128" height="121"/>
-        <image name="volume.3" catalog="system" width="128" height="86"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
