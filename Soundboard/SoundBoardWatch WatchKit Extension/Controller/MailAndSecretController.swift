@@ -64,6 +64,7 @@ class MailAndSecretController: WKInterfaceController {
         if value != nil {
             mailString = (value! as String).lowercased()
             mailLabel.setText(mailString!.lowercased())
+            mailTextField.setText(mailString)
         }
     }
     
@@ -71,6 +72,7 @@ class MailAndSecretController: WKInterfaceController {
         if value != nil {
             secretString = (value! as String).uppercased()
             secretLabel.setText(secretString)
+            secretTextField.setText(secretString)
         }
     }
     
