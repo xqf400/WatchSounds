@@ -109,7 +109,7 @@ class ViewController: UIViewController {
             player?.delegate = self
             player?.setVolume(volume, fadeDuration: 10.0)
             //guard let player = player else { return }
-            player!.play() 
+            player?.play() 
         } catch let error {
             print("Error 4545 \(error.localizedDescription)")
         }
@@ -151,7 +151,15 @@ class ViewController: UIViewController {
 extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! SoundViewCollectionViewCell
-        cell.cellImageView.image = UIImage(named: allsSoundArray[indexPath.row].soundImage)?.roundedImage
+        
+        
+        if allsSoundArray[indexPath.row].soundImage == "NoName"{
+            cell.cellImageView.image = UIImage(systemName: "music.note")?.roundedImage
+        }else{
+            cell.cellImageView.image = UIImage(named: allsSoundArray[indexPath.row].soundImage)?.roundedImage
+        }
+        
+
         cell.backGroundView.backgroundColor = backGroundColor
         //cell.cellImageView.layer.masksToBounds = true
         //cell.cellImageView.layer.cornerRadius = 8

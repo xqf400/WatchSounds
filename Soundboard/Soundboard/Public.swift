@@ -26,7 +26,6 @@ var playAMessage = false
 var playSoundString = ""
 var loundSound = true
 
-let Layla = SoundModel(soundId: 55, soundName: "Layla kurz", soundImage: "Layla.png", soundFile: "LaylaKurz", soundVolume: soundVolume, soundFileURL: Bundle.main.url(forResource: "LaylaKurz", withExtension: "mp3")!)
 
 public func addAllSounds(success: @escaping (_ str: String) -> Void, failure: @escaping (_ error: String) -> Void){
     //allsSoundArray.append(Layla)

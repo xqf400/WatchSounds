@@ -44,16 +44,13 @@ class WatchController: UIViewController {
         
         session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: OperationQueue())
         
-        if UserDefaults.standard.string(forKey: "adress") != nil{
-            //DispatchQueue.main.async {
-            let adress = UserDefaults.standard.string(forKey: "adress")
+
+        if UserDefaults.standard.string(forKey: "secret") != nil && UserDefaults.standard.string(forKey: "adress") != nil{
+            let adress = UserDefaults.standard.string(forKey: "adress")!
             self.mailTextfield.text = adress
-            //self.transferMailToWatchButton.isEnabled = false
-            //}
-        }
-        if UserDefaults.standard.string(forKey: "secret") != nil{
+
             let secret = UserDefaults.standard.string(forKey: "secret")!
-            self.secretLabel.text = "Upper and lower case is unimportant on the watch app. \nSecret: \(secret)"
+            self.secretLabel.text = "Upper and lower case is unimportant on the watch app. \nMail: \(adress)\nSecret: \(secret)"
         }
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -134,16 +131,16 @@ class WatchController: UIViewController {
     
     @IBAction func transferMailToWatchButtonAction(_ sender: Any) {
         if mailTextfield.text != ""{
-            let adress = mailTextfield.text
+            let adress = mailTextfield.text!.lowercased()
             let secret = randomString(length: 4)
-            let user = User(id: 0, mail: adress!, maxFilesCount: 2, uploadedSoundsCount: 0, secret: secret, sounds: [])
+            let user = User(id: 0, mail: adress, maxFilesCount: 2, uploadedSoundsCount: 0, secret: secret, sounds: [])
             UserDefaults.standard.set(adress, forKey: "adress")
             UserDefaults.standard.set(secret, forKey: "secret")
             uploadUserToUserInFirebase(user: user) { str in
                 let userPlist = UserPlist(id: user.id, mail: user.mail, maxFilesCount: user.maxFilesCount, uploadedSoundsCount: user.uploadedSoundsCount, secret: user.secret, sounds: [])
                 self.uploadPlistToFirebase(user: userPlist) { str in
                     DispatchQueue.main.async {
-                        self.secretLabel.text = "Upper and lower case is unimportant on the watch app. \nSecret: \(secret)"
+                        self.secretLabel.text = "Upper and lower case is unimportant on the watch app. \nMail: \(adress)\nSecret: \(secret)"
                     }
                     showHudSuccess(inView: self, text: "User and secret created. Please open th Watch App and enter the mail and secret.", delay: 2.0)
                     
@@ -247,7 +244,7 @@ class WatchController: UIViewController {
                                             //MARK: exist
                                             let newAccount2 = UserPlist(id: newAccount.id, mail: newAccount.mail, maxFilesCount: newAccount.maxFilesCount, uploadedSoundsCount: newAccount.uploadedSoundsCount, secret: newAccount.secret, sounds: user.sounds)
                                             
-                                            let newSound = SoundModel(soundId: 0, soundName: self.soundNameTextlabel.text!, soundImage: "NoName", soundFile: self.mp3Name!, soundVolume: 1.0, soundFileURL: URL(string: "https://google.de")!)
+                                            let newSound = SoundModel(soundId: 0, soundName: self.soundNameTextlabel.text!, soundImage: "NoName", soundFile: self.mp3Name!, soundVolume: 1.0)
                                             newAccount2.sounds.append(newSound)
                                             
                                             self.uploadPlistToFirebase(user: newAccount2) { str in
@@ -280,7 +277,7 @@ class WatchController: UIViewController {
                                         print("no error just no file do same")
                                         //MARK: doesnt exist
                                         let newAccount2 = UserPlist(id: newAccount.id, mail: newAccount.mail, maxFilesCount: newAccount.maxFilesCount, uploadedSoundsCount: newAccount.uploadedSoundsCount, secret: newAccount.secret, sounds: [])
-                                        let newSound = SoundModel(soundId: 0, soundName: self.soundNameTextlabel.text!, soundImage: "NoName", soundFile: self.mp3Name!, soundVolume: 1.0, soundFileURL: URL(string: "https://google.de")!)
+                                        let newSound = SoundModel(soundId: 0, soundName: self.soundNameTextlabel.text!, soundImage: "NoName", soundFile: self.mp3Name!, soundVolume: 1.0)
                                         newAccount2.sounds.append(newSound)
                                         self.uploadPlistToFirebase(user: newAccount2) { str in
                                             self.uploadUserToUserInFirebase(user: newAccount) { str in
@@ -336,7 +333,7 @@ class WatchController: UIViewController {
                         showHudError(inView: self, text: "data nil", delay: 2.0)
                         return
                     }
-                    let newSound = SoundModel(soundId: 0, soundName: self.soundNameTextlabel.text!, soundImage: "NoName", soundFile: self.mp3Name!, soundVolume: 1.0, soundFileURL: URL(string: "https://google.de")!)
+                    let newSound = SoundModel(soundId: 0, soundName: self.soundNameTextlabel.text!, soundImage: "NoName", soundFile: self.mp3Name!, soundVolume: 1.0)
                     
                     saveSongLocal(song: newSound, data: data) { str in
                         showHudSuccess(inView: self, text: "Uploaded", delay: 1.0)

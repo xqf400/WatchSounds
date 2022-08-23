@@ -114,8 +114,8 @@ class DownloadController: WKInterfaceController {
                     for sound in user.sounds{
                         let soundX = sound
                         downloadMp3FromFireBase(mp3Name: soundX.soundFile, session: self.session) { url in
-                            soundX.soundFileURL = url
-                            print("Sound: \(soundX.soundName) \nURL: \(soundX.soundFileURL) \nFile: \(sound.soundFile)")
+                            //soundX.soundFileURL = url
+                            print("Sound: \(soundX.soundName) \nURL: \(soundX.soundName) \nFile: \(sound.soundFile)")
                             if soundsNormal.first(where: { $0.soundFile == soundX.soundFile }) != nil {
                                 print("already in")
                             }else{

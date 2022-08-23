@@ -201,7 +201,7 @@
                                 </items>
                             </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sZf-ZG-W6A">
-                                <rect key="frame" x="0.0" y="266" width="414" height="189"/>
+                                <rect key="frame" x="0.0" y="286" width="414" height="189"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upload a sound" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aM1-HQ-bFV">
                                         <rect key="frame" x="8" y="8" width="398" height="20"/>
@@ -278,7 +278,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pWb-5M-Rno">
-                                <rect key="frame" x="0.0" y="88" width="414" height="178"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="198"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Actual Mail" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F9R-k1-PpU">
                                         <rect key="frame" x="8" y="8" width="398" height="20"/>
@@ -312,11 +312,11 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Secret available" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="kGz-Uk-ua8">
-                                        <rect key="frame" x="8" y="130" width="398" height="40"/>
+                                        <rect key="frame" x="8" y="130" width="398" height="60"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="duh-jk-tDL"/>
+                                            <constraint firstAttribute="height" constant="60" id="duh-jk-tDL"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
