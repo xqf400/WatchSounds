@@ -62,8 +62,8 @@ class MailAndSecretController: WKInterfaceController {
     
     @IBAction func mailTextFieldAction(_ value: NSString?) {
         if value != nil {
-            mailString = value! as String
-            mailLabel.setText(mailString)
+            mailString = (value! as String).lowercased()
+            mailLabel.setText(mailString!.lowercased())
         }
     }
     
@@ -78,11 +78,11 @@ class MailAndSecretController: WKInterfaceController {
         if secretString != nil && mailString != nil{
 
             self.checkButtonOutlet.setTitle("Checking...")
-            downloadDataFromFireBase(name: "\(mailString!).plist", folder: "userLists", session: session) { data in
+            downloadDataFromFireBase(name: "\(mailString!.lowercased()).plist", folder: "userLists", session: session) { data in
                 print("downloaded plist")
                 decodeClipFromData(data: data) { user in
                     if self.secretString == user.secret{
-                        UserDefaults.standard.set(self.mailString, forKey: "adress")
+                        UserDefaults.standard.set(self.mailString!.lowercased(), forKey: "adress")
                         UserDefaults.standard.set(self.secretString, forKey: "secret")
                         self.secretString = nil
                         self.mailString = nil

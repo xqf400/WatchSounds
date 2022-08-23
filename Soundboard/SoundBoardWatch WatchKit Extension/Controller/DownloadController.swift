@@ -31,7 +31,7 @@ class DownloadController: WKInterfaceController {
         super.awake(withContext: context)
         //UserDefaults.standard.set("8header8@googlemail.com", forKey: "adress")
         volumeView.focus()
-        setLabel()
+        
         
         //online Cloud data
         /*
@@ -66,6 +66,7 @@ class DownloadController: WKInterfaceController {
     
     override func willActivate() {
         super.willActivate()
+        setLabel()
         /*
         if WCSession.isSupported() {
             wcsession = WCSession.default
