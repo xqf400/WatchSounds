@@ -15,14 +15,16 @@ class User: Codable{
     var uploadedSoundsCount: Int
     var secret: String
     var sounds: [String]
+    var creationDate: String
     
-    init(id: Int, mail: String, maxFilesCount: Int, uploadedSoundsCount: Int, secret: String, sounds: [String]){
+    init(id: Int, mail: String, maxFilesCount: Int, uploadedSoundsCount: Int, secret: String, sounds: [String], creationDate: String){
         self.id = id
         self.mail = mail
         self.maxFilesCount = maxFilesCount
         self.uploadedSoundsCount = uploadedSoundsCount
         self.secret = secret
         self.sounds = sounds
+        self.creationDate = creationDate
     }
     
     convenience init?(dictionary: [String : Any]) {
@@ -32,11 +34,13 @@ class User: Codable{
             let uploadedSoundsCount = dictionary["uploadedSoundsCount"] as? Int,
             let secret = dictionary["secret"] as? String,
             let sounds = dictionary["sounds"] as? [String],
-            let mail = dictionary["mail"] as? String else {
+            let mail = dictionary["mail"] as? String,
+            let creationDate = dictionary["creationDate"] as? String
+        else {
             return nil
         }
 
-        self.init(id: id, mail: mail, maxFilesCount: maxFilesCount, uploadedSoundsCount: uploadedSoundsCount, secret: secret, sounds: sounds)
+        self.init(id: id, mail: mail, maxFilesCount: maxFilesCount, uploadedSoundsCount: uploadedSoundsCount, secret: secret, sounds: sounds, creationDate: creationDate)
     }
     
     var dictionary: [String: Any] {
@@ -46,14 +50,46 @@ class User: Codable{
         "maxFilesCount": maxFilesCount,
         "secret": secret,
         "sounds": sounds,
-        "mail": mail
+        "mail": mail,
+        "creationDate": creationDate,
       ]
     }
     
     
 }
 
+class UserPlist: Codable{
+    var user: User
+    var sounds: [SoundModel]
+    
+    init(user:User, sounds: [SoundModel]){
+        self.user = user
+        self.sounds = sounds
+    }
+    
+    convenience init?(dictionary: [String : Any]) {
+        guard
+            let sounds = dictionary["sounds"] as? [SoundModel],
+            let user = dictionary["user"] as? User
+        else {
+            return nil
+        }
 
+        self.init(user: user, sounds: sounds)
+    }
+    
+    var dictionary: [String: Any] {
+      return [
+        "user": user,
+        "sounds": sounds
+      ]
+    }
+    
+    
+    
+}
+
+/*
 class UserPlist: Codable{
     
     var id: Int
@@ -62,14 +98,17 @@ class UserPlist: Codable{
     var uploadedSoundsCount: Int
     var secret: String
     var sounds: [SoundModel]
+    var creationDate: Date
+
     
-    init(id: Int, mail: String, maxFilesCount: Int, uploadedSoundsCount: Int, secret: String, sounds: [SoundModel]){
+    init(id: Int, mail: String, maxFilesCount: Int, uploadedSoundsCount: Int, secret: String, sounds: [SoundModel], creationDate: Date){
         self.id = id
         self.mail = mail
         self.maxFilesCount = maxFilesCount
         self.uploadedSoundsCount = uploadedSoundsCount
         self.secret = secret
         self.sounds = sounds
+        self.creationDate = creationDate
     }
     
     convenience init?(dictionary: [String : Any]) {
@@ -79,11 +118,13 @@ class UserPlist: Codable{
             let uploadedSoundsCount = dictionary["uploadedSoundsCount"] as? Int,
             let secret = dictionary["secret"] as? String,
             let sounds = dictionary["sounds"] as? [SoundModel],
-            let mail = dictionary["mail"] as? String else {
+            let mail = dictionary["mail"] as? String,
+            let creationDate = dictionary["creationDate"] as? Date
+        else {
             return nil
         }
 
-        self.init(id: id, mail: mail, maxFilesCount: maxFilesCount, uploadedSoundsCount: uploadedSoundsCount, secret: secret, sounds: sounds)
+        self.init(id: id, mail: mail, maxFilesCount: maxFilesCount, uploadedSoundsCount: uploadedSoundsCount, secret: secret, sounds: sounds, creationDate: creationDate)
     }
     
     var dictionary: [String: Any] {
@@ -93,9 +134,10 @@ class UserPlist: Codable{
         "maxFilesCount": maxFilesCount,
         "secret": secret,
         "sounds": sounds,
-        "mail": mail
+        "mail": mail,
+        "creationDate": creationDate
       ]
     }
     
     
-}
+}*/

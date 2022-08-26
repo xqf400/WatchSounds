@@ -108,7 +108,7 @@ class DownloadController: WKInterfaceController {
             downloadDataFromFireBase(name: "\(mail!).plist", folder: "userLists", session: session) { data in
                 print("downloaded plist")
                 decodeClipFromData(data: data) { user in
-                    print("decoded todo check if secret is same as this : \(user.secret)")
+                    print("decoded todo check if secret is same as this : \(user.user.secret)")
                     //UserDefaults.standard.set(user.secret, forKey: "secret")
                     var count = 0
                     for sound in user.sounds{
@@ -126,6 +126,10 @@ class DownloadController: WKInterfaceController {
                                 writeArrayToFiles()
                                 DispatchQueue.main.async {
                                     self.testLabel.setText("Downloaded")
+                                    let action = WKAlertAction(title: "Ok", style: WKAlertActionStyle.default) {
+                                            print("Ok")
+                                        }
+                                    self.presentAlert(withTitle: "Downloaded", message: "Downloaded sounds", preferredStyle: WKAlertControllerStyle.alert, actions:[action])
                                 }
                             }
                         } failure: { error in

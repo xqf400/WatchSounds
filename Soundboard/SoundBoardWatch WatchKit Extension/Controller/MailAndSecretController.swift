@@ -83,13 +83,17 @@ class MailAndSecretController: WKInterfaceController {
             downloadDataFromFireBase(name: "\(mailString!.lowercased()).plist", folder: "userLists", session: session) { data in
                 print("downloaded plist")
                 decodeClipFromData(data: data) { user in
-                    if self.secretString == user.secret{
+                    if self.secretString == user.user.secret{
                         UserDefaults.standard.set(self.mailString!.lowercased(), forKey: "adress")
                         UserDefaults.standard.set(self.secretString, forKey: "secret")
                         self.secretString = nil
                         self.mailString = nil
                         print("correct secret for mail")
                         self.checkButtonOutlet.setTitle("Correct secret for mail")
+                            let action = WKAlertAction(title: "Ok", style: WKAlertActionStyle.default) {
+                                    print("Ok")
+                                }
+                            self.presentAlert(withTitle: "Correct secret", message: "Secret is correct. If you already uploaded sounds, they will be downloaded now.", preferredStyle: WKAlertControllerStyle.alert, actions:[action])
                         var count = 0
                         for sound in user.sounds{
                             let soundX = sound
@@ -105,6 +109,7 @@ class MailAndSecretController: WKInterfaceController {
                                 if count == user.sounds.count{
                                     writeArrayToFiles()
                                     print("wrote array1")
+
                                 }
                             } failure: { error in
                                 print("Error download mp3 \(error)")

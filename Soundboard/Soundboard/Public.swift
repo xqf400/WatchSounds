@@ -108,6 +108,44 @@ func createFolder(){
     }
 }
 
+//MARK: Date Formatter
+func getActualTimeAndDate()->String{
+    let formatter = DateFormatter()
+    formatter.dateStyle = .medium
+    formatter.timeStyle = .medium
+    formatter.dateFormat = "d MM yyyy HH:mm:ss"
+    formatter.timeZone = TimeZone(abbreviation: "GMT+02:00")
+    let formattedString : String = formatter.string(for: Date())!
+    return formattedString
+}
+
+func getShortTimeAndDateFromDate(date:Date)->String{
+    let formatter = DateFormatter()
+    formatter.dateStyle = .medium
+    formatter.timeStyle = .medium
+    formatter.dateFormat = "HH:mm d.MM"
+    formatter.timeZone = TimeZone(abbreviation: "GMT+02:00")
+    let formattedString : String = formatter.string(for: date)!
+    return formattedString
+}
+
+
+func stringToDate(str: String)->Date{
+    let formatter = DateFormatter()
+    //formatter.dateStyle = .medium
+    //formatter.timeStyle = .medium
+    formatter.timeZone = TimeZone(abbreviation: "GMT+02:00")
+    
+    formatter.dateFormat = "d MM yyyy HH:mm:ss"
+    let date = formatter.date(from:str)
+    if date != nil {
+        return date!
+    }else{
+        print(str)
+        return Date()
+    }
+}
+
     
 //MARK: Firebase
 
