@@ -8,13 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0537B8E1286CBBDF002B7ACD /* LaylaKurz.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0537B8DF286CBBDF002B7ACD /* LaylaKurz.mp3 */; };
-		0537B8E3286CBBF4002B7ACD /* LaylaKurz.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0537B8DF286CBBDF002B7ACD /* LaylaKurz.mp3 */; };
-		0537B8E4286CBBF4002B7ACD /* LaylaKurz.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0537B8DF286CBBDF002B7ACD /* LaylaKurz.mp3 */; };
-		0537B8E5286CBBF5002B7ACD /* LaylaKurz.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0537B8DF286CBBDF002B7ACD /* LaylaKurz.mp3 */; };
 		0537B8EB286CBCCD002B7ACD /* Layla.png in Resources */ = {isa = PBXBuildFile; fileRef = 0537B8E9286CBCCD002B7ACD /* Layla.png */; };
-		0537B8EC286CBCCD002B7ACD /* Layla.png in Resources */ = {isa = PBXBuildFile; fileRef = 0537B8E9286CBCCD002B7ACD /* Layla.png */; };
-		0537B8ED286CBCCD002B7ACD /* Layla.png in Resources */ = {isa = PBXBuildFile; fileRef = 0537B8E9286CBCCD002B7ACD /* Layla.png */; };
-		0537B8EE286CBCCD002B7ACD /* Layla.png in Resources */ = {isa = PBXBuildFile; fileRef = 0537B8E9286CBCCD002B7ACD /* Layla.png */; };
 		054FB34328B0E64A00404202 /* DownloadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054FB34228B0E64A00404202 /* DownloadController.swift */; };
 		054FB34528B0E7FD00404202 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 054FB34428B0E7FD00404202 /* GoogleService-Info.plist */; };
 		054FB34828B0EEAF00404202 /* RNCryptor in Frameworks */ = {isa = PBXBuildFile; productRef = 054FB34728B0EEAF00404202 /* RNCryptor */; };
@@ -605,8 +599,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0537B8E3286CBBF4002B7ACD /* LaylaKurz.mp3 in Resources */,
-				0537B8EC286CBCCD002B7ACD /* Layla.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -615,9 +607,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14AA436C2798714C0006F810 /* Assets.xcassets in Resources */,
-				0537B8ED286CBCCD002B7ACD /* Layla.png in Resources */,
 				14AA436A2798714A0006F810 /* Interface.storyboard in Resources */,
-				0537B8E4286CBBF4002B7ACD /* LaylaKurz.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -625,9 +615,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0537B8EE286CBCCD002B7ACD /* Layla.png in Resources */,
 				14AA437F2798714D0006F810 /* Assets.xcassets in Resources */,
-				0537B8E5286CBBF5002B7ACD /* LaylaKurz.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

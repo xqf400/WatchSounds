@@ -64,32 +64,32 @@ class WatchController: UIViewController {
         }
         let managedContext = appDelegate.persistentContainer.viewContext
         /*
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UserI")
-        do {
-            infoUser = try managedContext.fetch(fetchRequest)
-            for info in infoUser {
-                let mail = (info.value(forKeyPath: "mail") as! String)
-                let id = (info.value(forKeyPath: "id") as! Int)
-                let maxFilesCount = (info.value(forKeyPath: "maxFilesCount") as! Int)
-                let uploadedSoundsCount = (info.value(forKeyPath: "uploadedSoundsCount") as! Int)
-                let secret = (info.value(forKeyPath: "secret") as! String)
-                let creationDate = (info.value(forKeyPath: "creationDate") as! String)
-                
-                let user = User(id: id, mail: mail, maxFilesCount: maxFilesCount, uploadedSoundsCount: uploadedSoundsCount, secret: secret, sounds: [], creationDate: creationDate)
-                //user.print()
-            }
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }*/
+         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UserI")
+         do {
+         infoUser = try managedContext.fetch(fetchRequest)
+         for info in infoUser {
+         let mail = (info.value(forKeyPath: "mail") as! String)
+         let id = (info.value(forKeyPath: "id") as! Int)
+         let maxFilesCount = (info.value(forKeyPath: "maxFilesCount") as! Int)
+         let uploadedSoundsCount = (info.value(forKeyPath: "uploadedSoundsCount") as! Int)
+         let secret = (info.value(forKeyPath: "secret") as! String)
+         let creationDate = (info.value(forKeyPath: "creationDate") as! String)
+         
+         let user = User(id: id, mail: mail, maxFilesCount: maxFilesCount, uploadedSoundsCount: uploadedSoundsCount, secret: secret, sounds: [], creationDate: creationDate)
+         //user.print()
+         }
+         } catch let error as NSError {
+         print("Could not fetch. \(error), \(error.userInfo)")
+         }*/
         
-//        let fetchRequest2: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Sounds")
-//        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest2)
-//
-//        do {
-//            try managedContext.execute(deleteRequest)
-//        } catch let error as NSError {
-//            // TODO: handle the error
-//        }
+        //        let fetchRequest2: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Sounds")
+        //        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest2)
+        //
+        //        do {
+        //            try managedContext.execute(deleteRequest)
+        //        } catch let error as NSError {
+        //            // TODO: handle the error
+        //        }
         
         let fetchRequest1 = NSFetchRequest<NSManagedObject>(entityName: "Sounds")
         //print("Fetch \(fetchRequest)")
@@ -110,6 +110,8 @@ class WatchController: UIViewController {
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
+        
+        getAllMp3FilesFromCloudContainer()
         
     }
     
@@ -142,7 +144,7 @@ class WatchController: UIViewController {
         //            }
         //        }
         
-
+        
         
     }
     
@@ -170,9 +172,8 @@ class WatchController: UIViewController {
         }
     }
     
+    //MARK: Transfer Mail
     @IBAction func transferMailToWatchButtonAction(_ sender: Any) {
-        
-        
         
         if mailTextfield.text != ""{
             self.loadingHud.textLabel.text = "Bitte warten..."
@@ -199,6 +200,13 @@ class WatchController: UIViewController {
                     try managedContext.save()
                     infoUser.append(soundObject)
                     print("suc database")
+                    DispatchQueue.main.async {
+                        self.secretLabel.text = "Upper and lower case is unimportant on the watch app. \nMail: \(adress)\nSecret: \(secret)"
+                    }
+                    UserDefaults.standard.set(adress, forKey: "adress")
+                    UserDefaults.standard.set(secret, forKey: "secret")
+                    self.loadingHud.dismiss(animated: false)
+                    showHudSuccess(inView: self, text: "User and secret created. Please open the Watch App and enter the mail and secret.", delay: 2.0)
                 } catch let error as NSError {
                     print("Could not save. \(error)")
                 }
@@ -259,6 +267,7 @@ class WatchController: UIViewController {
      }
      }*/
     
+    //MARK: Choose Sound
     @IBAction func chooseSoundButtonAction(_ sender: Any) {
         
         var documentPicker: UIDocumentPickerViewController!
@@ -270,6 +279,7 @@ class WatchController: UIViewController {
         self.present(documentPicker, animated: true, completion: nil)
     }
     
+    //MARK: Upload  sound
     @IBAction func uploadSoundButtonAction(_ sender: Any) {
         if UserDefaults.standard.string(forKey: "adress") != nil{
             if soundNameTextlabel.text != "" {
@@ -303,35 +313,90 @@ class WatchController: UIViewController {
                         do {
                             try managedContext.save()
                             infoUser.append(soundObject)
-                            print("suc database")
+                            print("suc database \(newSound.soundName)")
+                            
+                            saveSongToCloudContainer(songFile: newSound.soundFile) { str in
+                                saveSongLocal(song: newSound, data: data) { str in
+                                    self.loadingHud.dismiss(animated: false)
+                                    showHudSuccess(inView: self, text: "Uploaded", delay: 1.0)
+                                    self.mp3URL = nil
+                                    self.mp3Name = nil
+                                    self.soundNameTextlabel.text = ""
+                                    self.selectedSoundLabel.text = "No sound selected"
+                                } failure: { error in
+                                    print("Failed to save1 upload \(error)")
+                                    self.loadingHud.dismiss(animated: false)
+                                    showHudError(inView: self, text: "Failed to save1 local \(error)", delay: 2.0)
+                                }
+                            } failure: { error in
+                                print("Failed to save1 upload \(error)")
+                                self.loadingHud.dismiss(animated: false)
+                                showHudError(inView: self, text: "Failed to save1 cloud \(error)", delay: 2.0)
+                            }
                         } catch let error as NSError {
                             print("Could not save. \(error)")
                         }
                     }else{
-                    
-                    self.getUserAccountIfExist(mail: id) { account in
-                        //print("got user")
-                        if account.uploadedSoundsCount < account.maxFilesCount {
-                            let newAccount = account
-                            encryptData(ID: id, data: data) { encData in
-                                uploadToFireBase(fileName: self.mp3Name!, data: encData, folder: "Soundfiles") { str in
-                                    //print("uploaded Sound")
-                                    newAccount.sounds.append(self.mp3Name!)
-                                    newAccount.uploadedSoundsCount = newAccount.uploadedSoundsCount + 1
-                                    
-                                    downloadDataFromFireBase(name: "\(id).plist", folder: "userLists", session: self.session) { data1 in
-                                        //print("downloaded plist")
-                                        decodeClipFromData(data: data1) { user in
-                                            //MARK: exist
-                                            //let newAccount2 = UserPlist(id: newAccount.id, mail: newAccount.mail, maxFilesCount: newAccount.maxFilesCount, uploadedSoundsCount: newAccount.uploadedSoundsCount, secret: newAccount.secret, sounds: user.sounds, creationDate: user.creationDate)
-                                            let newAccount2 = UserPlist(user: newAccount, sounds: user.sounds)
-
+                        
+                        self.getUserAccountIfExist(mail: id) { account in
+                            //print("got user")
+                            if account.uploadedSoundsCount < account.maxFilesCount {
+                                let newAccount = account
+                                encryptData(ID: id, data: data) { encData in
+                                    uploadToFireBase(fileName: self.mp3Name!, data: encData, folder: "Soundfiles") { str in
+                                        //print("uploaded Sound")
+                                        newAccount.sounds.append(self.mp3Name!)
+                                        newAccount.uploadedSoundsCount = newAccount.uploadedSoundsCount + 1
+                                        
+                                        downloadDataFromFireBase(name: "\(id).plist", folder: "userLists", session: self.session) { data1 in
+                                            //print("downloaded plist")
+                                            decodeClipFromData(data: data1) { user in
+                                                //MARK: exist
+                                                //let newAccount2 = UserPlist(id: newAccount.id, mail: newAccount.mail, maxFilesCount: newAccount.maxFilesCount, uploadedSoundsCount: newAccount.uploadedSoundsCount, secret: newAccount.secret, sounds: user.sounds, creationDate: user.creationDate)
+                                                let newAccount2 = UserPlist(user: newAccount, sounds: user.sounds)
+                                                
+                                                newAccount2.sounds.append(newSound)
+                                                
+                                                self.uploadPlistToFirebase(user: newAccount2) { str in
+                                                    //print("uploaded plist")
+                                                    self.uploadUserToUserInFirebase(user: newAccount) { str in
+                                                        //print("uploaded User")
+                                                        saveSongLocal(song: newSound, data: data) { str in
+                                                            self.loadingHud.dismiss(animated: false)
+                                                            showHudSuccess(inView: self, text: "Uploaded", delay: 1.0)
+                                                            self.mp3URL = nil
+                                                            self.mp3Name = nil
+                                                            self.soundNameTextlabel.text = ""
+                                                            self.selectedSoundLabel.text = "No sound selected"
+                                                        } failure: { error in
+                                                            print("Failed to save1 upload \(error)")
+                                                            self.loadingHud.dismiss(animated: false)
+                                                            showHudError(inView: self, text: "Failed to save1 local \(error)", delay: 2.0)
+                                                        }
+                                                    } failure: { error in
+                                                        self.loadingHud.dismiss(animated: false)
+                                                        print("Failed to save1 upload \(error)")
+                                                        showHudError(inView: self, text: "Failed to save1 upload \(error)", delay: 2.0)
+                                                    }
+                                                } failure: { error in
+                                                    self.loadingHud.dismiss(animated: false)
+                                                    print("Failed to save2 upload \(error)")
+                                                    showHudError(inView: self, text: "Failed to save2 upload \(error)", delay: 2.0)
+                                                }
+                                            } failure: { error in
+                                                self.loadingHud.dismiss(animated: false)
+                                                print("Failed to decode plist upload \(error)")
+                                                showHudError(inView: self, text: "Failed to save2 upload \(error)", delay: 2.0)
+                                            }
+                                        } failure: { [self] error in
+                                            print("no error just no file do same")
+                                            //MARK: doesnt exist
+                                            //let newAccount2 = UserPlist(id: newAccount.id, mail: newAccount.mail, maxFilesCount: newAccount.maxFilesCount, uploadedSoundsCount: newAccount.uploadedSoundsCount, secret: newAccount.secret, sounds: [], creationDate: newAccount.creationDate)
+                                            let newAccount2 = UserPlist(user: newAccount, sounds: [])
                                             newAccount2.sounds.append(newSound)
-                                            
                                             self.uploadPlistToFirebase(user: newAccount2) { str in
-                                                //print("uploaded plist")
                                                 self.uploadUserToUserInFirebase(user: newAccount) { str in
-                                                    //print("uploaded User")
+                                                    
                                                     saveSongLocal(song: newSound, data: data) { str in
                                                         self.loadingHud.dismiss(animated: false)
                                                         showHudSuccess(inView: self, text: "Uploaded", delay: 1.0)
@@ -345,71 +410,35 @@ class WatchController: UIViewController {
                                                         showHudError(inView: self, text: "Failed to save1 local \(error)", delay: 2.0)
                                                     }
                                                 } failure: { error in
-                                                    self.loadingHud.dismiss(animated: false)
                                                     print("Failed to save1 upload \(error)")
+                                                    self.loadingHud.dismiss(animated: false)
                                                     showHudError(inView: self, text: "Failed to save1 upload \(error)", delay: 2.0)
                                                 }
                                             } failure: { error in
-                                                self.loadingHud.dismiss(animated: false)
                                                 print("Failed to save2 upload \(error)")
+                                                self.loadingHud.dismiss(animated: false)
                                                 showHudError(inView: self, text: "Failed to save2 upload \(error)", delay: 2.0)
                                             }
-                                        } failure: { error in
-                                            self.loadingHud.dismiss(animated: false)
-                                            print("Failed to decode plist upload \(error)")
-                                            showHudError(inView: self, text: "Failed to save2 upload \(error)", delay: 2.0)
                                         }
-                                    } failure: { [self] error in
-                                        print("no error just no file do same")
-                                        //MARK: doesnt exist
-                                        //let newAccount2 = UserPlist(id: newAccount.id, mail: newAccount.mail, maxFilesCount: newAccount.maxFilesCount, uploadedSoundsCount: newAccount.uploadedSoundsCount, secret: newAccount.secret, sounds: [], creationDate: newAccount.creationDate)
-                                        let newAccount2 = UserPlist(user: newAccount, sounds: [])
-                                        newAccount2.sounds.append(newSound)
-                                        self.uploadPlistToFirebase(user: newAccount2) { str in
-                                            self.uploadUserToUserInFirebase(user: newAccount) { str in
-                                                
-                                                saveSongLocal(song: newSound, data: data) { str in
-                                                    self.loadingHud.dismiss(animated: false)
-                                                    showHudSuccess(inView: self, text: "Uploaded", delay: 1.0)
-                                                    self.mp3URL = nil
-                                                    self.mp3Name = nil
-                                                    self.soundNameTextlabel.text = ""
-                                                    self.selectedSoundLabel.text = "No sound selected"
-                                                } failure: { error in
-                                                    print("Failed to save1 upload \(error)")
-                                                    self.loadingHud.dismiss(animated: false)
-                                                    showHudError(inView: self, text: "Failed to save1 local \(error)", delay: 2.0)
-                                                }
-                                            } failure: { error in
-                                                print("Failed to save1 upload \(error)")
-                                                self.loadingHud.dismiss(animated: false)
-                                                showHudError(inView: self, text: "Failed to save1 upload \(error)", delay: 2.0)
-                                            }
-                                        } failure: { error in
-                                            print("Failed to save2 upload \(error)")
-                                            self.loadingHud.dismiss(animated: false)
-                                            showHudError(inView: self, text: "Failed to save2 upload \(error)", delay: 2.0)
-                                        }
+                                    } failure: { error in
+                                        print("error 12 \(error)")
+                                        self.loadingHud.dismiss(animated: false)
+                                        showHudError(inView: self, text: "Error 12: \(error)", delay: 2.0)
                                     }
                                 } failure: { error in
-                                    print("error 12 \(error)")
+                                    print("Error encrypt user: \(error)")
                                     self.loadingHud.dismiss(animated: false)
-                                    showHudError(inView: self, text: "Error 12: \(error)", delay: 2.0)
+                                    showHudError(inView: self, text: "Error 13: \(error)", delay: 2.0)
                                 }
-                            } failure: { error in
-                                print("Error encrypt user: \(error)")
+                            }else{
                                 self.loadingHud.dismiss(animated: false)
-                                showHudError(inView: self, text: "Error 13: \(error)", delay: 2.0)
+                                showHudError(inView: self, text: "max files buy more", delay: 2.0)
                             }
-                        }else{
+                        } failure: { error in
+                            print("Failed get User Account If Exist \(error)")
                             self.loadingHud.dismiss(animated: false)
-                            showHudError(inView: self, text: "max files buy more", delay: 2.0)
+                            showHudError(inView: self, text: "Failed get User Account \(error)", delay: 2.0)
                         }
-                    } failure: { error in
-                        print("Failed get User Account If Exist \(error)")
-                        self.loadingHud.dismiss(animated: false)
-                        showHudError(inView: self, text: "Failed get User Account \(error)", delay: 2.0)
-                    }
                     }
                 }else{
                     showHudError(inView: self, text: "First select a sound file", delay: 2.0)
@@ -531,6 +560,62 @@ class WatchController: UIViewController {
         return String((0..<length).map{ _ in letters.randomElement()! })
     }
     
+    func saveSongToCloudContainer(songFile: String,success: @escaping (_ str: String) -> Void, failure: @escaping (_ error: String) -> Void){
+        guard let data = try? Data(contentsOf: mp3URL!) else {
+            print("data nil")
+            showHudError(inView: self, text: "data nil", delay: 2.0)
+            failure("data nil")
+            return
+        }
+        guard let cloudurl = FileManager.default.url(forUbiquityContainerIdentifier: "iCloud.com.fku.WatchSoundboard1") else{
+            print("no url")
+            showHudError(inView: self, text: "url error", delay: 2.0)
+            failure("no url")
+            return
+        }
+        let url = cloudurl.appendingPathComponent(songFile)
+        do{
+            try data.write(to: url)
+            print("1wrote \(songFile) \(url)")
+            success("1wrote \(songFile) \(url)")
+        }catch{
+            print("Error 35 \(error.localizedDescription)")
+            failure("Error 35 \(error.localizedDescription)")
+        }
+    }
+    
+    func getAllMp3FilesFromCloudContainer(){
+        guard let cloudurl = FileManager.default.url(forUbiquityContainerIdentifier: "iCloud.com.fku.WatchSoundboard1") else{
+            print("no url")
+            showHudError(inView: self, text: "url error", delay: 2.0)
+            return
+        }
+        
+        
+        do {
+            let directoryContents = try FileManager.default.contentsOfDirectory(at: cloudurl, includingPropertiesForKeys: nil)
+            //print("directoryContents:", directoryContents.map { $0.localizedName ?? $0.lastPathComponent })
+//            for url1 in directoryContents {
+//                //let filename: NSString = url1.path as NSString
+//                //let pathExtention = filename.pathExtension
+//                //print(pathExtention)
+//                let bla = url1.localizedName ?? url1.lastPathComponent
+//                print("Name: \(bla)")
+//
+//            }
+            let mp3s = directoryContents.filter(\.isMP3).map { $0.localizedName ?? $0.lastPathComponent }
+            print("mp3s:", mp3s)
+    //        for mp3File in mp3s {
+    //            let url = soundsURL.appendingPathComponent(mp3File)
+    //            let sound = SoundModel(soundId: soundsNormal.count+1, soundName: mp3File, soundImage: "NoName", soundFile: mp3File, soundVolume: 1.0, soundFileURL: url)
+    //            soundsNormal.append(sound)
+    //        }
+        } catch {
+            print(error)
+        }
+    }
+    
+
 }//eoc
 
 

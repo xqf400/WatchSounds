@@ -62,6 +62,7 @@ func getSoundFromFiles(success: @escaping (_ str: String) -> Void, failure: @esc
 func saveSongLocal(song: SoundModel, data:Data, success: @escaping (_ str: String) -> Void, failure: @escaping (_ error: String) -> Void){
     let localURL = soundsURL.appendingPathComponent("\(song.soundFile)")
     if FileManager.default.fileExists(atPath: localURL.path) {
+        print("file exists \(song.soundName)")
     }else{
         do{
             try data.write(to: localURL)
@@ -355,6 +356,20 @@ extension UIView{
         rotation.isCumulative = true
         rotation.repeatCount = Float.greatestFiniteMagnitude
         self.layer.add(rotation, forKey: "rotationAnimation")
+    }
+}
+
+extension URL {
+    var typeIdentifier: String? { (try? resourceValues(forKeys: [.typeIdentifierKey]))?.typeIdentifier }
+    var isMP3: Bool { typeIdentifier == "public.mp3" }
+    var localizedName: String? { (try? resourceValues(forKeys: [.localizedNameKey]))?.localizedName }
+    var hasHiddenExtension: Bool {
+        get { (try? resourceValues(forKeys: [.hasHiddenExtensionKey]))?.hasHiddenExtension == true }
+        set {
+            var resourceValues = URLResourceValues()
+            resourceValues.hasHiddenExtension = newValue
+            try? setResourceValues(resourceValues)
+        }
     }
 }
 

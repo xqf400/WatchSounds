@@ -55,8 +55,10 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       notificationPayloadFile = "SoundBoardWatch WatchKit Extension/Not needed/PushNotificationPayload.apns">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.Carousel"
+         RemotePath = "/(null)">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "14AA43622798714A0006F810"
@@ -64,7 +66,7 @@
             BlueprintName = "SoundBoardWatch WatchKit App"
             ReferencedContainer = "container:Soundboard.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </RemoteRunnable>
       <CommandLineArguments>
          <CommandLineArgument
             argument = "-com.apple.CoreData.Logging.stderr 0"
@@ -94,8 +96,10 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.Carousel"
+         RemotePath = "/(null)">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "14AA43622798714A0006F810"
@@ -103,7 +107,16 @@
             BlueprintName = "SoundBoardWatch WatchKit App"
             ReferencedContainer = "container:Soundboard.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </RemoteRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "14AA43622798714A0006F810"
+            BuildableName = "WatchSoundboard.app"
+            BlueprintName = "SoundBoardWatch WatchKit App"
+            ReferencedContainer = "container:Soundboard.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

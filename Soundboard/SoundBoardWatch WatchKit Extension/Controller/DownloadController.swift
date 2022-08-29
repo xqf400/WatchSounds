@@ -85,6 +85,8 @@ class DownloadController: WKInterfaceController {
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
+        
+        getAllMp3FilesFromCloudContainer()
 
     }
     
@@ -215,6 +217,34 @@ class DownloadController: WKInterfaceController {
 //      }
     
     
+    func getAllMp3FilesFromCloudContainer(){
+        guard let cloudurl = FileManager.default.url(forUbiquityContainerIdentifier: "iCloud.com.fku.WatchSoundboard1") else{
+            print("no url")
+            return
+        }
+        
+        
+        do {
+            let directoryContents = try FileManager.default.contentsOfDirectory(at: cloudurl, includingPropertiesForKeys: nil)
+            //print("directoryContents:", directoryContents.map { $0.localizedName ?? $0.lastPathComponent })
+            for url1 in directoryContents {
+                //let filename: NSString = url1.path as NSString
+                //let pathExtention = filename.pathExtension
+                //print(pathExtention)
+                let bla = url1.localizedName ?? url1.lastPathComponent
+                print("Name: \(bla)")
+            }
+            let mp3s = directoryContents.filter(\.isMP3).map { $0.localizedName ?? $0.lastPathComponent }
+            print("mp3s:", mp3s)
+    //        for mp3File in mp3s {
+    //            let url = soundsURL.appendingPathComponent(mp3File)
+    //            let sound = SoundModel(soundId: soundsNormal.count+1, soundName: mp3File, soundImage: "NoName", soundFile: mp3File, soundVolume: 1.0, soundFileURL: url)
+    //            soundsNormal.append(sound)
+    //        }
+        } catch {
+            print(error)
+        }
+    }
    
     
     
