@@ -10,7 +10,7 @@ import WatchKit
 import RNCryptor
 import Alamofire
 //import WatchConnectivity
-//import CoreData
+import CoreData
 
 
 
@@ -22,7 +22,8 @@ class DownloadController: WKInterfaceController {
 
     var session : URLSession!
     //var wcsession : WCSession?
-    //private var infoUser :[NSManagedObject] = []
+    private var infoUserNS :[NSManagedObject] = []
+    private var soundsNS :[NSManagedObject] = []
     
 
     
@@ -34,7 +35,7 @@ class DownloadController: WKInterfaceController {
         
         
         //online Cloud data
-        /*
+        
         guard let appDelegate = WKExtension.shared().delegate as? ExtensionDelegate else {
             print("not found")
             return
@@ -42,21 +43,47 @@ class DownloadController: WKInterfaceController {
 
         
         let managedContext = appDelegate.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Userinfo")
-        print("Fetch \(fetchRequest)")
+        let fetchRequest1 = NSFetchRequest<NSManagedObject>(entityName: "Sounds")
+        //print("Fetch \(fetchRequest)")
+        
         do {
-            infoUser = try managedContext.fetch(fetchRequest)
-            print("Info: \(infoUser)")
-            for info in infoUser {
-                let mail = (info.value(forKeyPath: "mail") as! String)
-                print("mail: \(mail)")
-                UserDefaults.standard.set(mail, forKey: "adress")
-                setLabel()
+            soundsNS = try managedContext.fetch(fetchRequest1)
+            //print("Info: \(soundsNS)")
+            for sound in soundsNS {
+                let soundId = (sound.value(forKeyPath: "soundId") as! Int)
+                let soundName = (sound.value(forKeyPath: "soundName") as! String)
+                let soundImage = (sound.value(forKeyPath: "soundImage") as! String)
+                let soundFile = (sound.value(forKeyPath: "soundFile") as! String)
+                let soundVolume = (sound.value(forKeyPath: "soundVolume") as! Float)
+                
+                let sound = SoundModel(soundId: soundId, soundName: soundName, soundImage: soundImage, soundFile: soundFile, soundVolume: soundVolume)
+                sound.print()
             }
-
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
-        }*/
+        }
+        
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UserI")
+
+        do {
+            infoUserNS = try managedContext.fetch(fetchRequest)
+            //print("Info: \(infoUserNS)")
+            for info in infoUserNS {
+                let mail = (info.value(forKeyPath: "mail") as! String)
+                let id = (info.value(forKeyPath: "id") as! Int)
+                let maxFilesCount = (info.value(forKeyPath: "maxFilesCount") as! Int)
+                let uploadedSoundsCount = (info.value(forKeyPath: "uploadedSoundsCount") as! Int)
+                let secret = (info.value(forKeyPath: "secret") as! String)
+                let creationDate = (info.value(forKeyPath: "creationDate") as! String)
+                
+                print("mail: \(mail)")
+                //UserDefaults.standard.set("8header8@googlemail.com", forKey: "adress")
+                let user = User(id: id, mail: mail, maxFilesCount: maxFilesCount, uploadedSoundsCount: uploadedSoundsCount, secret: secret, sounds: [], creationDate: creationDate)
+                user.print()
+            }
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
 
     }
     

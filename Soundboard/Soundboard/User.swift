@@ -55,6 +55,16 @@ class User: Codable{
       ]
     }
     
+    func print(){
+        Swift.print("id: \(self.id)")
+        Swift.print("uploadedSoundsCount: \(self.uploadedSoundsCount)")
+        Swift.print("maxFilesCount: \(self.maxFilesCount)")
+        Swift.print("secret: \(self.secret)")
+        Swift.print("sounds: \(self.sounds)")
+        Swift.print("mail: \(self.mail)")
+        Swift.print("creationDate: \(self.creationDate)")
+    }
+    
     
 }
 

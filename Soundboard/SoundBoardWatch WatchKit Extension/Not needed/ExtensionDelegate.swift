@@ -6,7 +6,7 @@
 //
 
 import WatchKit
-//import CoreData
+import CoreData
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
 
@@ -80,6 +80,39 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
                 })
         print("loaded")
       return container
+    }()*/
+    
+    lazy var persistentContainer: NSPersistentCloudKitContainer = {
+      let container = NSPersistentCloudKitContainer(name: "User")
+        let description = container.persistentStoreDescriptions.first
+        
+        description?.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "iCloud.com.fku.WatchSoundboard1")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                print("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        container.viewContext.automaticallyMergesChangesFromParent = true
+        
+        
+        
+//        let description = container.persistentStoreDescriptions.first
+//
+//                description?.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "iCloud.com.fku.WatchSoundboard")
+
+        
+//      container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+//        if let error = error as NSError? {
+//          fatalError("Unresolved error \(error), \(error.userInfo)")
+//        }
+//      })
+//        container.loadPersistentStores(completionHandler: { (_, error) in
+//                    if let error = error as NSError? {
+//                        fatalError("Unresolved error \(error), \(error.userInfo)")
+//                    }
+//                })
+      return container
     }()
     
     func saveDatabase() {
@@ -93,6 +126,6 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
           fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
       }
-    }*/
+    }
 
 }

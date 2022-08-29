@@ -11,7 +11,7 @@ import SafariServices
 import AVFoundation
 import MediaPlayer
 import FirebaseCore
-//import CoreData
+import CoreData
 
 
 @main
@@ -62,12 +62,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate{ //, MessagingDelegate
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        //self.saveDatabase()
+        self.saveDatabase()
     }
     
-    /*
     lazy var persistentContainer: NSPersistentCloudKitContainer = {
-      let container = NSPersistentCloudKitContainer(name: "UserInfo")
+      let container = NSPersistentCloudKitContainer(name: "User")
+        let description = container.persistentStoreDescriptions.first
+        
+        description?.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "iCloud.com.fku.WatchSoundboard1")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                print("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        container.viewContext.automaticallyMergesChangesFromParent = true
+        
+        
+        
 //        let description = container.persistentStoreDescriptions.first
 //
 //                description?.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "iCloud.com.fku.WatchSoundboard")
@@ -78,14 +90,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate{ //, MessagingDelegate
 //          fatalError("Unresolved error \(error), \(error.userInfo)")
 //        }
 //      })
-        container.loadPersistentStores(completionHandler: { (_, error) in
-                    if let error = error as NSError? {
-                        fatalError("Unresolved error \(error), \(error.userInfo)")
-                    }
-                })
+//        container.loadPersistentStores(completionHandler: { (_, error) in
+//                    if let error = error as NSError? {
+//                        fatalError("Unresolved error \(error), \(error.userInfo)")
+//                    }
+//                })
       return container
     }()
-    
+     
+     
     func saveDatabase () {
       let context = persistentContainer.viewContext
       if context.hasChanges {
@@ -96,6 +109,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate{ //, MessagingDelegate
           fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
       }
+    }
+    
+    /*
+    struct PersistenceController {
+        static let shared = PersistenceController()
+        static var preview: PersistenceController = {
+            let result = PersistenceController(inMemory: true)
+            return result
+        }()
+        let container: NSPersistentCloudKitContainer
+        init(inMemory: Bool = false) {
+            container = NSPersistentCloudKitContainer(name: "UserInfo")
+            if inMemory {
+                container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+            }
+            let description = container.persistentStoreDescriptions.first
+            
+            description?.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "iCloud.com.fku.WatchSoundboard")
+            container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+                if let error = error as NSError? {
+                    print("Unresolved error \(error), \(error.userInfo)")
+                }
+            })
+            container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+            container.viewContext.automaticallyMergesChangesFromParent = true
+        }
     }*/
 
 }

@@ -12,7 +12,7 @@ import MediaPlayer
 import ModelIO
 import UniformTypeIdentifiers
 //import WatchConnectivity
-//import CoreData
+import CoreData
 import JGProgressHUD
 
 class WatchController: UIViewController {
@@ -38,7 +38,7 @@ class WatchController: UIViewController {
     var mp3Name: String?
     var session : URLSession!
     //var wcsession: WCSession?
-    //private var infoUser :[NSManagedObject] = []
+    private var infoUser :[NSManagedObject] = []
     let loadingHud = JGProgressHUD()
     
     override func viewDidLoad() {
@@ -89,21 +89,20 @@ class WatchController: UIViewController {
         //        }
         
         //online Cloud data
-        //        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-        //            return
-        //        }
-        //        let managedContext = appDelegate.persistentContainer.viewContext
-        //        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Userinfo")
-        //        do {
-        //            infoUser = try managedContext.fetch(fetchRequest)
-        //            for info in infoUser {
-        //                let mail = (info.value(forKeyPath: "mail") as! String)
-        //                print("mail: \(mail)")
-        //            }
-        //
-        //        } catch let error as NSError {
-        //            print("Could not fetch. \(error), \(error.userInfo)")
-        //        }
+                guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+                    return
+                }
+                let managedContext = appDelegate.persistentContainer.viewContext
+                let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UserI")
+                do {
+                    infoUser = try managedContext.fetch(fetchRequest)
+                    for info in infoUser {
+                        let mail = (info.value(forKeyPath: "mail") as! String)
+                        print("mail: \(mail)")
+                    }
+                } catch let error as NSError {
+                    print("Could not fetch. \(error), \(error.userInfo)")
+                }
         
     }
     
@@ -133,6 +132,8 @@ class WatchController: UIViewController {
     
     @IBAction func transferMailToWatchButtonAction(_ sender: Any) {
         
+
+        
         if mailTextfield.text != ""{
             self.loadingHud.textLabel.text = "Bitte warten..."
             self.loadingHud.show(in: self.view, animated: true)
@@ -153,22 +154,6 @@ class WatchController: UIViewController {
                     showHudSuccess(inView: self, text: "User and secret created. Please open the Watch App and enter the mail and secret.", delay: 2.0)
                     
                     /*
-                     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-                     return
-                     }
-                     let managedContext = appDelegate.persistentContainer.viewContext
-                     let entity = NSEntityDescription.entity(forEntityName: "Userinfo", in: managedContext)!
-                     let soundObject = NSManagedObject(entity: entity, insertInto: managedContext)
-                     soundObject.setValue(adress, forKeyPath: "mail")
-                     
-                     do {
-                     try managedContext.save()
-                     infoUser.append(soundObject)
-                     print("suc database")
-                     } catch let error as NSError {
-                     print("Could not save. \(error)")
-                     }
-                     
                      
                      
                      let alert = UIAlertController(title: "Please open Apple watch and go do the second page", message: "To tranfser your mail to your Watch the WatchSoundboard app must be open. Please open the WatchSoundboard app and go to the Download page and press the upload Button. If nothing happens please repeat it. \n\nIf you change your mail all sounds will be deleted!!!", preferredStyle: .alert)
@@ -212,6 +197,31 @@ class WatchController: UIViewController {
      }*/
     
     @IBAction func chooseSoundButtonAction(_ sender: Any) {
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+        return
+        }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "UserI", in: managedContext)!
+        let soundObject = NSManagedObject(entity: entity, insertInto: managedContext)
+        let user = User(id: 0, mail: "mail@test.de", maxFilesCount: 2, uploadedSoundsCount: 0, secret: "secret", sounds: [], creationDate: getActualTimeAndDate())
+        soundObject.setValue(user.mail, forKeyPath: "mail")
+        soundObject.setValue(user.creationDate, forKeyPath: "creationDate")
+        soundObject.setValue(user.id, forKeyPath: "id")
+        soundObject.setValue(user.maxFilesCount, forKeyPath: "maxFilesCount")
+        soundObject.setValue(user.secret, forKeyPath: "secret")
+        soundObject.setValue(user.uploadedSoundsCount, forKeyPath: "uploadedSoundsCount")
+
+        
+        do {
+        try managedContext.save()
+        infoUser.append(soundObject)
+        print("suc database")
+        } catch let error as NSError {
+        print("Could not save. \(error)")
+        }
+        
+        
         var documentPicker: UIDocumentPickerViewController!
         let supportedTypes: [UTType] = [UTType.mp3]
         documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: supportedTypes)

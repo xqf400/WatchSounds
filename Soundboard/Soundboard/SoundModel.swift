@@ -26,5 +26,14 @@ class SoundModel:Codable{
         //self.soundFileURL = soundFileURL
     }
     
+    func print(){
+        Swift.print("soundId: \(self.soundId)")
+        Swift.print("soundName: \(self.soundName)")
+        Swift.print("soundImage: \(self.soundImage)")
+        Swift.print("soundFile: \(self.soundFile)")
+        Swift.print("soundVolume: \(self.soundVolume)")
+
+    }
+    
     
 }

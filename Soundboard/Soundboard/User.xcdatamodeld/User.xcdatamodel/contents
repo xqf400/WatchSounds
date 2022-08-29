@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21G83" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Sounds" representedClassName="Sounds" syncable="YES">
-        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="soundFile" optional="YES" attributeType="String"/>
+        <attribute name="soundId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="soundImage" optional="YES" attributeType="String"/>
+        <attribute name="soundName" optional="YES" attributeType="String"/>
+        <attribute name="soundVolume" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
-    <entity name="Userinfo" representedClassName="Userinfo" syncable="YES">
+    <entity name="UserI" representedClassName="UserI" syncable="YES">
         <attribute name="creationDate" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="mail" optional="YES" attributeType="String"/>
         <attribute name="maxFilesCount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="secret" optional="YES" attributeType="String"/>
+        <attribute name="uploadedSoundsCount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="Userinfo" positionX="-63" positionY="-18" width="128" height="104"/>
-        <element name="Sounds" positionX="-63" positionY="18" width="128" height="44"/>
+        <element name="UserI" positionX="-54" positionY="-9" width="128" height="119"/>
+        <element name="Sounds" positionX="-36" positionY="36" width="128" height="104"/>
     </elements>
 </model>
