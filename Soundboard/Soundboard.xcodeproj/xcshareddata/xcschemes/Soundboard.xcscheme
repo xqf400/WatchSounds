@@ -14,23 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "14AA43622798714A0006F810"
-               BuildableName = "WatchSoundboard.app"
-               BlueprintName = "SoundBoardWatch WatchKit App"
-               ReferencedContainer = "container:Soundboard.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "14AA435F2798714A0006F810"
-               BuildableName = "WatchSoundboardWatch.app"
-               BlueprintName = "SoundBoardWatch"
+               BlueprintIdentifier = "14BB9C092738719D006DC0B7"
+               BuildableName = "Soundboard.app"
+               BlueprintName = "Soundboard"
                ReferencedContainer = "container:Soundboard.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,6 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "14BB9C1F2738719F006DC0B7"
+               BuildableName = "SoundboardTests.xctest"
+               BlueprintName = "SoundboardTests"
+               ReferencedContainer = "container:Soundboard.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "14BB9C292738719F006DC0B7"
+               BuildableName = "SoundboardUITests.xctest"
+               BlueprintName = "SoundboardUITests"
+               ReferencedContainer = "container:Soundboard.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -53,15 +59,14 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      allowLocationSimulation = "YES"
-      notificationPayloadFile = "SoundBoardWatch WatchKit Extension/Not needed/PushNotificationPayload.apns">
+      allowLocationSimulation = "YES">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "14AA43622798714A0006F810"
-            BuildableName = "WatchSoundboard.app"
-            BlueprintName = "SoundBoardWatch WatchKit App"
+            BlueprintIdentifier = "14BB9C092738719D006DC0B7"
+            BuildableName = "Soundboard.app"
+            BlueprintName = "Soundboard"
             ReferencedContainer = "container:Soundboard.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -71,11 +76,7 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-com.apple.CoreData.MigrationDebug 0"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "-com.apple.CoreData.CloudKitDebug 0"
+            argument = "-com.apple.CoreData.SQLDebug 0"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
@@ -83,7 +84,11 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-com.apple.CoreData.SQLDebug 0"
+            argument = "-com.apple.CoreData.CloudKitDebug 0"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-com.apple.CoreData.MigrationDebug 0"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
@@ -98,9 +103,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "14AA43622798714A0006F810"
-            BuildableName = "WatchSoundboard.app"
-            BlueprintName = "SoundBoardWatch WatchKit App"
+            BlueprintIdentifier = "14BB9C092738719D006DC0B7"
+            BuildableName = "Soundboard.app"
+            BlueprintName = "Soundboard"
             ReferencedContainer = "container:Soundboard.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

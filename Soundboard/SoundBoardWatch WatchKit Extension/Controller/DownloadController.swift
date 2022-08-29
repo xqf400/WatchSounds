@@ -76,10 +76,11 @@ class DownloadController: WKInterfaceController {
                 let secret = (info.value(forKeyPath: "secret") as! String)
                 let creationDate = (info.value(forKeyPath: "creationDate") as! String)
                 
-                print("mail: \(mail)")
                 //UserDefaults.standard.set("8header8@googlemail.com", forKey: "adress")
                 let user = User(id: id, mail: mail, maxFilesCount: maxFilesCount, uploadedSoundsCount: uploadedSoundsCount, secret: secret, sounds: [], creationDate: creationDate)
-                user.print()
+                //user.print()
+                print("mail: \(user.mail)")
+
             }
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")

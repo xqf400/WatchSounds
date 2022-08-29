@@ -39,6 +39,7 @@ class WatchController: UIViewController {
     var session : URLSession!
     //var wcsession: WCSession?
     private var infoUser :[NSManagedObject] = []
+    private var soundsNS :[NSManagedObject] = []
     let loadingHud = JGProgressHUD()
     
     override func viewDidLoad() {
@@ -56,6 +57,59 @@ class WatchController: UIViewController {
         }
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         view.addGestureRecognizer(tap)
+        
+        //online Cloud data
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        /*
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UserI")
+        do {
+            infoUser = try managedContext.fetch(fetchRequest)
+            for info in infoUser {
+                let mail = (info.value(forKeyPath: "mail") as! String)
+                let id = (info.value(forKeyPath: "id") as! Int)
+                let maxFilesCount = (info.value(forKeyPath: "maxFilesCount") as! Int)
+                let uploadedSoundsCount = (info.value(forKeyPath: "uploadedSoundsCount") as! Int)
+                let secret = (info.value(forKeyPath: "secret") as! String)
+                let creationDate = (info.value(forKeyPath: "creationDate") as! String)
+                
+                let user = User(id: id, mail: mail, maxFilesCount: maxFilesCount, uploadedSoundsCount: uploadedSoundsCount, secret: secret, sounds: [], creationDate: creationDate)
+                //user.print()
+            }
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }*/
+        
+//        let fetchRequest2: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Sounds")
+//        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest2)
+//
+//        do {
+//            try managedContext.execute(deleteRequest)
+//        } catch let error as NSError {
+//            // TODO: handle the error
+//        }
+        
+        let fetchRequest1 = NSFetchRequest<NSManagedObject>(entityName: "Sounds")
+        //print("Fetch \(fetchRequest)")
+        
+        do {
+            soundsNS = try managedContext.fetch(fetchRequest1)
+            //print("Info: \(soundsNS)")
+            for sound in soundsNS {
+                let soundId = (sound.value(forKeyPath: "soundId") as! Int)
+                let soundName = (sound.value(forKeyPath: "soundName") as! String)
+                let soundImage = (sound.value(forKeyPath: "soundImage") as! String)
+                let soundFile = (sound.value(forKeyPath: "soundFile") as! String)
+                let soundVolume = (sound.value(forKeyPath: "soundVolume") as! Float)
+                
+                let sound = SoundModel(soundId: soundId, soundName: soundName, soundImage: soundImage, soundFile: soundFile, soundVolume: soundVolume)
+                sound.print()
+            }
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
         
     }
     
@@ -88,21 +142,7 @@ class WatchController: UIViewController {
         //            }
         //        }
         
-        //online Cloud data
-                guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-                    return
-                }
-                let managedContext = appDelegate.persistentContainer.viewContext
-                let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UserI")
-                do {
-                    infoUser = try managedContext.fetch(fetchRequest)
-                    for info in infoUser {
-                        let mail = (info.value(forKeyPath: "mail") as! String)
-                        print("mail: \(mail)")
-                    }
-                } catch let error as NSError {
-                    print("Could not fetch. \(error), \(error.userInfo)")
-                }
+
         
     }
     
@@ -132,7 +172,7 @@ class WatchController: UIViewController {
     
     @IBAction func transferMailToWatchButtonAction(_ sender: Any) {
         
-
+        
         
         if mailTextfield.text != ""{
             self.loadingHud.textLabel.text = "Bitte warten..."
@@ -141,41 +181,64 @@ class WatchController: UIViewController {
             let secret = randomString(length: 4)
             let user = User(id: 0, mail: adress, maxFilesCount: 2, uploadedSoundsCount: 0, secret: secret, sounds: [], creationDate: getActualTimeAndDate())
             
-            uploadUserToUserInFirebase(user: user) { str in
-                //let userPlist = UserPlist(id: user.id, mail: user.mail, maxFilesCount: user.maxFilesCount, uploadedSoundsCount: user.uploadedSoundsCount, secret: user.secret, sounds: [], creationDate: user.creationDate)
-                let userPlist = UserPlist(user: user, sounds: [])
-                self.uploadPlistToFirebase(user: userPlist) { str in
-                    DispatchQueue.main.async {
-                        self.secretLabel.text = "Upper and lower case is unimportant on the watch app. \nMail: \(adress)\nSecret: \(secret)"
-                    }
-                    UserDefaults.standard.set(adress, forKey: "adress")
-                    UserDefaults.standard.set(secret, forKey: "secret")
-                    self.loadingHud.dismiss(animated: false)
-                    showHudSuccess(inView: self, text: "User and secret created. Please open the Watch App and enter the mail and secret.", delay: 2.0)
-                    
-                    /*
-                     
-                     
-                     let alert = UIAlertController(title: "Please open Apple watch and go do the second page", message: "To tranfser your mail to your Watch the WatchSoundboard app must be open. Please open the WatchSoundboard app and go to the Download page and press the upload Button. If nothing happens please repeat it. \n\nIf you change your mail all sounds will be deleted!!!", preferredStyle: .alert)
-                     alert.addAction(UIAlertAction(title: "Upload", style: .default, handler: { alert in
-                     self.sendMailToWatch(mail: adress!) { str in
-                     showHudSuccess(inView: self, text: "uploaded mail. You should see your mail on the Watch", delay: 1.0)
-                     } failure: { error in
-                     showHudError(inView: self, text: "Error watch app is not running", delay: 2.0)
-                     }
-                     }))
-                     alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-                     self.present(alert, animated: true)
-                     */
-                } failure: { error in
-                    print("Failed to save1 upload \(error)")
-                    self.loadingHud.dismiss(animated: false)
-                    showHudError(inView: self, text: "Failed to save1 upload \(error)", delay: 2.0)
+            if useCoreData {
+                guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+                    print("Error 2343")
+                    return
                 }
-            } failure: { error in
-                print("Failed to save2 upload \(error)")
-                self.loadingHud.dismiss(animated: false)
-                showHudError(inView: self, text: "Failed to save2 upload \(error)", delay: 2.0)
+                let managedContext = appDelegate.persistentContainer.viewContext
+                let entity = NSEntityDescription.entity(forEntityName: "UserI", in: managedContext)!
+                let soundObject = NSManagedObject(entity: entity, insertInto: managedContext)
+                soundObject.setValue(user.mail, forKeyPath: "mail")
+                soundObject.setValue(user.creationDate, forKeyPath: "creationDate")
+                soundObject.setValue(user.id, forKeyPath: "id")
+                soundObject.setValue(user.maxFilesCount, forKeyPath: "maxFilesCount")
+                soundObject.setValue(user.secret, forKeyPath: "secret")
+                soundObject.setValue(user.uploadedSoundsCount, forKeyPath: "uploadedSoundsCount")
+                do {
+                    try managedContext.save()
+                    infoUser.append(soundObject)
+                    print("suc database")
+                } catch let error as NSError {
+                    print("Could not save. \(error)")
+                }
+            }else{
+                uploadUserToUserInFirebase(user: user) { str in
+                    //let userPlist = UserPlist(id: user.id, mail: user.mail, maxFilesCount: user.maxFilesCount, uploadedSoundsCount: user.uploadedSoundsCount, secret: user.secret, sounds: [], creationDate: user.creationDate)
+                    let userPlist = UserPlist(user: user, sounds: [])
+                    self.uploadPlistToFirebase(user: userPlist) { str in
+                        DispatchQueue.main.async {
+                            self.secretLabel.text = "Upper and lower case is unimportant on the watch app. \nMail: \(adress)\nSecret: \(secret)"
+                        }
+                        UserDefaults.standard.set(adress, forKey: "adress")
+                        UserDefaults.standard.set(secret, forKey: "secret")
+                        self.loadingHud.dismiss(animated: false)
+                        showHudSuccess(inView: self, text: "User and secret created. Please open the Watch App and enter the mail and secret.", delay: 2.0)
+                        
+                        /*
+                         
+                         
+                         let alert = UIAlertController(title: "Please open Apple watch and go do the second page", message: "To tranfser your mail to your Watch the WatchSoundboard app must be open. Please open the WatchSoundboard app and go to the Download page and press the upload Button. If nothing happens please repeat it. \n\nIf you change your mail all sounds will be deleted!!!", preferredStyle: .alert)
+                         alert.addAction(UIAlertAction(title: "Upload", style: .default, handler: { alert in
+                         self.sendMailToWatch(mail: adress!) { str in
+                         showHudSuccess(inView: self, text: "uploaded mail. You should see your mail on the Watch", delay: 1.0)
+                         } failure: { error in
+                         showHudError(inView: self, text: "Error watch app is not running", delay: 2.0)
+                         }
+                         }))
+                         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+                         self.present(alert, animated: true)
+                         */
+                    } failure: { error in
+                        print("Failed to save1 upload \(error)")
+                        self.loadingHud.dismiss(animated: false)
+                        showHudError(inView: self, text: "Failed to save1 upload \(error)", delay: 2.0)
+                    }
+                } failure: { error in
+                    print("Failed to save2 upload \(error)")
+                    self.loadingHud.dismiss(animated: false)
+                    showHudError(inView: self, text: "Failed to save2 upload \(error)", delay: 2.0)
+                }
             }
         }else{
             showHudError(inView: self, text: "Please fill in a mail", delay: 2.0)
@@ -197,30 +260,6 @@ class WatchController: UIViewController {
      }*/
     
     @IBAction func chooseSoundButtonAction(_ sender: Any) {
-        
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-        return
-        }
-        let managedContext = appDelegate.persistentContainer.viewContext
-        let entity = NSEntityDescription.entity(forEntityName: "UserI", in: managedContext)!
-        let soundObject = NSManagedObject(entity: entity, insertInto: managedContext)
-        let user = User(id: 0, mail: "mail@test.de", maxFilesCount: 2, uploadedSoundsCount: 0, secret: "secret", sounds: [], creationDate: getActualTimeAndDate())
-        soundObject.setValue(user.mail, forKeyPath: "mail")
-        soundObject.setValue(user.creationDate, forKeyPath: "creationDate")
-        soundObject.setValue(user.id, forKeyPath: "id")
-        soundObject.setValue(user.maxFilesCount, forKeyPath: "maxFilesCount")
-        soundObject.setValue(user.secret, forKeyPath: "secret")
-        soundObject.setValue(user.uploadedSoundsCount, forKeyPath: "uploadedSoundsCount")
-
-        
-        do {
-        try managedContext.save()
-        infoUser.append(soundObject)
-        print("suc database")
-        } catch let error as NSError {
-        print("Could not save. \(error)")
-        }
-        
         
         var documentPicker: UIDocumentPickerViewController!
         let supportedTypes: [UTType] = [UTType.mp3]
@@ -246,6 +285,29 @@ class WatchController: UIViewController {
                     if UserDefaults.standard.string(forKey: "adress") != nil{
                         id = UserDefaults.standard.string(forKey: "adress")!
                     }
+                    let newSound = SoundModel(soundId: soundsNS.count+1, soundName: self.soundNameTextlabel.text!, soundImage: "NoName", soundFile: self.mp3Name!, soundVolume: 1.0)
+                    
+                    if useCoreData {
+                        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+                            print("Error 2343")
+                            return
+                        }
+                        let managedContext = appDelegate.persistentContainer.viewContext
+                        let entity = NSEntityDescription.entity(forEntityName: "Sounds", in: managedContext)!
+                        let soundObject = NSManagedObject(entity: entity, insertInto: managedContext)
+                        soundObject.setValue(newSound.soundId, forKeyPath: "soundId")
+                        soundObject.setValue(newSound.soundName, forKeyPath: "soundName")
+                        soundObject.setValue(newSound.soundImage, forKeyPath: "soundImage")
+                        soundObject.setValue(newSound.soundFile, forKeyPath: "soundFile")
+                        soundObject.setValue(newSound.soundVolume, forKeyPath: "soundVolume")
+                        do {
+                            try managedContext.save()
+                            infoUser.append(soundObject)
+                            print("suc database")
+                        } catch let error as NSError {
+                            print("Could not save. \(error)")
+                        }
+                    }else{
                     
                     self.getUserAccountIfExist(mail: id) { account in
                         //print("got user")
@@ -257,14 +319,13 @@ class WatchController: UIViewController {
                                     newAccount.sounds.append(self.mp3Name!)
                                     newAccount.uploadedSoundsCount = newAccount.uploadedSoundsCount + 1
                                     
-                                    
                                     downloadDataFromFireBase(name: "\(id).plist", folder: "userLists", session: self.session) { data1 in
                                         //print("downloaded plist")
                                         decodeClipFromData(data: data1) { user in
                                             //MARK: exist
                                             //let newAccount2 = UserPlist(id: newAccount.id, mail: newAccount.mail, maxFilesCount: newAccount.maxFilesCount, uploadedSoundsCount: newAccount.uploadedSoundsCount, secret: newAccount.secret, sounds: user.sounds, creationDate: user.creationDate)
                                             let newAccount2 = UserPlist(user: newAccount, sounds: user.sounds)
-                                            let newSound = SoundModel(soundId: 0, soundName: self.soundNameTextlabel.text!, soundImage: "NoName", soundFile: self.mp3Name!, soundVolume: 1.0)
+
                                             newAccount2.sounds.append(newSound)
                                             
                                             self.uploadPlistToFirebase(user: newAccount2) { str in
@@ -303,7 +364,6 @@ class WatchController: UIViewController {
                                         //MARK: doesnt exist
                                         //let newAccount2 = UserPlist(id: newAccount.id, mail: newAccount.mail, maxFilesCount: newAccount.maxFilesCount, uploadedSoundsCount: newAccount.uploadedSoundsCount, secret: newAccount.secret, sounds: [], creationDate: newAccount.creationDate)
                                         let newAccount2 = UserPlist(user: newAccount, sounds: [])
-                                        let newSound = SoundModel(soundId: 0, soundName: self.soundNameTextlabel.text!, soundImage: "NoName", soundFile: self.mp3Name!, soundVolume: 1.0)
                                         newAccount2.sounds.append(newSound)
                                         self.uploadPlistToFirebase(user: newAccount2) { str in
                                             self.uploadUserToUserInFirebase(user: newAccount) { str in
@@ -349,6 +409,7 @@ class WatchController: UIViewController {
                         print("Failed get User Account If Exist \(error)")
                         self.loadingHud.dismiss(animated: false)
                         showHudError(inView: self, text: "Failed get User Account \(error)", delay: 2.0)
+                    }
                     }
                 }else{
                     showHudError(inView: self, text: "First select a sound file", delay: 2.0)

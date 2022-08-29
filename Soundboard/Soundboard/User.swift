@@ -7,6 +7,8 @@
 
 import Foundation
 
+let useCoreData = true
+
 class User: Codable{
     
     var id: Int
