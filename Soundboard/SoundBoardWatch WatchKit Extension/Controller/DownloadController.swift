@@ -237,7 +237,7 @@ class DownloadController: WKInterfaceController {
 
             getSoundWithId(name: name) { url in
                 print("Name \(name) \nURL: \(url)")
-                if counter == soundsArray.count {
+                if counter == self.soundsArray.count {
                     DispatchQueue.main.async {
                         self.testLabel.setText("Downloaded")
                         let action = WKAlertAction(title: "Ok", style: WKAlertActionStyle.default) {
