@@ -282,7 +282,7 @@ class DownloadController: WKInterfaceController {
    
     func getSoundWithId(name: String, success: @escaping (_ url: URL) -> Void, failure: @escaping (_ error: String) -> Void){
         let id = CKRecord.ID(recordName: name)
-        container.publicCloudDatabase.fetch(withRecordID: id) { record, error in
+        container.privateCloudDatabase.fetch(withRecordID: id) { record, error in
             if error != nil {
                 failure("Err1 \(name) \(error!)")
             }else{

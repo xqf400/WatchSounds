@@ -269,6 +269,12 @@ class WatchController: UIViewController {
             //}//coredata
         }else{
             showHudError(inView: self, text: "Please fill in a mail", delay: 2.0)
+            
+//            getSoundWithName(name: "LaylaKurz") { url in
+//                print("Url \(url)")
+//            } failure: { error in
+//                print("Error soundname: \(error)")
+//            }
         }
     }
     
@@ -331,10 +337,12 @@ class WatchController: UIViewController {
                         soundObject.setValue(newSound.soundVolume, forKeyPath: "soundVolume")
                         do {
                             try managedContext.save()
-                            infoUser.append(soundObject)
+                            soundsNS.append(soundObject)
+                            print("todo save db")
                             print("suc database \(newSound.soundName)")
                             
                             saveSongToCloudContainer(fileName: newSound.soundFile, url: mp3URL!) { str in
+                                print(str)
                                 saveSongLocal(song: newSound, data: data) { str in
                                     DispatchQueue.main.async {
                                     self.loadingHud.dismiss(animated: false)
@@ -476,6 +484,16 @@ class WatchController: UIViewController {
             }
         }else{
             if mp3URL != nil && mp3Name != nil{
+                
+//                saveSongToCloudContainer(fileName: mp3Name!, url: mp3URL!) { str in
+//                    print(str)
+//                } failure: { error in
+//                    print("Er23 \(error)")
+//                }
+
+
+                
+                
                 let alert = UIAlertController(title: "No Mail configured", message: "Do you just want to save it local?", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Just save normal", style: .default, handler: { action in
                     guard let data = try? Data(contentsOf: self.mp3URL!) else {
@@ -599,13 +617,12 @@ class WatchController: UIViewController {
         
         let File1 = CKAsset(fileURL: url)
         newRecord1.setObject(File1, forKey: name)
-        
-        container.publicCloudDatabase.save(newRecord1) { record, error in
+        container.privateCloudDatabase.save(newRecord1) { record, error in
             if error != nil {
                 print("Err6 \(error!)")
                 failure("Err6 \(error!)")
             }
-            print("Rec2 uploaded \(id.recordName)")
+            print("Rec3 uploaded \(id.recordName)")
             success("Rec2 uploaded \(id.recordName)")
         }
         
@@ -645,14 +662,14 @@ class WatchController: UIViewController {
             if error != nil {
                 print("error \(error!)")
             }else{
-                print("status \(status)")
+                print("status \(status.rawValue)")
             }
         }
         
         for sound in soundsArray {
             let name = (sound.soundFile as NSString).deletingPathExtension
-
-            getSoundWithId(name: name) { url in
+            print("Name: \(name)")
+            getSoundWithName(name: name) { url in
                 print("Name \(name) \nURL: \(url)")
             } failure: { error in
                 print("Error 45 \(error)")
@@ -685,9 +702,9 @@ class WatchController: UIViewController {
         }*/
     }
     
-    func getSoundWithId(name: String, success: @escaping (_ url: URL) -> Void, failure: @escaping (_ error: String) -> Void){
+    func getSoundWithName(name: String, success: @escaping (_ url: URL) -> Void, failure: @escaping (_ error: String) -> Void){
         let id = CKRecord.ID(recordName: name)
-        container.publicCloudDatabase.fetch(withRecordID: id) { record, error in
+        container.privateCloudDatabase.fetch(withRecordID: id) { record, error in
             if error != nil {
                 failure("Err1 \(name) \(error!)")
             }else{
