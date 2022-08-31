@@ -11,6 +11,7 @@ import RNCryptor
 import Alamofire
 //import WatchConnectivity
 import CoreData
+import CloudKit
 
 
 
@@ -24,7 +25,8 @@ class DownloadController: WKInterfaceController {
     //var wcsession : WCSession?
     private var infoUserNS :[NSManagedObject] = []
     private var soundsNS :[NSManagedObject] = []
-    
+    let container = CKContainer.init(identifier: "iCloud.com.fku.WatchSoundboard1")
+    var soundsArray : [SoundModel] = []
 
     
     override func awake(withContext context: Any?) {
@@ -34,59 +36,9 @@ class DownloadController: WKInterfaceController {
         volumeView.focus()
         
         
-        //online Cloud data
-        
-        guard let appDelegate = WKExtension.shared().delegate as? ExtensionDelegate else {
-            print("not found")
-            return
-        }
 
         
-        let managedContext = appDelegate.persistentContainer.viewContext
-        let fetchRequest1 = NSFetchRequest<NSManagedObject>(entityName: "Sounds")
-        //print("Fetch \(fetchRequest)")
-        
-        do {
-            soundsNS = try managedContext.fetch(fetchRequest1)
-            //print("Info: \(soundsNS)")
-            for sound in soundsNS {
-                let soundId = (sound.value(forKeyPath: "soundId") as! Int)
-                let soundName = (sound.value(forKeyPath: "soundName") as! String)
-                let soundImage = (sound.value(forKeyPath: "soundImage") as! String)
-                let soundFile = (sound.value(forKeyPath: "soundFile") as! String)
-                let soundVolume = (sound.value(forKeyPath: "soundVolume") as! Float)
-                
-                let sound = SoundModel(soundId: soundId, soundName: soundName, soundImage: soundImage, soundFile: soundFile, soundVolume: soundVolume)
-                sound.print()
-            }
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
-        
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UserI")
-
-        do {
-            infoUserNS = try managedContext.fetch(fetchRequest)
-            //print("Info: \(infoUserNS)")
-            for info in infoUserNS {
-                let mail = (info.value(forKeyPath: "mail") as! String)
-                let id = (info.value(forKeyPath: "id") as! Int)
-                let maxFilesCount = (info.value(forKeyPath: "maxFilesCount") as! Int)
-                let uploadedSoundsCount = (info.value(forKeyPath: "uploadedSoundsCount") as! Int)
-                let secret = (info.value(forKeyPath: "secret") as! String)
-                let creationDate = (info.value(forKeyPath: "creationDate") as! String)
-                
-                //UserDefaults.standard.set("8header8@googlemail.com", forKey: "adress")
-                let user = User(id: id, mail: mail, maxFilesCount: maxFilesCount, uploadedSoundsCount: uploadedSoundsCount, secret: secret, sounds: [], creationDate: creationDate)
-                //user.print()
-                print("mail: \(user.mail)")
-
-            }
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
-        
-        getAllMp3FilesFromCloudContainer()
+        //getAllMp3FilesFromCloudContainer()
 
     }
     
@@ -129,10 +81,70 @@ class DownloadController: WKInterfaceController {
         }*/
         
         
+        //online Cloud data
+        
+        guard let appDelegate = WKExtension.shared().delegate as? ExtensionDelegate else {
+            print("not found")
+            return
+        }
+
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest1 = NSFetchRequest<NSManagedObject>(entityName: "Sounds")
+        //print("Fetch \(fetchRequest)")
+        
+        do {
+            soundsNS = try managedContext.fetch(fetchRequest1)
+            //print("Info: \(soundsNS)")
+            var counter = 0
+            for sound in soundsNS {
+                counter = counter + 1
+                let soundId = (sound.value(forKeyPath: "soundId") as! Int)
+                let soundName = (sound.value(forKeyPath: "soundName") as! String)
+                let soundImage = (sound.value(forKeyPath: "soundImage") as! String)
+                let soundFile = (sound.value(forKeyPath: "soundFile") as! String)
+                let soundVolume = (sound.value(forKeyPath: "soundVolume") as! Float)
+                
+                let sound = SoundModel(soundId: soundId, soundName: soundName, soundImage: soundImage, soundFile: soundFile, soundVolume: soundVolume)
+                soundsArray.append(sound)
+                sound.print()
+                if counter == soundsNS.count {
+                    getAllMp3FilesFromCloudContainer()
+                }
+            }
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UserI")
+
+        do {
+            infoUserNS = try managedContext.fetch(fetchRequest)
+            //print("Info: \(infoUserNS)")
+            for info in infoUserNS {
+                let mail = (info.value(forKeyPath: "mail") as! String)
+                let id = (info.value(forKeyPath: "id") as! Int)
+                let maxFilesCount = (info.value(forKeyPath: "maxFilesCount") as! Int)
+                let uploadedSoundsCount = (info.value(forKeyPath: "uploadedSoundsCount") as! Int)
+                let secret = (info.value(forKeyPath: "secret") as! String)
+                let creationDate = (info.value(forKeyPath: "creationDate") as! String)
+                
+                //UserDefaults.standard.set("8header8@googlemail.com", forKey: "adress")
+                let user = User(id: id, mail: mail, maxFilesCount: maxFilesCount, uploadedSoundsCount: uploadedSoundsCount, secret: secret, sounds: [], creationDate: creationDate)
+                //user.print()
+                print("mail: \(user.mail)")
+
+            }
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+        
         
         DispatchQueue.main.async {
             self.testLabel.setText("loading...")
         }
+        
         if UserDefaults.standard.string(forKey: "adress") != nil{
             let mail = UserDefaults.standard.string(forKey: "adress")
             downloadDataFromFireBase(name: "\(mail!).plist", folder: "userLists", session: session) { data in
@@ -188,9 +200,9 @@ class DownloadController: WKInterfaceController {
         }else{
             print("Mail empty")
             DispatchQueue.main.async {
-                self.testLabel.setText("Please syncronise mail empty")
+                self.testLabel.setText("Please syncronise, mail empty")
             }
-        }        
+        }
     }
     
 
@@ -218,7 +230,29 @@ class DownloadController: WKInterfaceController {
     
     
     func getAllMp3FilesFromCloudContainer(){
-        guard let cloudurl = FileManager.default.url(forUbiquityContainerIdentifier: "iCloud.com.fku.WatchSoundboard1") else{
+        var counter = 0
+        for sound in soundsArray {
+            counter = counter + 1
+            let name = (sound.soundFile as NSString).deletingPathExtension
+
+            getSoundWithId(name: name) { url in
+                print("Name \(name) \nURL: \(url)")
+                if counter == soundsArray.count {
+                    DispatchQueue.main.async {
+                        self.testLabel.setText("Downloaded")
+                        let action = WKAlertAction(title: "Ok", style: WKAlertActionStyle.default) {
+                                print("Ok")
+                            }
+                        self.presentAlert(withTitle: "Downloaded", message: "Downloaded sounds1", preferredStyle: WKAlertControllerStyle.alert, actions:[action])
+                    }
+                }
+            } failure: { error in
+                print("Error 45 \(error)")
+            }
+        }
+        
+        /*
+        guard let cloudurl = FileManager.default.url(forUbiquityContainerIdentifier: "iCloud.com.fku.WatchSoundboard1")?.appendingPathComponent("Documents") else{
             print("no url")
             return
         }
@@ -243,10 +277,33 @@ class DownloadController: WKInterfaceController {
     //        }
         } catch {
             print(error)
-        }
+        }*/
     }
    
-    
+    func getSoundWithId(name: String, success: @escaping (_ url: URL) -> Void, failure: @escaping (_ error: String) -> Void){
+        let id = CKRecord.ID(recordName: name)
+        container.publicCloudDatabase.fetch(withRecordID: id) { record, error in
+            if error != nil {
+                failure("Err1 \(name) \(error!)")
+            }else{
+                if record != nil {
+                    let file = record!.object(forKey: name)
+                    print("file found \(name)")
+                    if let asset = file as? CKAsset {
+                        guard let url = asset.fileURL else {
+                            failure("fileurl")
+                            return
+                        }
+                        success(url)
+                    }else{
+                        failure("\(name) asset wrong")
+                    }
+                }else{
+                    failure("\(name) record nil")
+                }
+            }
+        }
+    }
     
 }//eoc
 

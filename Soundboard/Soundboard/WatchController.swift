@@ -14,6 +14,7 @@ import UniformTypeIdentifiers
 //import WatchConnectivity
 import CoreData
 import JGProgressHUD
+import CloudKit
 
 class WatchController: UIViewController {
     
@@ -41,6 +42,8 @@ class WatchController: UIViewController {
     private var infoUser :[NSManagedObject] = []
     private var soundsNS :[NSManagedObject] = []
     let loadingHud = JGProgressHUD()
+    let container = CKContainer.init(identifier: "iCloud.com.fku.WatchSoundboard1")
+    var soundsArray : [SoundModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,10 +97,23 @@ class WatchController: UIViewController {
         let fetchRequest1 = NSFetchRequest<NSManagedObject>(entityName: "Sounds")
         //print("Fetch \(fetchRequest)")
         
+        //Delete all
+        /*
+        let fetchRequestDelete: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Sounds")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequestDelete)
+        do {
+            try managedContext.execute(deleteRequest)
+            print("deleted all")
+        } catch let error as NSError {
+            print("Error deleting all \(error)")
+        }*/
+        
         do {
             soundsNS = try managedContext.fetch(fetchRequest1)
             //print("Info: \(soundsNS)")
+            var counter = 0
             for sound in soundsNS {
+                counter = counter + 1
                 let soundId = (sound.value(forKeyPath: "soundId") as! Int)
                 let soundName = (sound.value(forKeyPath: "soundName") as! String)
                 let soundImage = (sound.value(forKeyPath: "soundImage") as! String)
@@ -105,13 +121,16 @@ class WatchController: UIViewController {
                 let soundVolume = (sound.value(forKeyPath: "soundVolume") as! Float)
                 
                 let sound = SoundModel(soundId: soundId, soundName: soundName, soundImage: soundImage, soundFile: soundFile, soundVolume: soundVolume)
+                soundsArray.append(sound)
                 sound.print()
+                if counter == soundsNS.count {
+                    getAllMp3FilesFromCloudContainer()
+                }
             }
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
-        
-        getAllMp3FilesFromCloudContainer()
+
         
     }
     
@@ -315,23 +334,32 @@ class WatchController: UIViewController {
                             infoUser.append(soundObject)
                             print("suc database \(newSound.soundName)")
                             
-                            saveSongToCloudContainer(songFile: newSound.soundFile) { str in
+                            saveSongToCloudContainer(fileName: newSound.soundFile, url: mp3URL!) { str in
                                 saveSongLocal(song: newSound, data: data) { str in
+                                    DispatchQueue.main.async {
                                     self.loadingHud.dismiss(animated: false)
                                     showHudSuccess(inView: self, text: "Uploaded", delay: 1.0)
                                     self.mp3URL = nil
                                     self.mp3Name = nil
                                     self.soundNameTextlabel.text = ""
                                     self.selectedSoundLabel.text = "No sound selected"
+                                    }
+                                    self.soundsArray.append(newSound)
+                                    self.getAllMp3FilesFromCloudContainer()
+
                                 } failure: { error in
                                     print("Failed to save1 upload \(error)")
+                                    DispatchQueue.main.async {
                                     self.loadingHud.dismiss(animated: false)
                                     showHudError(inView: self, text: "Failed to save1 local \(error)", delay: 2.0)
+                                    }
                                 }
                             } failure: { error in
                                 print("Failed to save1 upload \(error)")
+                                DispatchQueue.main.async {
                                 self.loadingHud.dismiss(animated: false)
                                 showHudError(inView: self, text: "Failed to save1 cloud \(error)", delay: 2.0)
+                                }
                             }
                         } catch let error as NSError {
                             print("Could not save. \(error)")
@@ -560,38 +588,80 @@ class WatchController: UIViewController {
         return String((0..<length).map{ _ in letters.randomElement()! })
     }
     
-    func saveSongToCloudContainer(songFile: String,success: @escaping (_ str: String) -> Void, failure: @escaping (_ error: String) -> Void){
+    //MARK: Save song to Cloud
+     
+    func saveSongToCloudContainer(fileName: String,url: URL,success: @escaping (_ str: String) -> Void, failure: @escaping (_ error: String) -> Void){
+        //let fileName = "Iloveit.mp3"
+        print("FileName: \(fileName)")
+        let name = (fileName as NSString).deletingPathExtension
+        let id = CKRecord.ID(recordName: name)
+        let newRecord1 = CKRecord(recordType: name, recordID: id)
+        
+        let File1 = CKAsset(fileURL: url)
+        newRecord1.setObject(File1, forKey: name)
+        
+        container.publicCloudDatabase.save(newRecord1) { record, error in
+            if error != nil {
+                print("Err6 \(error!)")
+                failure("Err6 \(error!)")
+            }
+            print("Rec2 uploaded \(id.recordName)")
+            success("Rec2 uploaded \(id.recordName)")
+        }
+        
+        
+        /*
         guard let data = try? Data(contentsOf: mp3URL!) else {
             print("data nil")
             showHudError(inView: self, text: "data nil", delay: 2.0)
             failure("data nil")
             return
         }
-        guard let cloudurl = FileManager.default.url(forUbiquityContainerIdentifier: "iCloud.com.fku.WatchSoundboard1") else{
+        let manager = FileManager.default
+        guard let cloudurl = manager.url(forUbiquityContainerIdentifier: "iCloud.com.fku.WatchSoundboard1")?.appendingPathComponent("Documents") else{
             print("no url")
             showHudError(inView: self, text: "url error", delay: 2.0)
             failure("no url")
             return
         }
         let url = cloudurl.appendingPathComponent(songFile)
+
         do{
-            try data.write(to: url)
+            //try data.write(to: url)
+            try manager.setUbiquitous(true, itemAt: mp3URL!, destinationURL: url)
+
             print("1wrote \(songFile) \(url)")
             success("1wrote \(songFile) \(url)")
         }catch{
             print("Error 35 \(error.localizedDescription)")
             failure("Error 35 \(error.localizedDescription)")
-        }
+        }*/
     }
     
     func getAllMp3FilesFromCloudContainer(){
-        guard let cloudurl = FileManager.default.url(forUbiquityContainerIdentifier: "iCloud.com.fku.WatchSoundboard1") else{
-            print("no url")
-            showHudError(inView: self, text: "url error", delay: 2.0)
-            return
+        //let fileName = "Iloveit.mp3"
+        
+        container.accountStatus { status, error in
+            if error != nil {
+                print("error \(error!)")
+            }else{
+                print("status \(status)")
+            }
         }
         
-        
+        for sound in soundsArray {
+            let name = (sound.soundFile as NSString).deletingPathExtension
+
+            getSoundWithId(name: name) { url in
+                print("Name \(name) \nURL: \(url)")
+            } failure: { error in
+                print("Error 45 \(error)")
+                DispatchQueue.main.async {
+                showHudError(inView: self, text: error, delay: 2.0)
+                }
+            }
+        }
+        /*
         do {
             let directoryContents = try FileManager.default.contentsOfDirectory(at: cloudurl, includingPropertiesForKeys: nil)
             //print("directoryContents:", directoryContents.map { $0.localizedName ?? $0.lastPathComponent })
@@ -612,6 +682,31 @@ class WatchController: UIViewController {
     //        }
         } catch {
             print(error)
+        }*/
+    }
+    
+    func getSoundWithId(name: String, success: @escaping (_ url: URL) -> Void, failure: @escaping (_ error: String) -> Void){
+        let id = CKRecord.ID(recordName: name)
+        container.publicCloudDatabase.fetch(withRecordID: id) { record, error in
+            if error != nil {
+                failure("Err1 \(name) \(error!)")
+            }else{
+                if record != nil {
+                    let file = record!.object(forKey: name)
+                    print("file found \(name)")
+                    if let asset = file as? CKAsset {
+                        guard let url = asset.fileURL else {
+                            failure(" \(name) fileurl")
+                            return
+                        }
+                        success(url)
+                    }else{
+                        failure("\(name) asset wrong")
+                    }
+                }else{
+                    failure("\(name) record nil")
+                }
+            }
         }
     }
     

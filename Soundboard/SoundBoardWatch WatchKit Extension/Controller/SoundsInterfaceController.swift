@@ -113,6 +113,7 @@ class SoundsInterfaceController: WKInterfaceController {
     func addAllSound(){
         soundsNormal.removeAll()
         //getLocalFiles()
+        if UserDefaults.standard.string(forKey: "adress") != nil{
         getSoundFromFiles { str in
             self.tableView.setNumberOfRows(soundsNormal.count, withRowType: "SoundRow")
             for index in 0..<self.tableView.numberOfRows {
@@ -130,6 +131,7 @@ class SoundsInterfaceController: WKInterfaceController {
 
         //soundsNormal.append(Layla)
         soundsNormal = soundsNormal.sorted { $0.soundName < $1.soundName }
+        }
     }
     
     
