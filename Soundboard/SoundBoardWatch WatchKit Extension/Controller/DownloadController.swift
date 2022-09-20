@@ -141,7 +141,7 @@ class DownloadController: WKInterfaceController {
         }
         
         
-        
+        /*
         DispatchQueue.main.async {
             self.testLabel.setText("loading...")
         }
@@ -203,7 +203,7 @@ class DownloadController: WKInterfaceController {
             DispatchQueue.main.async {
                 self.testLabel.setText("Please syncronise, mail empty")
             }
-        }
+        }*/
     }
     
 
@@ -233,19 +233,39 @@ class DownloadController: WKInterfaceController {
     func getAllMp3FilesFromCloudContainer(){
         var counter = 0
         for sound in soundsArray {
+            print("Count \(soundsArray.count)")
             counter = counter + 1
             let name = (sound.soundFile as NSString).deletingPathExtension
 
             getSoundWithId(name: name) { url in
                 print("Name \(name) \nURL: \(url)")
-                if counter == self.soundsArray.count {
-                    DispatchQueue.main.async {
-                        self.testLabel.setText("Downloaded")
-                        let action = WKAlertAction(title: "Ok", style: WKAlertActionStyle.default) {
-                                print("Ok")
-                            }
-                        self.presentAlert(withTitle: "Downloaded", message: "Downloaded sounds1", preferredStyle: WKAlertControllerStyle.alert, actions:[action])
+                let localURL = soundsURL.appendingPathComponent("\(name).mp3")
+                do {
+                    if FileManager.default.fileExists(atPath: localURL.path) {
+                        try FileManager.default.removeItem(at: localURL)
                     }
+                    try FileManager.default.copyItem(at: url, to: localURL)
+                    print("LocalUrl2: \(localURL)")
+                } catch (let error) {
+                    print("Cannot copy item at \(localURL) to \(url): \(error)")
+                }
+                if counter == self.soundsArray.count {
+                    let encoder = PropertyListEncoder()
+                    do{
+                        let data = try encoder.encode(self.soundsArray)
+                        try data.write(to: soundsURL.appendingPathComponent("sounds.plist"))
+                        print("wrote sounds.plist \(self.soundsArray.count)")
+                        DispatchQueue.main.async {
+                            self.testLabel.setText("Downloaded")
+                            let action = WKAlertAction(title: "Ok", style: WKAlertActionStyle.default) {
+                                    print("Ok")
+                                }
+                            self.presentAlert(withTitle: "Downloaded", message: "Downloaded sounds1", preferredStyle: WKAlertControllerStyle.alert, actions:[action])
+                        }
+                    }catch{
+                        print("Error encoding plist: \(error)")
+                    }
+
                 }
             } failure: { error in
                 print("Error 45 \(error)")

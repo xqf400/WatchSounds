@@ -15,6 +15,7 @@ import UniformTypeIdentifiers
 import CoreData
 import JGProgressHUD
 import CloudKit
+import WidgetKit
 
 class WatchController: UIViewController {
     
@@ -202,7 +203,7 @@ class WatchController: UIViewController {
             let secret = randomString(length: 4)
             let user = User(id: 0, mail: adress, maxFilesCount: 2, uploadedSoundsCount: 0, secret: secret, sounds: [], creationDate: getActualTimeAndDate())
             
-            //if useCoreData {
+            if useCoreData {
                 guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
                     print("Error 2343")
                     return
@@ -230,7 +231,7 @@ class WatchController: UIViewController {
                 } catch let error as NSError {
                     print("Could not save. \(error)")
                 }
-            //}else{//cordata
+            }else{//cordata
                 uploadUserToUserInFirebase(user: user) { str in
                     //let userPlist = UserPlist(id: user.id, mail: user.mail, maxFilesCount: user.maxFilesCount, uploadedSoundsCount: user.uploadedSoundsCount, secret: user.secret, sounds: [], creationDate: user.creationDate)
                     let userPlist = UserPlist(user: user, sounds: [])
@@ -267,7 +268,7 @@ class WatchController: UIViewController {
                     self.loadingHud.dismiss(animated: false)
                     showHudError(inView: self, text: "Failed to save2 upload \(error)", delay: 2.0)
                 }
-            //}//coredata
+            }//coredata
         }else{
             showHudError(inView: self, text: "Please fill in a mail", delay: 2.0)
             
@@ -323,7 +324,7 @@ class WatchController: UIViewController {
                     }
                     let newSound = SoundModel(soundId: soundsNS.count+1, soundName: self.soundNameTextlabel.text!, soundImage: "NoName", soundFile: self.mp3Name!, soundVolume: 1.0, showOnLS: false)
                     
-                    //if useCoreData {
+                    if useCoreData {
                         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
                             print("Error 2343")
                             return
@@ -341,7 +342,7 @@ class WatchController: UIViewController {
                         do {
                             try managedContext.save()
                             soundsNS.append(soundObject)
-                            print("todo save db")
+                            //print("todo save db")
                             print("suc database \(newSound.soundName)")
                             
                             saveSongToCloudContainer(fileName: newSound.soundFile, url: mp3URL!) { str in
@@ -353,6 +354,7 @@ class WatchController: UIViewController {
                                         if useCoreData{
                                             self.mp3URL = nil
                                             self.mp3Name = nil
+                                            WidgetCenter.shared.reloadAllTimelines()
                                         }
                                     self.soundNameTextlabel.text = ""
                                     self.selectedSoundLabel.text = "No sound selected"
@@ -377,7 +379,7 @@ class WatchController: UIViewController {
                         } catch let error as NSError {
                             print("Could not save. \(error)")
                         }
-                    //}else{//coredata
+                    }else{//coredata
                         
                         self.getUserAccountIfExist(mail: id) { account in
                             //print("got user")
@@ -480,7 +482,7 @@ class WatchController: UIViewController {
                             self.loadingHud.dismiss(animated: false)
                             showHudError(inView: self, text: "Failed get User Account \(error)", delay: 2.0)
                         }
-                    //}//coredata
+                    }//coredata
                 }else{
                     showHudError(inView: self, text: "First select a sound file", delay: 2.0)
                 }

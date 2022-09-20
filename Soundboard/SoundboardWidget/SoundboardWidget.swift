@@ -47,10 +47,15 @@ struct SoundboardWidgetEntryView : View {
     
     /*
     @FetchRequest(
-        sortDescriptors: [SortDescriptor(\Item.timestamp)],
-        predicate: NSPredicate(format: "showOnWidget == %d", true)
-    )
-    private var showOnWidgetItems: FetchedResults<Sounds>*/
+        sortDescriptors: [SortDescriptor(\Sounds.showOnLS)],
+        predicate: NSPredicate(format: "showOnLS == %d", true)
+    )*/
+    
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Sounds.soundName, ascending: true)],
+        animation: .default)
+    
+    private var showOnWidgetItems: FetchedResults<Sounds>
     
     var fontStyle : Font {
         switch widgetFamily {
@@ -74,7 +79,34 @@ struct SoundboardWidgetEntryView : View {
     }
 
     var body: some View {
-        Text(entry.date, style: .time)
+        //Text(entry.date, style: .time)
+        switch
+        if showOnWidgetItems.count > 0 {
+            Text(showOnWidgetItems[0].soundName ?? "")
+                .font(fontStyle)
+                .fontWeight(.medium)
+                .foregroundColor(showOnWidgetItems[0].showOnLS ? Color.green : Color.red)
+                .padding(.vertical, 10)
+                .lineLimit(3)
+            Divider()
+        }
+        if showOnWidgetItems.count > 1 {
+            Text(showOnWidgetItems[1].soundName ?? "")
+                .font(fontStyle)
+                .fontWeight(.medium)
+                .foregroundColor(showOnWidgetItems[1].showOnLS ? Color.green : Color.red)
+                .padding(.vertical, 10)
+                .lineLimit(3)
+            Divider()
+        }
+        if showOnWidgetItems.count > 2 {
+            Text(showOnWidgetItems[2].soundName ?? "")
+            .font(fontStyle)
+            .fontWeight(.medium)
+            .foregroundColor(showOnWidgetItems[2].showOnLS ? Color.green : Color.red)
+            .padding(.vertical, 10)
+            .lineLimit(3)
+    }
     }
 }
 

@@ -10,17 +10,21 @@ import CoreData
 struct PersistenceController {
     static let shared = PersistenceController()
 
-    let container: NSPersistentCloudKitContainer //NSpersistenCloudContainer
+    //let container: NSPersistentCloudKitContainer //NSPersistentContainer
+    let container: NSPersistentContainer //NSpersistenCloudContainer
+
 
     init(inMemory: Bool = false) {
-        container = NSPersistentCloudKitContainer(name: "User") //NSPersistentContainer
+        //container = NSPersistentCloudKitContainer(name: "User") //NSPersistentContainer
+        container = NSPersistentContainer(name: "User") //NSPersistentContainer
+
         let description = container.persistentStoreDescriptions.first
         
 #if os(iOS)
         let storeURL = AppGroup.facts.containerURL.appendingPathComponent("User.plist")
         description?.url = storeURL
 #endif
-        description?.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "iCloud.com.fku.WatchSoundboard1")
+        //description?.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "iCloud.com.fku.WatchSoundboard1")
         if inMemory {
             print("in memory")
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
