@@ -119,8 +119,9 @@ class WatchController: UIViewController {
                 let soundImage = (sound.value(forKeyPath: "soundImage") as! String)
                 let soundFile = (sound.value(forKeyPath: "soundFile") as! String)
                 let soundVolume = (sound.value(forKeyPath: "soundVolume") as! Float)
+                let showOnLS = (sound.value(forKeyPath: "showOnLS") as! Bool)
                 
-                let sound = SoundModel(soundId: soundId, soundName: soundName, soundImage: soundImage, soundFile: soundFile, soundVolume: soundVolume)
+                let sound = SoundModel(soundId: soundId, soundName: soundName, soundImage: soundImage, soundFile: soundFile, soundVolume: soundVolume, showOnLS: showOnLS)
                 soundsArray.append(sound)
                 sound.print()
                 if counter == soundsNS.count {
@@ -320,7 +321,7 @@ class WatchController: UIViewController {
                     if UserDefaults.standard.string(forKey: "adress") != nil{
                         id = UserDefaults.standard.string(forKey: "adress")!
                     }
-                    let newSound = SoundModel(soundId: soundsNS.count+1, soundName: self.soundNameTextlabel.text!, soundImage: "NoName", soundFile: self.mp3Name!, soundVolume: 1.0)
+                    let newSound = SoundModel(soundId: soundsNS.count+1, soundName: self.soundNameTextlabel.text!, soundImage: "NoName", soundFile: self.mp3Name!, soundVolume: 1.0, showOnLS: false)
                     
                     //if useCoreData {
                         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
@@ -335,6 +336,8 @@ class WatchController: UIViewController {
                         soundObject.setValue(newSound.soundImage, forKeyPath: "soundImage")
                         soundObject.setValue(newSound.soundFile, forKeyPath: "soundFile")
                         soundObject.setValue(newSound.soundVolume, forKeyPath: "soundVolume")
+                        soundObject.setValue(newSound.showOnLS, forKeyPath: "showOnLS")
+
                         do {
                             try managedContext.save()
                             soundsNS.append(soundObject)
@@ -347,8 +350,10 @@ class WatchController: UIViewController {
                                     DispatchQueue.main.async {
                                     self.loadingHud.dismiss(animated: false)
                                     showHudSuccess(inView: self, text: "Uploaded", delay: 1.0)
-                                    self.mp3URL = nil
-                                    self.mp3Name = nil
+                                        if useCoreData{
+                                            self.mp3URL = nil
+                                            self.mp3Name = nil
+                                        }
                                     self.soundNameTextlabel.text = ""
                                     self.selectedSoundLabel.text = "No sound selected"
                                     }
@@ -503,7 +508,7 @@ class WatchController: UIViewController {
                     }
                     self.loadingHud.textLabel.text = "Bitte warten..."
                     self.loadingHud.show(in: self.view, animated: true)
-                    let newSound = SoundModel(soundId: 0, soundName: self.soundNameTextlabel.text!, soundImage: "NoName", soundFile: self.mp3Name!, soundVolume: 1.0)
+                    let newSound = SoundModel(soundId: 0, soundName: self.soundNameTextlabel.text!, soundImage: "NoName", soundFile: self.mp3Name!, soundVolume: 1.0, showOnLS: false)
                     
                     saveSongLocal(song: newSound, data: data) { str in
                         self.loadingHud.dismiss(animated: false)

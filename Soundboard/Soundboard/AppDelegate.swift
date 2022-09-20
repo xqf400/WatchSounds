@@ -68,7 +68,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate{ //, MessagingDelegate
     lazy var persistentContainer: NSPersistentCloudKitContainer = {
       let container = NSPersistentCloudKitContainer(name: "User")
         let description = container.persistentStoreDescriptions.first
-        
+#if os(iOS)
+        let storeURL = AppGroup.facts.containerURL.appendingPathComponent("User.plist")
+        description?.url = storeURL
+#endif
         description?.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "iCloud.com.fku.WatchSoundboard1")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
@@ -137,6 +140,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate{ //, MessagingDelegate
         }
     }*/
 
+}
+public enum AppGroup: String {
+  case facts = "group.fku.WatchSoundboard"
+
+  public var containerURL: URL {
+    switch self {
+    case .facts:
+      return FileManager.default.containerURL(
+      forSecurityApplicationGroupIdentifier: self.rawValue)!
+    }
+  }
 }
 
 

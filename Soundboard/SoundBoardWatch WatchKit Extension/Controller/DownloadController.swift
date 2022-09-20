@@ -104,8 +104,9 @@ class DownloadController: WKInterfaceController {
                 let soundImage = (sound.value(forKeyPath: "soundImage") as! String)
                 let soundFile = (sound.value(forKeyPath: "soundFile") as! String)
                 let soundVolume = (sound.value(forKeyPath: "soundVolume") as! Float)
-                
-                let sound = SoundModel(soundId: soundId, soundName: soundName, soundImage: soundImage, soundFile: soundFile, soundVolume: soundVolume)
+                let showOnLS = (sound.value(forKeyPath: "showOnLS") as! Bool)
+
+                let sound = SoundModel(soundId: soundId, soundName: soundName, soundImage: soundImage, soundFile: soundFile, soundVolume: soundVolume, showOnLS: showOnLS)
                 soundsArray.append(sound)
                 sound.print()
                 if counter == soundsNS.count {

@@ -27,6 +27,13 @@
 		056EC8D528BCC07300D26B1C /* User.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 056EC8D328BCC07300D26B1C /* User.xcdatamodeld */; };
 		056EC8D628BCC07300D26B1C /* User.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 056EC8D328BCC07300D26B1C /* User.xcdatamodeld */; };
 		057C88FC28B38CA300A3E16A /* MailAndSecretController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057C88FB28B38CA300A3E16A /* MailAndSecretController.swift */; };
+		0589896F28D9E6EB00C1495C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0589896E28D9E6EB00C1495C /* WidgetKit.framework */; };
+		0589897128D9E6EB00C1495C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0589897028D9E6EB00C1495C /* SwiftUI.framework */; };
+		0589897428D9E6EC00C1495C /* SoundboardWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0589897328D9E6EC00C1495C /* SoundboardWidget.swift */; };
+		0589897628D9E6ED00C1495C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0589897528D9E6ED00C1495C /* Assets.xcassets */; };
+		0589897A28D9E6ED00C1495C /* SoundboardWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0589896D28D9E6EB00C1495C /* SoundboardWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0589898028D9E83E00C1495C /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0589897F28D9E83E00C1495C /* Container.swift */; };
+		0589898128D9E88100C1495C /* User.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 056EC8D328BCC07300D26B1C /* User.xcdatamodeld */; };
 		05DE629C28B3604400C69178 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05DE629B28B3604400C69178 /* CloudKit.framework */; };
 		05DE629F28B3605900C69178 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05DE629E28B3605900C69178 /* CloudKit.framework */; };
 		1442C0082805D8AA00DDA3D6 /* Sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1442C0072805D8AA00DDA3D6 /* Sounds.swift */; };
@@ -62,6 +69,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0589897828D9E6ED00C1495C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 14BB9C022738719D006DC0B7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0589896C28D9E6EB00C1495C;
+			remoteInfo = SoundboardWidgetExtension;
+		};
 		14AA43652798714A0006F810 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 14BB9C022738719D006DC0B7 /* Project object */;
@@ -121,6 +135,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				0589897A28D9E6ED00C1495C /* SoundboardWidgetExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,6 +153,14 @@
 		056EC8D428BCC07300D26B1C /* User.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = User.xcdatamodel; sourceTree = "<group>"; };
 		057C88F628B3744600A3E16A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS8.5.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
 		057C88FB28B38CA300A3E16A /* MailAndSecretController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailAndSecretController.swift; sourceTree = "<group>"; };
+		0589896D28D9E6EB00C1495C /* SoundboardWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SoundboardWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		0589896E28D9E6EB00C1495C /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		0589897028D9E6EB00C1495C /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		0589897328D9E6EC00C1495C /* SoundboardWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundboardWidget.swift; sourceTree = "<group>"; };
+		0589897528D9E6ED00C1495C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0589897728D9E6ED00C1495C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0589897E28D9E73600C1495C /* SoundboardWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SoundboardWidgetExtension.entitlements; sourceTree = "<group>"; };
+		0589897F28D9E83E00C1495C /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		05DE629B28B3604400C69178 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		05DE629D28B3605700C69178 /* SoundBoardWatch WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SoundBoardWatch WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		05DE629E28B3605900C69178 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS8.5.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -187,6 +210,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0589896A28D9E6EB00C1495C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0589897128D9E6EB00C1495C /* SwiftUI.framework in Frameworks */,
+				0589896F28D9E6EB00C1495C /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		14AA436E2798714C0006F810 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -267,6 +299,17 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		0589897228D9E6EC00C1495C /* SoundboardWidget */ = {
+			isa = PBXGroup;
+			children = (
+				0589897F28D9E83E00C1495C /* Container.swift */,
+				0589897328D9E6EC00C1495C /* SoundboardWidget.swift */,
+				0589897528D9E6ED00C1495C /* Assets.xcassets */,
+				0589897728D9E6ED00C1495C /* Info.plist */,
+			);
+			path = SoundboardWidget;
+			sourceTree = "<group>";
+		};
 		14AA43672798714A0006F810 /* SoundBoardWatch WatchKit App */ = {
 			isa = PBXGroup;
 			children = (
@@ -294,11 +337,13 @@
 		14BB9C012738719D006DC0B7 = {
 			isa = PBXGroup;
 			children = (
+				0589897E28D9E73600C1495C /* SoundboardWidgetExtension.entitlements */,
 				14BB9C0C2738719D006DC0B7 /* Soundboard */,
 				14BB9C232738719F006DC0B7 /* SoundboardTests */,
 				14BB9C2D2738719F006DC0B7 /* SoundboardUITests */,
 				14AA43672798714A0006F810 /* SoundBoardWatch WatchKit App */,
 				14AA43752798714C0006F810 /* SoundBoardWatch WatchKit Extension */,
+				0589897228D9E6EC00C1495C /* SoundboardWidget */,
 				14BB9C0B2738719D006DC0B7 /* Products */,
 				1D7CA137DEC92C49FC6138D1 /* Pods */,
 				728F2FDAF055F60D8F359F96 /* Frameworks */,
@@ -314,6 +359,7 @@
 				14AA43602798714A0006F810 /* WatchSoundboardWatch.app */,
 				14AA43632798714A0006F810 /* WatchSoundboard.app */,
 				14AA43712798714C0006F810 /* SoundBoardWatch WatchKit Extension.appex */,
+				0589896D28D9E6EB00C1495C /* SoundboardWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -399,6 +445,8 @@
 				969428E972A60599771D88A4 /* Pods_Soundboard.framework */,
 				D3DEDDEEA760D66BBA276950 /* Pods_Soundboard_SoundboardUITests.framework */,
 				C70B2B973C6F9B4D198F1C5E /* Pods_SoundboardTests.framework */,
+				0589896E28D9E6EB00C1495C /* WidgetKit.framework */,
+				0589897028D9E6EB00C1495C /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -406,6 +454,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0589896C28D9E6EB00C1495C /* SoundboardWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0589897D28D9E6ED00C1495C /* Build configuration list for PBXNativeTarget "SoundboardWidgetExtension" */;
+			buildPhases = (
+				0589896928D9E6EB00C1495C /* Sources */,
+				0589896A28D9E6EB00C1495C /* Frameworks */,
+				0589896B28D9E6EB00C1495C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SoundboardWidgetExtension;
+			productName = SoundboardWidgetExtension;
+			productReference = 0589896D28D9E6EB00C1495C /* SoundboardWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		14AA435F2798714A0006F810 /* SoundBoardWatch */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 14AA438C2798714D0006F810 /* Build configuration list for PBXNativeTarget "SoundBoardWatch" */;
@@ -486,6 +551,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				0589897928D9E6ED00C1495C /* PBXTargetDependency */,
 			);
 			name = Soundboard;
 			packageProductDependencies = (
@@ -542,9 +608,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1320;
+				LastSwiftUpdateCheck = 1400;
 				LastUpgradeCheck = 1300;
 				TargetAttributes = {
+					0589896C28D9E6EB00C1495C = {
+						CreatedOnToolsVersion = 14.0;
+					};
 					14AA435F2798714A0006F810 = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
@@ -590,11 +659,20 @@
 				14AA435F2798714A0006F810 /* SoundBoardWatch */,
 				14AA43622798714A0006F810 /* SoundBoardWatch WatchKit App */,
 				14AA43702798714C0006F810 /* SoundBoardWatch WatchKit Extension */,
+				0589896C28D9E6EB00C1495C /* SoundboardWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0589896B28D9E6EB00C1495C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0589897628D9E6ED00C1495C /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		14AA435E2798714A0006F810 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -769,6 +847,16 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0589896928D9E6EB00C1495C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0589898128D9E88100C1495C /* User.xcdatamodeld in Sources */,
+				0589897428D9E6EC00C1495C /* SoundboardWidget.swift in Sources */,
+				0589898028D9E83E00C1495C /* Container.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		14AA436D2798714C0006F810 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -828,6 +916,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0589897928D9E6ED00C1495C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0589896C28D9E6EB00C1495C /* SoundboardWidgetExtension */;
+			targetProxy = 0589897828D9E6ED00C1495C /* PBXContainerItemProxy */;
+		};
 		14AA43662798714A0006F810 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 14AA43622798714A0006F810 /* SoundBoardWatch WatchKit App */;
@@ -878,6 +971,68 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0589897B28D9E6ED00C1495C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = SoundboardWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L2CJ78AL3T;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SoundboardWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SoundboardWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fku.WatchSoundboard.SoundboardWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0589897C28D9E6ED00C1495C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = SoundboardWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L2CJ78AL3T;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SoundboardWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SoundboardWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fku.WatchSoundboard.SoundboardWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		14AA43822798714D0006F810 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1309,6 +1464,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0589897D28D9E6ED00C1495C /* Build configuration list for PBXNativeTarget "SoundboardWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0589897B28D9E6ED00C1495C /* Debug */,
+				0589897C28D9E6ED00C1495C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		14AA438A2798714D0006F810 /* Build configuration list for PBXNativeTarget "SoundBoardWatch WatchKit Extension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
